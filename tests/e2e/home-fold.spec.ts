@@ -1,0 +1,97 @@
+import { test, expect } from '@playwright/test';
+
+const PLATE_NAME = /0540 123 0335 numarasını ara/;
+const WA_NAME = /Konumu WhatsApp'tan gönder/;
+
+test('call and WhatsApp are above the fold on 375x667', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/');
+
+  const plate = page.getByRole('link', { name: PLATE_NAME }).first();
+  const wa = page.getByRole('link', { name: WA_NAME }).first();
+
+  const plateBox = await plate.boundingBox();
+  const waBox = await wa.boundingBox();
+  expect(plateBox).not.toBeNull();
+  expect(waBox).not.toBeNull();
+  expect(plateBox!.y + plateBox!.height).toBeLessThanOrEqual(667);
+  expect(waBox!.y + waBox!.height).toBeLessThanOrEqual(667);
+
+  await expect(plate).toHaveAttribute('href', 'tel:+905401230335');
+  expect(await wa.getAttribute('href')).toMatch(/^https:\/\/wa\.me\/905401230335\?text=/);
+});
+
+test('Turkish uppercase', async ({ page }) => {
+  await page.goto('/');
+  const h1 = await page.locator('h1').innerText();
+  expect(h1).toContain('YOLDA MI KALDINIZ?');
+
+  const header = await page.locator('header').first().innerText();
+  expect(header).toMatch(/İZMİR|İzmir/);
+  expect(header).not.toContain('IZMIR');
+});
+
+test('no horizontal scroll at 320px', async ({ page }) => {
+  await page.setViewportSize({ width: 320, height: 640 });
+  await page.goto('/');
+
+  const scrollWidth = await page.evaluate(() => document.documentElement.scrollWidth);
+  expect(scrollWidth).toBeLessThanOrEqual(320);
+
+  const digits = page.locator('.plate-digits').first();
+  const { height, fontSize } = await digits.evaluate((el) => ({
+    height: el.getBoundingClientRect().height,
+    fontSize: parseFloat(getComputedStyle(el).fontSize),
+  }));
+  expect(height).toBeLessThan(1.6 * fontSize);
+});
+
+test.describe('without JavaScript', () => {
+  test.use({ javaScriptEnabled: false, viewport: { width: 375, height: 667 } });
+
+  test('works without JavaScript', async ({ page }) => {
+    await page.goto('/');
+    await expect(page.getByRole('link', { name: PLATE_NAME }).first()).toHaveAttribute(
+      'href',
+      'tel:+905401230335',
+    );
+    await page.evaluate(() => window.scrollTo(0, document.documentElement.scrollHeight));
+    await expect(page.getByRole('link', { name: 'Ara', exact: true })).toBeVisible();
+  });
+});
+
+test('sticky bar hides while hero CTA is visible, shows after scroll', async ({ page }) => {
+  await page.setViewportSize({ width: 375, height: 667 });
+  await page.goto('/');
+
+  const sticky = page.getByRole('link', { name: 'Ara', exact: true });
+  await expect(sticky).toBeHidden();
+
+  await page.evaluate(() => window.scrollTo(0, 1200));
+  await expect(sticky).toBeVisible();
+});
+
+test('desktop hero composition', async ({ page }) => {
+  await page.setViewportSize({ width: 1440, height: 900 });
+  await page.goto('/');
+  const half = 720;
+
+  const h1 = await page.locator('h1').boundingBox();
+  const plate = await page.getByRole('link', { name: PLATE_NAME }).first().boundingBox();
+  const photo = await page.locator('.hero-photo img').boundingBox();
+  const band = page.locator('.reflective-band').first();
+
+  expect(h1).not.toBeNull();
+  expect(plate).not.toBeNull();
+  expect(photo).not.toBeNull();
+  expect(h1!.x + h1!.width).toBeLessThanOrEqual(half);
+  expect(plate!.x + plate!.width).toBeLessThanOrEqual(half);
+  // The photo column is slightly wider than the copy column, so check its centre.
+  expect(photo!.x).toBeGreaterThanOrEqual(h1!.x + h1!.width);
+  expect(photo!.x + photo!.width / 2).toBeGreaterThan(half);
+  expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(1440 - 1);
+
+  await expect(band).toBeVisible();
+  const bandBox = await band.boundingBox();
+  expect(bandBox!.y + bandBox!.height).toBeLessThanOrEqual(900);
+});

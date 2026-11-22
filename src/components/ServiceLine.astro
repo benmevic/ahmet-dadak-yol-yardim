@@ -1,0 +1,48 @@
+---
+interface Props {
+  items: { label: string; href?: string }[];
+}
+
+const { items } = Astro.props;
+---
+<ul class="service-line" aria-label="Hizmetler">
+  {
+    items.map((item) => (
+      <li>{item.href ? <a href={item.href}>{item.label}</a> : item.label}</li>
+    ))
+  }
+</ul>
+
+<style>
+  .service-line {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 0;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    font: 600 1.0625rem/1.25 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  li {
+    white-space: nowrap;
+  }
+
+  li:not(:last-child)::after {
+    content: '›' / '';
+    margin: 0 10px;
+    color: var(--red);
+    font-weight: 700;
+  }
+
+  a {
+    color: inherit;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+</style>

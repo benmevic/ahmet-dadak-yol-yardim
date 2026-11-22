@@ -1,0 +1,107 @@
+---
+import type { ImageMetadata } from 'astro';
+import { getImage } from 'astro:assets';
+import '../styles/global.css';
+import logo from '../assets/logo.jpg';
+import { isIndexable } from '../lib/seo';
+import SiteHeader from '../components/SiteHeader.astro';
+import SiteFooter from '../components/SiteFooter.astro';
+import StickyActions from '../components/StickyActions.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  path: string;
+  jsonLd?: object[];
+  ogImage?: ImageMetadata;
+}
+
+const { title, description, path, jsonLd = [], ogImage } = Astro.props;
+
+const site = Astro.site;
+const indexable = isIndexable(site);
+const canonical = indexable && site ? new URL(path, site).toString() : undefined;
+
+const icon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
+const touchIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
+const og = ogImage ? await getImage({ src: ogImage, width: 1200, format: 'jpg' }) : undefined;
+const ogUrl = og ? (site ? new URL(og.src, site).toString() : og.src) : undefined;
+
+const serialize = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c');
+---
+<!doctype html>
+<html lang="tr">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    {canonical && <link rel="canonical" href={canonical} />}
+    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    <meta name="theme-color" content="#ffffff" />
+    <link rel="icon" type="image/png" href={icon.src} />
+    <link rel="apple-touch-icon" href={touchIcon.src} />
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="tr_TR" />
+    <meta property="og:site_name" content="Ahmet Dadak Yol Yardım" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    {canonical && <meta property="og:url" content={canonical} />}
+    {ogUrl && <meta property="og:image" content={ogUrl} />}
+    {jsonLd.map((data) => <script type="application/ld+json" set:html={serialize(data)} />)}
+  </head>
+  <body>
+    <a class="skip-link" href="#icerik">İçeriğe geç</a>
+    <SiteHeader path={path} />
+    <main id="icerik">
+      <slot />
+    </main>
+    <SiteFooter />
+    <StickyActions />
+  </body>
+</html>
+
+<style is:global>
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+    text-size-adjust: 100%;
+  }
+
+  body {
+    font-size: 1rem;
+    line-height: 1.45;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img,
+  picture,
+  svg {
+    display: block;
+    max-width: 100%;
+  }
+</style>
+
+<style>
+  .skip-link {
+    position: absolute;
+    top: 8px;
+    left: 8px;
+    z-index: 30;
+    padding: 10px 14px;
+    border-radius: 6px;
+    background: var(--ink);
+    color: #fff;
+    font-weight: 600;
+    transform: translateY(-200%);
+  }
+
+  .skip-link:focus-visible {
+    transform: none;
+  }
+</style>
