@@ -10,6 +10,7 @@ import ContactBlock from '../../components/ContactBlock.astro';
 import { services, type Service } from '../../data/services';
 import { jobs } from '../../data/jobs';
 import { business } from '../../data/business';
+import { liveIlceler, ilcePath } from '../../lib/ilce';
 import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
 
 export const getStaticPaths = (() =>
@@ -53,7 +54,7 @@ const jsonLd = [
         <span aria-hidden="true">/</span>
         <a href="/hizmetler/">Hizmetler</a>
       </nav>
-      <h1>{service.name}</h1>
+      <h1>{service.name} · İzmir 7/24</h1>
       <p class="lead">{service.lead}</p>
       <div class="actions">
         <PlateCall data-primary-cta />
@@ -93,6 +94,23 @@ const jsonLd = [
         <Faq items={service.faq} />
       </div>
     </section>
+
+    <section class="service-areas wrap" aria-labelledby="areas-title">
+      <h2 id="areas-title" class="section-title">Hizmet verdiğimiz yerler</h2>
+      <p>İzmir'in her ilçesine geliyoruz.</p>
+      <ul>
+        {
+          liveIlceler().map((d) => (
+            <li>
+              <a href={ilcePath(d)}>{d.name} çekici</a>
+            </li>
+          ))
+        }
+        <li>
+          <a href="/izmir/">Tüm İzmir ilçeleri</a>
+        </li>
+      </ul>
+    </section>
   </article>
 
   <JobStrip limit={3} heading="Son taşıdıklarımız" />
@@ -100,6 +118,38 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
+  .service-areas {
+    padding-bottom: 34px;
+  }
+
+  .service-areas p {
+    margin: 10px 0 0;
+    color: var(--muted);
+  }
+
+  .service-areas ul {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 22px;
+    margin: 8px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service-areas a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font: 700 1.125rem/1.2 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
   .service-head {
     padding-top: 18px;
     padding-bottom: 26px;

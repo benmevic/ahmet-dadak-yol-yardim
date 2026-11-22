@@ -19,6 +19,7 @@ export function localBusinessJsonLd(
   areaServed: string[],
   siteUrl: URL | undefined,
   logoUrl?: string,
+  serviceNames: string[] = [],
 ): object {
   return {
     '@context': 'https://schema.org',
@@ -45,6 +46,18 @@ export function localBusinessJsonLd(
       addressCountry: 'TR',
     })),
     areaServed: areaServed.map((name) => ({ '@type': 'City', name })),
+    ...(serviceNames.length > 0
+      ? {
+          hasOfferCatalog: {
+            '@type': 'OfferCatalog',
+            name: 'Çekici ve yol yardım hizmetleri',
+            itemListElement: serviceNames.map((name) => ({
+              '@type': 'Offer',
+              itemOffered: { '@type': 'Service', name },
+            })),
+          },
+        }
+      : {}),
   };
 }
 

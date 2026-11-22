@@ -9,6 +9,7 @@ import ContactBlock from '../../components/ContactBlock.astro';
 import type { Ilce } from '../../data/ilceler';
 import { liveIlceler, ilcePath } from '../../lib/ilce';
 import { business } from '../../data/business';
+import { services } from '../../data/services';
 import { localBusinessJsonLd, serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
 
 export const getStaticPaths = (() =>
@@ -55,8 +56,8 @@ const jsonLd = [
 ].filter((entry): entry is object => entry !== null);
 ---
 <BaseLayout
-  title={`${ilce.name} Çekici 7/24 | Ahmet Dadak Yol Yardım`}
-  description={`${ilce.name} çekici ve yol yardım, gece gündüz. 0540 123 0335'i arayın ya da konumunuzu WhatsApp'tan gönderin; aracınızı istediğiniz yere bırakalım.`}
+  title={`${ilce.name} Çekici 7/24, Oto Kurtarma | Ahmet Dadak`}
+  description={`${ilce.name} oto çekici ve yol yardım, gece gündüz. 0540 123 0335'i arayın ya da konumunuzu WhatsApp'tan gönderin; aracınızı istediğiniz yere bırakalım.`}
   path={path}
   jsonLd={jsonLd}
 >
@@ -104,6 +105,19 @@ const jsonLd = [
       }
     </div>
 
+    <section class="district-services wrap" aria-labelledby="ds-title">
+      <h2 id="ds-title" class="section-title">{ilce.name} ilçesinde verdiğimiz hizmetler</h2>
+      <ul class="ds-list">
+        {
+          services.map((s) => (
+            <li>
+              <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
+            </li>
+          ))
+        }
+      </ul>
+    </section>
+
     <section class="faq-section wrap" aria-labelledby="faq-title">
       <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
       <div class="faq-wrap">
@@ -117,6 +131,33 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
+  .district-services {
+    padding-bottom: 30px;
+  }
+
+  .ds-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 22px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .ds-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font: 700 1.125rem/1.2 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
   .district-head {
     padding-top: 18px;
     padding-bottom: 26px;

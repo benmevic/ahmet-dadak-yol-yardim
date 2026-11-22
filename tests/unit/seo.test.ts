@@ -42,6 +42,16 @@ describe('localBusinessJsonLd', () => {
     expect(bare).not.toHaveProperty('image');
   });
 
+  it('lists the given services in an OfferCatalog, and omits it when none are given', () => {
+    const ld = localBusinessJsonLd(business, ['Bornova'], undefined, undefined, ['Arıza kurtarma', 'Akü takviyesi']) as Ld;
+    expect(ld.hasOfferCatalog['@type']).toBe('OfferCatalog');
+    expect(ld.hasOfferCatalog.itemListElement).toEqual([
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Arıza kurtarma' } },
+      { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Akü takviyesi' } },
+    ]);
+    expect(localBusinessJsonLd(business, ['Bornova'], undefined)).not.toHaveProperty('hasOfferCatalog');
+  });
+
   it('covers all 7 days in openingHoursSpecification', () => {
     const ld = localBusinessJsonLd(business, ['Bornova'], undefined) as Ld;
     expect(ld.openingHoursSpecification[0].dayOfWeek).toHaveLength(7);

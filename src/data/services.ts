@@ -16,14 +16,14 @@ export const services: Service[] = [
   {
     slug: 'ariza-kurtarma',
     name: 'Arıza kurtarma',
-    metaTitle: 'İzmir Arıza Kurtarma, 7/24 Çekici | Ahmet Dadak',
+    metaTitle: 'İzmir Arıza Kurtarma, 7/24 Oto Çekici | Ahmet Dadak',
     metaDescription:
       "Aracınız yolda mı kaldı? İzmir'in her ilçesinde gece gündüz arıza kurtarma. Arayın ya da konumunuzu gönderin, aracınızı istediğiniz yere bırakalım.",
     lead: 'Aracınız çalışmıyorsa ya da yolda durduysa arayın. Çekicimizle gelir, aracı istediğiniz yere bırakırız.',
     body: [
       "Motor durduğunda, araç marş basmadığında ya da bir uyarı lambası sizi yolda bıraktığında yapılacak şey basit: arayın. Konumunuzu söyleyin ya da WhatsApp'tan gönderin, çekicimiz size gelsin.",
       'Aracınızı kendi çekicimizin kasasına alır, güvenle taşırız. Nereye gitmesini istediğiniz size kalmış: evinize, tanıdığınız bir servise ya da başka bir adrese.',
-      "İzmir'in her ilçesine hizmet veriyoruz, gece gündüz, hafta sonu dahil.",
+      "İzmir'in her ilçesine oto çekicimizle geliyoruz, gece gündüz, hafta sonu dahil.",
     ],
     whenToCall: [
       'Araç marş basmıyor ya da çalışırken durdu.',
@@ -58,6 +58,7 @@ export const services: Service[] = [
     body: [
       'Kaza anı kötü bir andır; araç yolda, siz telaştasınız. Önce kendinizin ve yanınızdakilerin iyi olduğundan emin olun, sonra bizi arayın.',
       'Çekicimizle gelir, aracınızı kasaya alıp taşırız. Hasarlı araç da olsa yerinde bırakmak zorunda değilsiniz; nereye götürmek istediğinizi söylemeniz yeterli.',
+      'Otoyolda, çevre yolunda ya da şehir içinde, kazalı aracınız için acil çekici gerektiğinde gece gündüz arayabilirsiniz.',
       "İzmir'in her ilçesine geliyoruz. Konumunuzu telefonda anlatabilir ya da WhatsApp'tan gönderebilirsiniz.",
     ],
     whenToCall: [

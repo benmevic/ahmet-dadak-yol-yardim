@@ -5,6 +5,10 @@ export interface FaqItem {
 
 export const homeFaq: FaqItem[] = [
   {
+    q: "İzmir'de en yakın çekiciyi nasıl çağırırım?",
+    a: "0540 123 0335'i arayın ya da konumunuzu WhatsApp'tan gönderin. Oto çekicimiz bulunduğunuz yere gelir, aracınızı istediğiniz yere bırakır.",
+  },
+  {
     q: 'Hangi bölgelere geliyorsunuz?',
     a: "İzmir'in her ilçesine geliyoruz. Bornova ve Kemalpaşa'dayız, çekicimiz İzmir geneline çıkar.",
   },

@@ -30,12 +30,18 @@ const logoImage = await getImage({ src: logo, width: 512, height: 512, format: '
 const logoUrl = Astro.site ? new URL(logoImage.src, Astro.site).toString() : undefined;
 
 const jsonLd = [
-  localBusinessJsonLd(business, liveIlceler().map((i) => i.name), Astro.site, logoUrl),
+  localBusinessJsonLd(
+    business,
+    liveIlceler().map((i) => i.name),
+    Astro.site,
+    logoUrl,
+    serviceList.map((s) => s.name),
+  ),
   faqJsonLd(homeFaq),
 ].filter((entry): entry is object => entry !== null);
 ---
 <BaseLayout
-  title="İzmir Çekici ve Yol Yardım 7/24 | Ahmet Dadak Yol Yardım"
+  title="İzmir Oto Çekici ve Yol Yardım 7/24 | Ahmet Dadak Yol Yardım"
   description="İzmir'in her ilçesinde gece gündüz çekici ve yol yardım. 0540 123 0335'i arayın ya da konumunuzu WhatsApp'tan gönderin; aracınızı istediğiniz yere bırakalım."
   path="/"
   jsonLd={jsonLd}
