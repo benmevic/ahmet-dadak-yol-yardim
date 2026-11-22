@@ -1,26 +1,30 @@
 :root {
-  /* Palette from the logo: black, red, silver, gold crown. */
-  --ground: #f3f3f6;
-  --panel: #ffffff;
-  --ink: #16171b;
-  --muted: #50535c;
-  --line: #e2e3e8;
-  --red: #d71920;
+  /* Dark palette from the logo: black ground, red, silver, gold crown. */
+  --ground: #101115;
+  --panel: #1a1b21;
+  --panel-2: #22232a;
+  --ink: #f4f4f6;
+  --muted: #b3b6bf;
+  --line: #2d2e36;
+  --red: #e31b23;
   --red-deep: #7e0b10;
-  --gold: #c99a2e;
+  --gold: #e2b24a;
   --gold-light: #ffd36a;
+  /* Fixed colours for surfaces that stay light in every theme (plate, captions). */
+  --paper: #ffffff;
+  --paper-ink: #16171b;
   --blue: #0f4fa8;
   --amber: #f2b705;
-  --night: #16171b;
+  --night: #08090b;
   --red-panel: linear-gradient(135deg, #d71920 0%, #b3131a 48%, #7e0b10 100%);
-  --night-panel: linear-gradient(120deg, #16171b 0%, #3b0d11 52%, #b3131a 100%);
+  --night-panel: linear-gradient(120deg, #e31b23 0%, #a5121a 45%, #3b0d11 100%);
   /* Motion tokens from the transitions.dev scale. */
   --duration-quick: 150ms;
   --duration-fast: 250ms;
   --duration-very-slow: 500ms;
   --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
-  --card-shadow-lift: 0 1px 0 rgb(22 23 27 / 0.04), 0 24px 44px -24px rgb(22 23 27 / 0.5);
-  --card-shadow: 0 1px 0 rgb(22 23 27 / 0.04), 0 18px 40px -26px rgb(22 23 27 / 0.45);
+  --card-shadow-lift: 0 0 0 1px rgb(227 27 35 / 0.55), 0 24px 44px -20px rgb(227 27 35 / 0.45);
+  --card-shadow: 0 0 0 1px var(--line), 0 18px 40px -26px rgb(0 0 0 / 0.8);
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'Barlow', system-ui, sans-serif;
 }

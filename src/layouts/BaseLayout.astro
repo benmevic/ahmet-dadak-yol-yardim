@@ -46,7 +46,7 @@ const serialize = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c'
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
     {(!indexable || noindex) && <meta name="robots" content="noindex, nofollow" />}
-    <meta name="theme-color" content="#ffffff" />
+    <meta name="theme-color" content="#101115" />
     <link rel="icon" type="image/png" href={icon.src} />
     <link rel="apple-touch-icon" href={touchIcon.src} />
     <meta property="og:type" content="website" />
@@ -106,8 +106,8 @@ const serialize = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c'
     z-index: 30;
     padding: 10px 14px;
     border-radius: 6px;
-    background: var(--ink);
-    color: #fff;
+    background: var(--paper);
+    color: var(--paper-ink);
     font-weight: 600;
     transform: translateY(-200%);
   }
