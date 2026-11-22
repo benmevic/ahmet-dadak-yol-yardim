@@ -42,7 +42,7 @@ const steps = [
   .steps li {
     position: relative;
     padding: 18px 18px 20px 72px;
-    border-radius: 18px;
+    border-radius: 20px;
     background: var(--panel);
     box-shadow: var(--card-shadow);
     counter-increment: step;
@@ -54,7 +54,10 @@ const steps = [
     left: 20px;
     top: 14px;
     font: 700 2.75rem/1 var(--font-display);
-    color: var(--red);
+    background: linear-gradient(180deg, var(--red), var(--red-deep));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
     font-variant-numeric: tabular-nums;
   }
 
@@ -86,7 +89,7 @@ const steps = [
     }
 
     .steps li {
-      padding: 22px 24px 26px;
+      padding: 24px 26px 28px;
     }
 
     .steps li::before {

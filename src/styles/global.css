@@ -8,15 +8,7 @@
 body {
   margin: 0;
   background:
-    linear-gradient(
-        180deg,
-        var(--sun) 0,
-        var(--sun) 560px,
-        var(--sun-soft) 820px,
-        var(--cream) 1040px,
-        var(--ground) 1320px
-      )
-      top / 100% 1320px no-repeat,
+    linear-gradient(180deg, #fff 0, var(--ground) 720px) top / 100% 720px no-repeat,
     var(--ground);
   color: var(--ink);
   font-family: var(--font-body);
@@ -58,5 +50,58 @@ a {
 
   .section-title {
     font-size: 2rem;
+  }
+}
+
+/* Short red-to-gold rule under section titles, the logo's two accent colours. */
+.section-title::after {
+  content: '';
+  display: block;
+  width: 44px;
+  height: 4px;
+  margin-top: 10px;
+  border-radius: 2px;
+  background: linear-gradient(90deg, var(--red), var(--gold));
+}
+
+/* A page head drawn as a rounded red panel floating on the light page. */
+.head-panel {
+  margin: 6px 12px 0;
+  padding: 20px 18px 26px;
+  border-radius: 24px;
+  background: var(--red-panel);
+  color: #fff;
+  box-shadow: 0 24px 48px -30px rgb(126 11 16 / 0.8);
+  margin-bottom: 24px;
+}
+
+body .head-panel h1,
+body .head-panel .lead,
+body .head-panel .crumbs,
+body .head-panel .crumbs a {
+  color: #fff;
+}
+
+body .head-panel .lead {
+  color: rgb(255 255 255 / 0.9);
+}
+
+body .head-panel nav.crumbs a[href] {
+  color: #fff;
+  text-decoration-color: var(--gold-light);
+}
+
+@media (min-width: 768px) {
+  .head-panel {
+    margin: 8px 32px 0;
+    padding: 30px 36px 38px;
+    border-radius: 30px;
+  }
+}
+
+@media (min-width: 1664px) {
+  .head-panel {
+    margin-inline: auto;
+    max-width: 1600px;
   }
 }
