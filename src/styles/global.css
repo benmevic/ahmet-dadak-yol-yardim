@@ -7,7 +7,17 @@
 
 body {
   margin: 0;
-  background: var(--ground);
+  background:
+    linear-gradient(
+        180deg,
+        var(--sun) 0,
+        var(--sun) 560px,
+        var(--sun-soft) 820px,
+        var(--cream) 1040px,
+        var(--ground) 1320px
+      )
+      top / 100% 1320px no-repeat,
+    var(--ground);
   color: var(--ink);
   font-family: var(--font-body);
 }

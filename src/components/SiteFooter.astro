@@ -82,15 +82,14 @@ const links = [
 
 <style>
   .site-footer {
-    background: var(--panel);
-    border-top: 1px solid var(--line);
+    background: linear-gradient(180deg, var(--ground) 0, var(--sun-soft) 110px, var(--sun) 300px);
     color: var(--ink);
   }
 
   .footer-inner {
     display: grid;
     gap: 28px;
-    padding: 36px 16px 28px;
+    padding: 96px 16px 28px;
   }
 
   p {
@@ -136,7 +135,7 @@ const links = [
     font-size: 0.9375rem;
     font-weight: 500;
     text-decoration: underline;
-    text-decoration-color: var(--line);
+    text-decoration-color: rgb(21 21 21 / 0.25);
     text-decoration-thickness: 2px;
     transition: text-decoration-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
   }
@@ -190,7 +189,7 @@ const links = [
 
   .footer-legal {
     padding: 16px;
-    border-top: 1px solid var(--line);
+    border-top: 1px solid rgb(21 21 21 / 0.14);
     color: var(--muted);
     font-size: 0.8125rem;
   }
@@ -204,7 +203,7 @@ const links = [
   @media (min-width: 768px) {
     .footer-inner {
       grid-template-columns: 1.3fr 1fr 1fr;
-      padding: 44px 32px 36px;
+      padding: 120px 32px 36px;
     }
 
     .footer-lead {

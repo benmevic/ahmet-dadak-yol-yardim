@@ -18,11 +18,14 @@ const { items } = Astro.props;
 
 <style>
   .faq {
-    border-top: 1px solid var(--line);
+    padding: 4px 20px;
+    border-radius: 18px;
+    background: var(--panel);
+    box-shadow: var(--card-shadow);
   }
 
-  details {
-    border-bottom: 1px solid var(--line);
+  details + details {
+    border-top: 1px solid var(--line);
   }
 
   summary {

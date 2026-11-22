@@ -89,7 +89,8 @@ test('desktop hero composition', async ({ page }) => {
   // The photo column is slightly wider than the copy column, so check its centre.
   expect(photo!.x).toBeGreaterThanOrEqual(h1!.x + h1!.width);
   expect(photo!.x + photo!.width / 2).toBeGreaterThan(half);
-  expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(1440 - 1);
+  // The photo is a rounded card inset from the right edge by the page gutter.
+  expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(1440 - 48);
 
   await expect(band).toBeVisible();
   const bandBox = await band.boundingBox();

@@ -1,12 +1,18 @@
 :root {
-  --ground: #f3f4f2;
+  /* Palette from the owner's yellow/black flyer and the truck's reflective tape. */
+  --sun: #ffd21f;
+  --sun-soft: #ffe680;
+  --cream: #fff3c4;
+  --ground: #fff7dc;
   --panel: #ffffff;
-  --ink: #141518;
-  --muted: #4a4d55;
-  --line: #d9dbd8;
-  --red: #c8161d;
+  --ink: #151515;
+  --muted: #4d4637;
+  --line: #ecdfae;
+  --red: #d7141c;
+  --red-deep: #9d0f14;
   --blue: #0f4fa8;
   --amber: #f2b705;
+  --card-shadow: 0 1px 0 rgb(21 21 21 / 0.04), 0 14px 30px -20px rgb(157 15 20 / 0.45);
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'Barlow', system-ui, sans-serif;
 }

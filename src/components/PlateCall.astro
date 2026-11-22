@@ -37,9 +37,7 @@ const { size = 'lg', ...attrs } = Astro.props;
     border-radius: 8px;
     overflow: hidden;
     text-decoration: none;
-    box-shadow:
-      0 2px 0 rgb(20 21 24 / 0.08),
-      0 10px 24px -12px rgb(20 21 24 / 0.45);
+    box-shadow: 0 5px 0 var(--ink);
     transition:
       transform 160ms cubic-bezier(0.16, 1, 0.3, 1),
       box-shadow 160ms cubic-bezier(0.16, 1, 0.3, 1);
@@ -100,18 +98,14 @@ const { size = 'lg', ...attrs } = Astro.props;
 
   @media (hover: hover) {
     .plate:hover {
-      transform: translateY(-1px);
-      box-shadow:
-        0 3px 0 rgb(20 21 24 / 0.1),
-        0 14px 28px -12px rgb(20 21 24 / 0.55);
+      transform: translateY(-2px);
+      box-shadow: 0 7px 0 var(--ink);
     }
   }
 
   .plate:active {
-    transform: translateY(1px);
-    box-shadow:
-      0 1px 0 rgb(20 21 24 / 0.08),
-      0 6px 14px -10px rgb(20 21 24 / 0.45);
+    transform: translateY(4px);
+    box-shadow: 0 1px 0 var(--ink);
   }
 
   @media (prefers-reduced-motion: reduce) {
