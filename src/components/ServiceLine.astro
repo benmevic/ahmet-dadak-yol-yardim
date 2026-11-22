@@ -32,6 +32,7 @@ const { items } = Astro.props;
   }
 
   li:not(:last-child)::after {
+    content: '›';
     content: '›' / '';
     margin: 0 10px;
     color: var(--red);
@@ -39,10 +40,17 @@ const { items } = Astro.props;
   }
 
   a {
+    position: relative;
     color: inherit;
     text-decoration: underline;
     text-decoration-color: var(--red);
     text-decoration-thickness: 2px;
     text-underline-offset: 4px;
+  }
+
+  a::before {
+    content: '';
+    position: absolute;
+    inset: -11px -4px;
   }
 </style>

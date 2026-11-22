@@ -1,5 +1,6 @@
 ---
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
+import logo from '../assets/logo.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import PlateCall from '../components/PlateCall.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
@@ -17,16 +18,19 @@ import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
 import { liveIlceler, ilcePath } from '../lib/ilce';
 
 const services = [
-  { label: 'Arıza' },
-  { label: 'Kaza' },
-  { label: 'Akü takviyesi' },
-  { label: 'Lastik' },
-  { label: 'Yakıt' },
-  { label: 'Alkollüyseniz arayın' },
+  { label: 'Arıza', href: '/hizmetler/ariza-kurtarma/' },
+  { label: 'Kaza', href: '/hizmetler/kaza-oto-kurtarma/' },
+  { label: 'Akü takviyesi', href: '/hizmetler/aku-takviyesi/' },
+  { label: 'Lastik', href: '/hizmetler/lastik-destegi/' },
+  { label: 'Yakıt', href: '/hizmetler/yakit-destegi/' },
+  { label: 'Alkollüyseniz arayın', href: '/hizmetler/alkollu-surucu-arac-tasima/' },
 ];
 
+const logoImage = await getImage({ src: logo, width: 512, height: 512, format: 'png' });
+const logoUrl = Astro.site ? new URL(logoImage.src, Astro.site).toString() : undefined;
+
 const jsonLd = [
-  localBusinessJsonLd(business, liveIlceler().map((i) => i.name), Astro.site),
+  localBusinessJsonLd(business, liveIlceler().map((i) => i.name), Astro.site, logoUrl),
   faqJsonLd(homeFaq),
 ].filter((entry): entry is object => entry !== null);
 ---

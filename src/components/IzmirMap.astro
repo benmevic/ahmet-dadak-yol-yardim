@@ -1,5 +1,6 @@
 ---
 import raw from '../assets/izmir-ilceler.svg?raw';
+import { ilcePath } from '../lib/ilce';
 
 interface Props {
   highlight: string[];
@@ -29,7 +30,7 @@ const active = districts.filter((d) => live.has(d.slug));
             <title>{d.name}</title>
           </path>
         );
-        return isLive ? <a href={`/izmir/${d.slug}-cekici/`} aria-label={`${d.name} çekici`}>{path}</a> : path;
+        return isLive ? <a href={ilcePath(d)} aria-label={`${d.name} çekici`} tabindex="-1" aria-hidden="true">{path}</a> : path;
       })
     }
     {

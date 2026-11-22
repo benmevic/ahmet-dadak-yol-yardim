@@ -15,13 +15,14 @@ interface Props {
   path: string;
   jsonLd?: object[];
   ogImage?: ImageMetadata;
+  noindex?: boolean;
 }
 
-const { title, description, path, jsonLd = [], ogImage } = Astro.props;
+const { title, description, path, jsonLd = [], ogImage, noindex = false } = Astro.props;
 
 const site = Astro.site;
 const indexable = isIndexable(site);
-const canonical = indexable && site ? new URL(path, site).toString() : undefined;
+const canonical = indexable && !noindex && site ? new URL(path, site).toString() : undefined;
 
 const icon = await getImage({ src: logo, width: 64, height: 64, format: 'png' });
 const touchIcon = await getImage({ src: logo, width: 180, height: 180, format: 'png' });
@@ -44,7 +45,7 @@ const serialize = (data: object) => JSON.stringify(data).replace(/</g, '\\u003c'
     <title>{title}</title>
     <meta name="description" content={description} />
     {canonical && <link rel="canonical" href={canonical} />}
-    {!indexable && <meta name="robots" content="noindex, nofollow" />}
+    {(!indexable || noindex) && <meta name="robots" content="noindex, nofollow" />}
     <meta name="theme-color" content="#ffffff" />
     <link rel="icon" type="image/png" href={icon.src} />
     <link rel="apple-touch-icon" href={touchIcon.src} />

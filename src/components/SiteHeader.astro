@@ -13,6 +13,7 @@ const links = [
   { label: 'Hizmetler', href: '/hizmetler/' },
   { label: 'İlçeler', href: '/izmir/' },
   { label: 'Nasıl çalışıyoruz', href: '/#nasil' },
+  { label: 'İletişim', href: '/iletisim/' },
   { label: 'Instagram', href: business.instagramUrl, external: true },
 ];
 
@@ -27,7 +28,8 @@ const isCurrent = (href: string) => href !== '/' && !href.includes('#') && path.
       width={48}
       height={48}
       densities={[1, 2]}
-      alt="Ahmet Dadak Yol Yardım logosu"
+      alt=""
+      loading="eager"
     />
     <span class="brand-text">
       <span class="brand-name">Ahmet Dadak<span class="wide"> Yol Yardım</span></span>

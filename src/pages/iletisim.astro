@@ -1,14 +1,19 @@
 ---
+import { getImage } from 'astro:assets';
+import logo from '../assets/logo.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import IzmirMap from '../components/IzmirMap.astro';
-import { liveIlceler } from '../lib/ilce';
+import { liveIlceler, ilcePath } from '../lib/ilce';
 import { business } from '../data/business';
 import { localBusinessJsonLd, breadcrumbJsonLd } from '../lib/seo';
 
 const live = liveIlceler();
+const logoImage = await getImage({ src: logo, width: 512, height: 512, format: 'png' });
+const logoUrl = Astro.site ? new URL(logoImage.src, Astro.site).toString() : undefined;
+
 const jsonLd = [
-  localBusinessJsonLd(business, live.map((i) => i.name), Astro.site),
+  localBusinessJsonLd(business, live.map((i) => i.name), Astro.site, logoUrl),
   breadcrumbJsonLd(
     [
       { name: 'Ana sayfa', path: '/' },
@@ -43,7 +48,7 @@ const jsonLd = [
         {
           live.map((i) => (
             <li>
-              <a href={`/izmir/${i.slug}-cekici/`}>{i.name} çekici</a>
+              <a href={ilcePath(i)}>{i.name} çekici</a>
             </li>
           ))
         }

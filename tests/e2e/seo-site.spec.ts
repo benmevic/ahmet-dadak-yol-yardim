@@ -35,3 +35,29 @@ test('sitemap lists live districts only and every page has unique title and og:i
     expect(html, url).toMatch(/<meta property="og:image" content="https:\/\/ornek\.com\.tr\/[^"]+"/);
   }
 });
+
+test('404 is noindex with no canonical', async ({ page }) => {
+  await page.goto('/404.html');
+  await expect(page.locator('meta[name=robots][content^=noindex]')).toHaveCount(1);
+  await expect(page.locator('link[rel=canonical]')).toHaveCount(0);
+});
+
+test('business entity has a stable @id and district pages reference it', async ({ page }) => {
+  const read = async (path: string) => {
+    await page.goto(path);
+    return page
+      .locator('script[type="application/ld+json"]')
+      .evaluateAll((els) => els.map((e) => JSON.parse(e.textContent ?? '{}')));
+  };
+  const home = await read('/');
+  const business = home.find((d) => d['@type'] === 'AutomotiveBusiness');
+  expect(business['@id']).toBe(`${SITE}/#isletme`);
+  expect(business.logo).toMatch(/^https:\/\/ornek\.com\.tr\//);
+
+  for (const path of ['/izmir/bornova-cekici/', '/hizmetler/ariza-kurtarma/']) {
+    const ld = await read(path);
+    expect(ld.some((d) => d['@type'] === 'AutomotiveBusiness'), path).toBe(false);
+    const service = ld.find((d) => d['@type'] === 'Service');
+    expect(service.provider).toEqual({ '@id': `${SITE}/#isletme` });
+  }
+});

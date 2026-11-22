@@ -95,3 +95,35 @@ test('desktop hero composition', async ({ page }) => {
   const bandBox = await band.boundingBox();
   expect(bandBox!.y + bandBox!.height).toBeLessThanOrEqual(900);
 });
+
+for (const path of [
+  '/',
+  '/hizmetler/ariza-kurtarma/',
+  '/hizmetler/',
+  '/izmir/',
+  '/izmir/bornova-cekici/',
+  '/iletisim/',
+]) {
+  test(`a tel link and a WhatsApp link are on screen at load: ${path}`, async ({ page }) => {
+    await page.setViewportSize({ width: 375, height: 667 });
+    await page.goto(path);
+    await page.waitForTimeout(300);
+    const inView = (selector: string) =>
+      page.locator(selector).evaluateAll((els) =>
+        els.some((e) => {
+          const r = e.getBoundingClientRect();
+          const style = getComputedStyle(e);
+          return (
+            style.visibility !== 'hidden' &&
+            r.width > 0 &&
+            r.top >= 0 &&
+            r.bottom <= window.innerHeight &&
+            r.left >= 0 &&
+            r.right <= window.innerWidth
+          );
+        }),
+      );
+    expect(await inView('a[href^="tel:"]')).toBe(true);
+    expect(await inView('a[href^="https://wa.me/"]')).toBe(true);
+  });
+}
