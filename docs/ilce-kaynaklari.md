@@ -25,7 +25,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 - Yollar:
   - Menemen–Çandarlı Otoyolu (O-33): https://tr.wikipedia.org/wiki/Aliağa
-  - D.550 bağlantıları (O-33 çıkışları): https://en.wikipedia.org/wiki/Otoyol_33
+  - D.550 bağlantıları (O-33 çıkışları): https://tr.wikipedia.org/wiki/Aliağa
 - Yerler:
   - Petkim, TÜPRAŞ ve SOCAR STAR rafinerisi: https://tr.wikipedia.org/wiki/Aliağa
   - Aliağa Kuş Cenneti: https://tr.wikipedia.org/wiki/Aliağa
@@ -51,10 +51,9 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Bayındır
 
-- ZAYIF KAYNAK NOTU: Yol adları Ödemiş sayfasındaki yol tarifinden alındı; Bayındır sayfasında yol adı yok.
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: Bayındır–Ödemiş yolu yalnızca Ödemiş sayfasındaki yol tarifinde geçer; Bayındır sayfasında yol adı yok. Yol bilgisi eksik.
 - Yollar:
   - Bayındır–Ödemiş yolu: https://tr.wikipedia.org/wiki/Ödemiş (Ödemiş yol tarifi)
-  - Aydın Otoyolu Torbalı–Ödemiş çıkışı: https://tr.wikipedia.org/wiki/Ödemiş (Ödemiş yol tarifi)
 - Yerler:
   - Bayındır Kalesi: https://tr.wikipedia.org/wiki/Bayındır,_İzmir
   - Zeytinova Barajı: https://tr.wikipedia.org/wiki/Bayındır,_İzmir
@@ -79,10 +78,10 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Bergama
 
+- ZAYIF KAYNAK NOTU: Çandarlı bağlantısı (O-33) çıkarıldı: Çandarlı Vikipedi sayfasına göre Dikili ilçesinde; Otoyol 33 sayfası yalnızca "Çandarlı Limanı bağlantısı, Bergama yakınında" diyor.
 - Yollar:
   - Bergama–Dikili karayolu: https://tr.wikipedia.org/wiki/Dikili
   - Bergama–İvrindi karayolu: https://tr.wikipedia.org/wiki/Bergama
-  - Çandarlı limanı bağlantısı (O-33): https://en.wikipedia.org/wiki/Otoyol_33
 - Yerler:
   - Pergamon Akropolü: https://tr.wikipedia.org/wiki/Bergama
   - Asklepion: https://tr.wikipedia.org/wiki/Bergama
@@ -119,7 +118,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Çeşme
 
-- ZAYIF KAYNAK NOTU: Karaburun komşusu denizin karşı kıyısındadır; kara sınırı yalnızca Urla.
+- ZAYIF KAYNAK NOTU: Kara sınırı yalnızca Urla (Vikipedi: doğuda Urla, diğer yönler Ege Denizi). Karaburun komşu listesinden çıkarıldı.
 - Yollar:
   - İzmir–Çeşme Otoyolu (O-32): https://tr.wikipedia.org/wiki/Çeşme,_İzmir
   - D.300 Çeşme–İzmir yolu: https://tr.wikipedia.org/wiki/Çeşme,_İzmir
@@ -130,7 +129,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
   - Ilıca: https://tr.wikipedia.org/wiki/Çeşme,_İzmir
   - Alaçatı: https://tr.wikipedia.org/wiki/Çeşme,_İzmir
   - Altınkum: https://tr.wikipedia.org/wiki/Çeşme,_İzmir
-- Komşular: Urla (https://tr.wikipedia.org/wiki/Çeşme,_İzmir); Karaburun (https://tr.wikipedia.org/wiki/Çeşme,_İzmir)
+- Komşular: Urla (https://tr.wikipedia.org/wiki/Çeşme,_İzmir)
 - Giriş paragrafındaki diğer ifadeler: https://tr.wikipedia.org/wiki/Çeşme,_İzmir
 
 ### Çiğli
@@ -149,24 +148,24 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Dikili
 
-- ZAYIF KAYNAK NOTU: Aliağa kara komşusu değil, Çandarlı Körfezi karşısında yakın ilçe.
+- ZAYIF KAYNAK NOTU: Yol bilgisi eksik (tek yol: Bergama–Dikili karayolu). Ağılkale kavşağı çıkarıldı. İzmir içinde tek kara komşusu Bergama; Aliağa çıkarıldı.
 - Yollar:
   - Bergama–Dikili karayolu: https://tr.wikipedia.org/wiki/Dikili
-  - Ağılkale kavşağı: https://tr.wikipedia.org/wiki/Dikili
 - Yerler:
   - Çandarlı Kalesi: https://tr.wikipedia.org/wiki/Dikili
   - Dikili Limanı: https://tr.wikipedia.org/wiki/Dikili
   - Bademli Deniz Ilıcası: https://tr.wikipedia.org/wiki/Dikili
   - Nebiler Şelalesi: https://tr.wikipedia.org/wiki/Dikili
   - Atatürk Botanik Bahçesi: https://tr.wikipedia.org/wiki/Dikili
-- Komşular: Bergama (https://tr.wikipedia.org/wiki/Dikili); Aliağa (https://tr.wikipedia.org/wiki/Dikili)
+- Komşular: Bergama (https://tr.wikipedia.org/wiki/Dikili)
 - Giriş paragrafındaki diğer ifadeler: https://tr.wikipedia.org/wiki/Dikili
 
 ### Foça
 
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: P.35-79 il yolu numarası yalnızca Otoyol 33 çıkış tablosunda (Foça ve Yenifoça yönü) geçer; Foça sayfasında yol yok.
 - Yollar:
-  - Foça il yolu (P.35-79): https://en.wikipedia.org/wiki/Otoyol_33
-  - Menemen–Çandarlı Otoyolu (O-33) bağlantısı: https://en.wikipedia.org/wiki/Otoyol_33
+  - Foça il yolu (P.35-79): https://en.wikipedia.org/wiki/Otoyol_33 (P.35-79 Foça yönü)
+  - Menemen–Çandarlı Otoyolu (O-33) bağlantısı: https://en.wikipedia.org/wiki/Otoyol_33 (P.35-79 Foça yönü)
 - Yerler:
   - Siren Kayalıkları: https://tr.wikipedia.org/wiki/Foça
   - Eski Foça: https://tr.wikipedia.org/wiki/Foça
@@ -192,6 +191,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Güzelbahçe
 
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: P.35-39 il yolu numarası yalnızca Otoyol 32 çıkış tablosunda (K3, Seferihisar yönü) geçer.
 - Yollar:
   - İzmir–Çeşme Otoyolu (O-32): https://tr.wikipedia.org/wiki/Güzelbahçe
   - Seferihisar il yolu (P.35-39): https://en.wikipedia.org/wiki/Otoyol_32
@@ -206,10 +206,9 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Karabağlar
 
-- ZAYIF KAYNAK NOTU: Yeşillik Caddesi için kaynak zayıf.
+- ZAYIF KAYNAK NOTU: Yol bilgisi eksik (tek yol: O-30). Yeşillik Caddesi güvenilir kaynak bulunamadığı için çıkarıldı.
 - Yollar:
   - İzmir Çevre Yolu (O-30): https://tr.wikipedia.org/wiki/Karabağlar
-  - Yeşillik Caddesi: https://www.e-sehir.com/turkiye-haritasi/yesillik-caddesi-nerede-nasil-gidilir.html (ZAYIF: yalnızca harita dizini)
 - Yerler:
   - İzmir Atatürk Eğitim ve Araştırma Hastanesi: https://tr.wikipedia.org/wiki/Karabağlar
   - İzmir Demokrasi Üniversitesi: https://tr.wikipedia.org/wiki/Karabağlar
@@ -219,7 +218,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Karaburun
 
-- ZAYIF KAYNAK NOTU: Çeşme denizin karşı kıyısındadır; kara sınırı yalnızca Urla. D.505 ve İYTE–Mordoğan yolu için tek kaynak var.
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: "Karaburun yolu (D.505)" yalnızca Otoyol 32 çıkış tablosunda (K5, D.300 ile D.505 Karaburun yönü) geçer; Karaburun sayfasında yol numarası yok. İYTE–Mordoğan yolu tek kaynaktan. Kara komşusu yalnızca Urla; Çeşme listeden çıkarıldı.
 - Yollar:
   - Karaburun yolu (D.505): https://en.wikipedia.org/wiki/Otoyol_32
   - İYTE–Mordoğan yolu: https://tr.wikipedia.org/wiki/Karaburun,_İzmir
@@ -229,7 +228,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
   - Bodrum Koyu: https://tr.wikipedia.org/wiki/Karaburun,_İzmir
   - Büyük Ada ve feneri: https://tr.wikipedia.org/wiki/Karaburun,_İzmir
   - Saip İskelesi: https://tr.wikipedia.org/wiki/Karaburun,_İzmir
-- Komşular: Urla (https://tr.wikipedia.org/wiki/Karaburun,_İzmir); Çeşme (https://tr.wikipedia.org/wiki/Karaburun,_İzmir)
+- Komşular: Urla (https://tr.wikipedia.org/wiki/Karaburun,_İzmir)
 - Giriş paragrafındaki diğer ifadeler: https://tr.wikipedia.org/wiki/Karaburun,_İzmir
 
 ### Karşıyaka
@@ -248,16 +247,15 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Kınık
 
-- ZAYIF KAYNAK NOTU: Yollar KTB sayfasında sadece "devlet yolu/il yolu" diye geçer. Aliağa kara komşusu değil, yakın ilçedir (testin 2 komşu şartı için yazıldı).
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: "devlet yolu" yalnızca KTB sayfasında "devlet yolu 21 km" diye geçer, yol adı/numarası yok. Yol bilgisi eksik. İzmir içinde tek kara komşusu Bergama (KTB: Soma ve Bergama komşu; Soma Manisa).
 - Yollar:
   - Kınık devlet yolu: https://izmir.ktb.gov.tr/EN-110162/kinik.html (yalnızca "devlet yolu 21 km, il yolu 6 km"; yol numarası yok)
-  - Kınık il yolu: https://izmir.ktb.gov.tr/EN-110162/kinik.html (yalnızca "devlet yolu 21 km, il yolu 6 km"; yol numarası yok)
 - Yerler:
   - Mamurt Kalesi ve Kybele Tapınağı: https://izmir.ktb.gov.tr/EN-110162/kinik.html
   - Asar Kalesi: https://izmir.ktb.gov.tr/EN-110162/kinik.html
   - Yunt Dağları: https://izmir.ktb.gov.tr/EN-110162/kinik.html
   - Bakırçay: https://izmir.ktb.gov.tr/EN-110162/kinik.html
-- Komşular: Bergama (https://izmir.ktb.gov.tr/EN-110162/kinik.html); Aliağa (https://izmir.ktb.gov.tr/EN-110162/kinik.html)
+- Komşular: Bergama (https://izmir.ktb.gov.tr/EN-110162/kinik.html)
 - Giriş paragrafındaki diğer ifadeler: https://izmir.ktb.gov.tr/EN-110162/kinik.html
 
 ### Kiraz
@@ -319,7 +317,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Narlıdere
 
-- ZAYIF KAYNAK NOTU: Yollar yalnızca O-32 ve D.300 bağlantısıdır.
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: "D.300 bağlantısı" yalnızca Otoyol 32 çıkış tablosunda (K2, Narlıdere yönü) geçer; Narlıdere sayfasında yalnızca O-32 var.
 - Yollar:
   - İzmir–Çeşme Otoyolu (O-32) Narlıdere çıkışı (D.300): https://en.wikipedia.org/wiki/Otoyol_32 (K2, D.300) ve https://tr.wikipedia.org/wiki/Narlıdere
 - Yerler:
@@ -348,7 +346,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 ### Seferihisar
 
-- ZAYIF KAYNAK NOTU: Tek il yolu numarası var; ikinci "yol" O-32 çıkışıdır.
+- ZAYIF KAYNAK NOTU: ZAYIF KAYNAK: P.35-39 numarası yalnızca Otoyol 32 çıkış tablosunda geçer; Seferihisar sayfasında yol yok.
 - Yollar:
   - Güzelbahçe–Seferihisar il yolu (P.35-39): https://en.wikipedia.org/wiki/Otoyol_32 (K3)
   - İzmir–Çeşme Otoyolu (O-32) Güzelbahçe çıkışı: https://en.wikipedia.org/wiki/Otoyol_32 (K3)

@@ -72,7 +72,6 @@ export const ilceler: Ilce[] = [
     intro: "Bayındır, Kemalpaşa, Torbalı, Tire ve Ödemiş arasında, tarıma dayalı bir ovada yer alır. Çiçek Festivali ve Zeytinova Barajı ilçenin bilinen yerleri; ilk Osmanlı darphanesinin de burada kurulduğu anlatılır. Köyler arası yollar uzun geçer. Bayındır–Ödemiş yolunda ya da köy yollarında kaldıysanız arayın, konumunuza kasalı çekici yollayalım.",
     roads: [
       "Bayındır–Ödemiş yolu",
-      "Aydın Otoyolu Torbalı–Ödemiş çıkışı",
     ],
     landmarks: [
       "Bayındır Kalesi",
@@ -112,11 +111,10 @@ export const ilceler: Ilce[] = [
     name: "Bergama",
     slug: "bergama",
     status: 'draft',
-    intro: "Bergama, Pergamon Akropolü, Asklepion ve Kızıl Avlu ile İzmir'in en eski yerleşimlerinden biri. İlçe kuzeyde Balıkesir, doğuda Manisa sınırına dayanır. İvrindi'ye giden karayolu, Dikili yolu ve Çandarlı limanına inen otoyol bağlantısı ilçenin ana bağlantıları. Gezi sırasında ya da yolda aracınız bozulursa bize konum atın.",
+    intro: "Bergama, Pergamon Akropolü, Asklepion ve Kızıl Avlu ile İzmir'in en eski yerleşimlerinden biri. İlçe kuzeyde Balıkesir, doğuda Manisa sınırına dayanır. İvrindi'ye giden karayolu ile Dikili yolu ilçenin ana bağlantıları. Gezi sırasında ya da yolda aracınız bozulursa bize konum atın.",
     roads: [
       "Bergama–Dikili karayolu",
       "Bergama–İvrindi karayolu",
-      "Çandarlı limanı bağlantısı (O-33)",
     ],
     landmarks: [
       "Pergamon Akropolü",
@@ -210,7 +208,7 @@ export const ilceler: Ilce[] = [
     name: "Çeşme",
     slug: "cesme",
     status: 'draft',
-    intro: "Çeşme, Karaburun Yarımadası'nın batı ucunda, Sakız Adası'na bakan bir tatil ilçesi. Çeşme Kalesi, Ilıca, Alaçatı ve Altınkum ilçedeki bilinen yerler. İzmir–Çeşme Otoyolu ve D.300 ilçeye ulaşır; Çeşme Limanı'ndan Sakız, Atina ve Trieste hatlarına gemi kalkar. Limana giderken ya da plaj yolunda aracınız kalırsa arayın, kasalı çekici yola çıksın.",
+    intro: "Çeşme, Karaburun Yarımadası'nın batı ucunda, Sakız Adası'na bakan bir tatil ilçesi. Çeşme Kalesi, Ilıca, Alaçatı ve Altınkum ilçedeki bilinen yerler. İzmir–Çeşme Otoyolu ve D.300 ilçeye ulaşır; Çeşme Limanı da ilçede. Limana giderken ya da plaj yolunda aracınız kalırsa arayın, kasalı çekici yola çıksın.",
     roads: [
       "İzmir–Çeşme Otoyolu (O-32)",
       "D.300 Çeşme–İzmir yolu",
@@ -223,7 +221,7 @@ export const ilceler: Ilce[] = [
       "Alaçatı",
       "Altınkum",
     ],
-    neighbours: ["Urla", "Karaburun"],
+    neighbours: ["Urla"],
     faq: [
       { q: "Gemiye yetişecektim, aracım Çeşme yolunda bozuldu. Ne yapmalıyım?", a: "Önce güvenli yere geçin, sonra bizi arayın. Aracı kasaya alıp servise ya da söylediğiniz adrese götürürüz." },
       { q: "Alaçatı ve Ilıca tarafına gelir misiniz?", a: "Evet, İzmir geneline hizmet veriyoruz. Konumunuzu gönderin." },
@@ -255,10 +253,9 @@ export const ilceler: Ilce[] = [
     name: "Dikili",
     slug: "dikili",
     status: 'draft',
-    intro: "Dikili, İzmir'in kuzeybatı ucunda, Balıkesir sınırında bir sahil ilçesi. Çandarlı Kalesi, Bademli ve Nebiler'in kaplıcaları ve Dikili Limanı bilinen yerleri. Bergama'dan gelen karayolu ilçeye iner; Ağılkale yakınında bir kavşak var. Tatil dönüşü, kaplıca yolunda ya da Çandarlı tarafında aracınız kalırsa ararsanız, aracı kasaya alıp götürürüz.",
+    intro: "Dikili, İzmir'in kuzeybatı ucunda, Balıkesir sınırında bir sahil ilçesi. Çandarlı Kalesi, Bademli ve Nebiler'in kaplıcaları ve Dikili Limanı bilinen yerleri. Bergama'dan gelen karayolu ilçeye iner. Tatil dönüşü, kaplıca yolunda ya da Çandarlı tarafında aracınız kalırsa ararsanız, aracı kasaya alıp götürürüz.",
     roads: [
       "Bergama–Dikili karayolu",
-      "Ağılkale kavşağı",
     ],
     landmarks: [
       "Çandarlı Kalesi",
@@ -267,7 +264,7 @@ export const ilceler: Ilce[] = [
       "Nebiler Şelalesi",
       "Atatürk Botanik Bahçesi",
     ],
-    neighbours: ["Bergama", "Aliağa"],
+    neighbours: ["Bergama"],
     faq: [
       { q: "Dikili'de tatilde aracım bozuldu, otele kadar çekilir mi?", a: "Evet. Aracı kasaya alıp otele, servise ya da eve bırakabiliriz. Nereye gideceğini siz söylersiniz." },
       { q: "Nebiler ya da Bademli yolunda kaldım, gelir misiniz?", a: "Konumunuzu WhatsApp ile gönderin; yakındaki köy ya da tesisin adını da yazarsanız yeri daha çabuk buluruz." },
@@ -343,10 +340,9 @@ export const ilceler: Ilce[] = [
     name: "Karabağlar",
     slug: "karabaglar",
     status: 'draft',
-    intro: "Karabağlar, Konak'ın güneyinde, Buca ve Gaziemir arasında yoğun yerleşimli bir ilçe. İzmir Atatürk Eğitim ve Araştırma Hastanesi ile Demokrasi Üniversitesi burada; Bozyaka'nın eski bağları 1970'lere kadar korunmuş. Çevre yolu ilçenin içinden geçer. Hastane çevresinde, Yeşillik Caddesi'nde ya da çevre yolu çıkışlarında aracınız bozulursa konumunuzu gönderin.",
+    intro: "Karabağlar, Konak'ın güneyinde, Buca ve Gaziemir arasında yoğun yerleşimli bir ilçe. İzmir Atatürk Eğitim ve Araştırma Hastanesi ile Demokrasi Üniversitesi burada; Bozyaka'nın eski bağları 1970'lere kadar korunmuş. Çevre yolu ilçenin içinden geçer. Hastane çevresinde, mahalle sokaklarında ya da çevre yolu çıkışlarında aracınız bozulursa konumunuzu gönderin.",
     roads: [
       "İzmir Çevre Yolu (O-30)",
-      "Yeşillik Caddesi",
     ],
     landmarks: [
       "İzmir Atatürk Eğitim ve Araştırma Hastanesi",
@@ -363,7 +359,7 @@ export const ilceler: Ilce[] = [
     name: "Karaburun",
     slug: "karaburun",
     status: 'draft',
-    intro: "Karaburun, İzmir'in en batısındaki yarımadada, Urla'nın kuzeyinde yer alır. Mordoğan ve Küçükbahçe beldeleri, Bodrum Koyu ve Büyük Ada'daki fener ilçeyi tanıtır. İzmir'den gelen D.505 yolu yarımadaya girer; İYTE'den Mordoğan'a giden yol da yenilenmiş. Mordoğan yolunda ya da kıyı köylerinde araç kalırsa ararsanız, uzun yola da çıkarız.",
+    intro: "Karaburun, İzmir'in en batısındaki yarımadada, Urla'nın kuzeyinde yer alır. Mordoğan ve Küçükbahçe beldeleri, Bodrum Koyu ve Büyük Ada'daki fener ilçeyi tanıtır. İzmir'den gelen D.505 yolu yarımadaya girer; İYTE'den Mordoğan'a giden yol da yenilenmiş. Mordoğan yolunda ya da kıyı köylerinde araç kalırsa ararsanız, aracı kasaya alırız.",
     roads: [
       "Karaburun yolu (D.505)",
       "İYTE–Mordoğan yolu",
@@ -375,7 +371,7 @@ export const ilceler: Ilce[] = [
       "Büyük Ada ve feneri",
       "Saip İskelesi",
     ],
-    neighbours: ["Urla", "Çeşme"],
+    neighbours: ["Urla"],
     faq: [
       { q: "Karaburun'un uzak köylerinde aracım bozuldu, gelir misiniz?", a: "Köyün adını ve konumunuzu gönderin. Yarımadada mesafe uzun olduğu için nerede olduğunuzu net yazmanız yeter." },
       { q: "Mordoğan yolunda virajda araç patinaj yaptı, ne yapmalıyım?", a: "Aracı yolun dışına, görünür bir yere çekip dörtlüleri yakın. Ardından konumu ve araç durumunu bize yazın." },
@@ -441,10 +437,9 @@ export const ilceler: Ilce[] = [
     name: "Kınık",
     slug: "kinik",
     status: 'draft',
-    intro: "Kınık, İzmir'in kuzeydoğusunda, Yunt ve Madra dağları arasındaki bir ova ilçesidir. Bakırçay, Mamurt Kalesi ve Kybele Tapınağı kalıntıları ilçenin tarihi ve doğal yerleri. Bergama ve Manisa'nın Soma ilçesiyle komşudur; devlet yolu ve il yolu ilçeye ulaşır. Köyler arasındaki yolda ya da yaylada aracınız kalırsa ararsanız, çekicimiz gelir.",
+    intro: "Kınık, İzmir'in kuzeydoğusunda, Yunt ve Madra dağları arasındaki bir ova ilçesidir. Bakırçay, Mamurt Kalesi ve Kybele Tapınağı kalıntıları ilçenin tarihi ve doğal yerleri. Bergama ve Manisa'nın Soma ilçesiyle komşudur. Köyler arasındaki yolda ya da yaylada aracınız kalırsa ararsanız, çekicimiz gelir.",
     roads: [
       "Kınık devlet yolu",
-      "Kınık il yolu",
     ],
     landmarks: [
       "Mamurt Kalesi ve Kybele Tapınağı",
@@ -452,7 +447,7 @@ export const ilceler: Ilce[] = [
       "Yunt Dağları",
       "Bakırçay",
     ],
-    neighbours: ["Bergama", "Aliağa"],
+    neighbours: ["Bergama"],
     faq: [
       { q: "Kınık'ta köy yolunda arıza yaptım, hangi bilgiyi vermeliyim?", a: "Köyün adını, konumunuzu ve aracın durumunu yazın. Telefon çekmezse yakındaki bir köyden arayın." },
       { q: "Yunt Dağları'nda yayladan dönerken araç kapandı, ne yapmalıyım?", a: "Aracı eğimli yolda sabitleyin, dörtlüleri yakın ve konumunuzu gönderin." },
@@ -462,7 +457,7 @@ export const ilceler: Ilce[] = [
     name: "Kiraz",
     slug: "kiraz",
     status: 'draft',
-    intro: "Kiraz, Bozdağ'dan Salihli'ye ve Nazilli'ye uzanan geçişte yer alan küçük bir ilçe. Hisar Kalesi, İsa Bey Ulu Camii, Suludere köyü ve Küçük Menderes şelalesi ilçenin yerleri. Köylerin çoğu Bozdağ'ın yamaçlarında ya da eteklerinde. Dağ yolunda ya da pazar yeri çevresinde aracınız kalırsa arayın, uzak mesafeden de gelip aracı kasaya alırız.",
+    intro: "Kiraz, Bozdağ'dan Salihli'ye ve Nazilli'ye uzanan geçişte yer alan küçük bir ilçe. Hisar Kalesi, İsa Bey Ulu Camii, Suludere köyü ve Küçük Menderes şelalesi ilçenin yerleri. Köylerin çoğu Bozdağ'ın yamaçlarında ya da eteklerinde. Dağ yolunda ya da pazar yeri çevresinde aracınız kalırsa arayın, aracı kasaya alırız.",
     roads: [
       "Ödemiş–Kiraz yolu",
       "Bozdağ geçişi",

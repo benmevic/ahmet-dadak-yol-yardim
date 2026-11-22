@@ -2,7 +2,7 @@ Kontrol ettiğiniz ilçeyi işaretleyin; işaretlenen ilçeler yayına alınır.
 
 - [ ] Aliağa
 - [ ] Balçova
-- [ ] Bayındır
+- [ ] Bayındır (yol bilgisi eksik)
 - [ ] Bayraklı
 - [ ] Bergama
 - [ ] Beydağ
@@ -10,15 +10,15 @@ Kontrol ettiğiniz ilçeyi işaretleyin; işaretlenen ilçeler yayına alınır.
 - [ ] Buca
 - [ ] Çeşme
 - [ ] Çiğli
-- [ ] Dikili
+- [ ] Dikili (yol bilgisi eksik)
 - [ ] Foça
 - [ ] Gaziemir
 - [ ] Güzelbahçe
-- [ ] Karabağlar
+- [ ] Karabağlar (yol bilgisi eksik)
 - [ ] Karaburun
 - [ ] Karşıyaka
 - [ ] Kemalpaşa
-- [ ] Kınık
+- [ ] Kınık (yol bilgisi eksik)
 - [ ] Kiraz
 - [ ] Konak
 - [ ] Menderes
