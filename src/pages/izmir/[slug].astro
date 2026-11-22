@@ -10,6 +10,7 @@ import type { Ilce } from '../../data/ilceler';
 import { liveIlceler, ilcePath } from '../../lib/ilce';
 import { business } from '../../data/business';
 import { services } from '../../data/services';
+import { priceFaq } from '../../data/common-faq';
 import { localBusinessJsonLd, serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
 
 export const getStaticPaths = (() =>
@@ -32,7 +33,7 @@ const addressFaq = {
   q: `${business.name} adresiniz nerede?`,
   a: `${business.addresses.map((a) => a.postalLine).join('; ')}. Çekicimiz bu adreslerden çıkıp İzmir'in her ilçesine gider.`,
 };
-const faqItems = [...ilce.faq, addressFaq];
+const faqItems = [...ilce.faq, priceFaq, addressFaq];
 
 const jsonLd = [
   Astro.site

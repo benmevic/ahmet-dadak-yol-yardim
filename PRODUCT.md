@@ -34,7 +34,9 @@ Contact is by phone call or WhatsApp (including sharing a live location). Visito
 - The business previously ran as Dadak Nakliyat (moving). Moving services are dropped and must not appear.
 - Addresses (owner approved publishing; may be removed on request): Çambel Mah. 2005 Sk. No:4, Kemalpaşa / İzmir and Mevlana Mah. 1713 Sk. No:3, Bornova / İzmir.
 - Domain: not bought yet.
-- Open: prices, years in business, customer reviews, Google Business Profile. Do not invent any of them.
+- Vehicles carried: cars, light commercial vehicles, dolmuş/minibüs and motorcycles (motorcycles confirmed by the user, 2026-11-23).
+- Price wording: the user asked for "uygun fiyat" wording (2026-11-23). Amounts are not published and no "en ucuz" claim is made.
+- Open: price amounts, years in business, customer reviews, Google Business Profile. Do not invent any of them.
 
 ## Brand Commitments
 

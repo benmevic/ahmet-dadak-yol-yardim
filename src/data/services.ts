@@ -45,6 +45,10 @@ export const services: Service[] = [
         q: 'Gece de geliyor musunuz?',
         a: 'Evet, 7/24 çalışıyoruz. Gece yarısı da hafta sonu da arayabilirsiniz.',
       },
+      {
+        q: 'Motosikletimi de taşır mısınız?',
+        a: 'Evet. Otomobil ve hafif ticari aracın yanında motosiklet de taşıyoruz; arızalı motosikletinizi istediğiniz yere bırakırız.',
+      },
     ],
     jobId: 'partner',
   },

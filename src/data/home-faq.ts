@@ -26,6 +26,6 @@ export const homeFaq: FaqItem[] = [
   },
   {
     q: 'Hangi araçları taşıyorsunuz?',
-    a: 'Otomobil, hafif ticari araç ve dolmuş/minibüs taşıyoruz. Fotoğraflarımızda bunların örneklerini görebilirsiniz.',
+    a: 'Otomobil, hafif ticari araç, dolmuş/minibüs ve motosiklet taşıyoruz. Fotoğraflarımızda bunların örneklerini görebilirsiniz.',
   },
 ];

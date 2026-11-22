@@ -11,11 +11,14 @@ import HowItWorks from '../components/HowItWorks.astro';
 import Faq from '../components/Faq.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import { homeFaq } from '../data/home-faq';
+import { priceFaq } from '../data/common-faq';
 import parkBornova from '../assets/jobs/park-bornova.jpg';
 import { business } from '../data/business';
 import { services as serviceList } from '../data/services';
 import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
 import { liveIlceler, ilcePath } from '../lib/ilce';
+
+const faqItems = [homeFaq[0], priceFaq, ...homeFaq.slice(1)];
 
 const services = [
   { label: 'Arıza', href: '/hizmetler/ariza-kurtarma/' },
@@ -37,7 +40,7 @@ const jsonLd = [
     logoUrl,
     serviceList.map((s) => s.name),
   ),
-  faqJsonLd(homeFaq),
+  faqJsonLd(faqItems),
 ].filter((entry): entry is object => entry !== null);
 ---
 <BaseLayout
@@ -133,7 +136,7 @@ const jsonLd = [
     <div class="wrap">
       <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
       <div class="faq-wrap">
-        <Faq items={homeFaq} />
+        <Faq items={faqItems} />
       </div>
     </div>
   </section>
