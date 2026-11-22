@@ -87,8 +87,8 @@ test('desktop hero composition', async ({ page }) => {
   // The copy sits on the left, dark side of the photo.
   expect(h1!.x + h1!.width).toBeLessThanOrEqual(half);
   expect(plate!.x + plate!.width).toBeLessThanOrEqual(half);
-  // The photo fills the whole hero, edge to edge inside its rounded frame.
-  expect(photo!.x).toBeLessThanOrEqual(hero!.x + 1);
+  // The truck photo sits on the right and runs to the hero's right edge.
+  expect(photo!.x + photo!.width / 2).toBeGreaterThan(half);
   expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(hero!.x + hero!.width - 1);
   // The whole hero, with its call plate, fits the first screen.
   expect(hero!.y + hero!.height).toBeLessThanOrEqual(900);
