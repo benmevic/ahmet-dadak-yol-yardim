@@ -25,7 +25,7 @@ Her satır: iddia, kaynak. Ayrı bağlantı yoksa ilgili ilçenin Vikipedi sayfa
 
 - Yollar:
   - Menemen–Çandarlı Otoyolu (O-33): https://tr.wikipedia.org/wiki/Aliağa
-  - D.550 bağlantıları (O-33 çıkışları): https://tr.wikipedia.org/wiki/Aliağa
+  - D.550 bağlantıları (O-33 çıkışları): https://en.wikipedia.org/wiki/Otoyol_33
 - Yerler:
   - Petkim, TÜPRAŞ ve SOCAR STAR rafinerisi: https://tr.wikipedia.org/wiki/Aliağa
   - Aliağa Kuş Cenneti: https://tr.wikipedia.org/wiki/Aliağa
