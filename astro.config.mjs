@@ -6,5 +6,5 @@ export default defineConfig({
   output: 'static',
   trailingSlash: 'always',
   outDir: process.env.OUT_DIR ?? './dist',
-  integrations: [sitemap()],
+  integrations: process.env.SITE_URL ? [sitemap()] : [],
 });

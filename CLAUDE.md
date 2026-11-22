@@ -13,7 +13,25 @@ Local search visibility is a top priority (people search "çekici" + district/ci
 
 ## Status
 
-The repository has no application code yet. Stack, build, lint and test commands are not decided; update this file with them once the project is scaffolded.
+Static Astro 7 site (TypeScript strict, no UI framework, trailingSlash always). Pages: home, `/hizmetler/` plus six service pages, `/izmir/` plus live district pages, `/iletisim/`, 404, `/robots.txt`.
+
+Commands:
+
+- `npm run dev`: dev server.
+- `npm test`: Vitest unit tests (`npx vitest run <file>` for one file).
+- `npm run test:e2e`: Playwright; builds and serves the site on 4322 (no SITE_URL, noindex) and a second build with SITE_URL=https://ornek.com.tr into `dist-site/` on 4324 (`npm run test:e2e -- <file>` for one spec).
+- `npm run build`: build to `dist/`. Without `SITE_URL` the site is noindex, robots.txt disallows all and no sitemap is made. Production: `SITE_URL=https://<real-domain> npm run build` (adds canonicals, sitemap, robots Allow). `OUT_DIR` overrides the output folder.
+
+Data files (`src/data/`):
+
+- `business.ts`: phone, WhatsApp, Instagram, addresses.
+- `services.ts`: the six services.
+- `ilceler.ts`: districts, each with `status` 'live' or 'draft'. Only live districts get pages and sitemap entries.
+- `jobs.ts`: photos of completed jobs; `home-faq.ts`: home page FAQ.
+
+Publishing a district: the owner checks the draft against `docs/ilce-kontrol-listesi.md`, then set its `status` to 'live' in `ilceler.ts`.
+
+The default `og:image` is generated at build time (1200x630 crop of `src/assets/jobs/park-bornova.jpg`, no logo).
 
 ## Skill workflow
 

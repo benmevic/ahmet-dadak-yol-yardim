@@ -8,3 +8,4 @@ playwright-report/
 eski-site/
 .claude/settings.local.json
 .impeccable/hook.cache.json
+dist-site/
