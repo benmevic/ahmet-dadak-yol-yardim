@@ -2,6 +2,7 @@
 import { business } from '../data/business';
 import PlateCall from './PlateCall.astro';
 import WhatsAppButton from './WhatsAppButton.astro';
+import InstagramButton from './InstagramButton.astro';
 ---
 <section id="iletisim" class="contact" aria-labelledby="contact-title">
   <div class="wrap contact-inner">
@@ -10,11 +11,8 @@ import WhatsAppButton from './WhatsAppButton.astro';
       <div class="contact-buttons">
         <PlateCall size="md" data-primary-cta />
         <WhatsAppButton block />
+        <InstagramButton block />
       </div>
-      <p class="contact-insta">
-        Instagram:{' '}
-        <a href={business.instagramUrl} target="_blank" rel="noopener">@{business.instagramHandle}</a>
-      </p>
     </div>
     <ul class="contact-addresses">
       {
@@ -51,18 +49,6 @@ import WhatsAppButton from './WhatsAppButton.astro';
 
   .contact-buttons :global(.plate) {
     display: flex;
-  }
-
-  .contact-insta {
-    margin: 16px 0 0;
-    color: var(--muted);
-  }
-
-  .contact-insta a {
-    color: var(--ink);
-    font-weight: 600;
-    text-decoration-color: var(--red);
-    text-decoration-thickness: 2px;
   }
 
   .contact-addresses {

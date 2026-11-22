@@ -2,6 +2,7 @@
 import { Picture } from 'astro:assets';
 import logo from '../assets/logo.jpg';
 import { business } from '../data/business';
+import Instagram from './icons/Instagram.astro';
 
 interface Props {
   path: string;
@@ -47,8 +48,14 @@ const isCurrent = (href: string) => href !== '/' && !href.includes('#') && path.
             <a
               href={link.href}
               aria-current={isCurrent(link.href) ? 'page' : undefined}
+              class:list={{ 'nav-insta': link.external }}
               {...(link.external ? { target: '_blank', rel: 'noopener' } : {})}
             >
+              {link.external && (
+                <span class="nav-insta-icon">
+                  <Instagram size={15} />
+                </span>
+              )}
               {link.label}
             </a>
           </li>
@@ -56,6 +63,15 @@ const isCurrent = (href: string) => href !== '/' && !href.includes('#') && path.
       }
     </ul>
   </nav>
+  <a
+    class="header-insta"
+    href={business.instagramUrl}
+    target="_blank"
+    rel="noopener"
+    aria-label={`Instagram: @${business.instagramHandle}`}
+  >
+    <Instagram size={22} />
+  </a>
 </header>
 
 <style>
@@ -129,6 +145,38 @@ const isCurrent = (href: string) => href !== '/' && !href.includes('#') && path.
     transition: border-color 160ms cubic-bezier(0.16, 1, 0.3, 1);
   }
 
+  .site-nav a.nav-insta {
+    display: inline-flex;
+    align-items: center;
+    gap: 7px;
+  }
+
+  .nav-insta-icon {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: var(--insta-gradient);
+    color: #fff;
+  }
+
+  .header-insta {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 42px;
+    height: 42px;
+    border-radius: 11px;
+    background: var(--insta-gradient);
+    color: #fff;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .header-insta:active {
+    filter: brightness(0.85);
+  }
+
   .site-nav a:hover,
   .site-nav a[aria-current='page'] {
     border-bottom-color: var(--red);
@@ -166,6 +214,10 @@ const isCurrent = (href: string) => href !== '/' && !href.includes('#') && path.
 
     .site-nav {
       display: block;
+    }
+
+    .header-insta {
+      display: none;
     }
   }
 

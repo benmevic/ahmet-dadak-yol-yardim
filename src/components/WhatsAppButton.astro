@@ -1,7 +1,7 @@
 ---
 import { business } from '../data/business';
 import { whatsappHref, DEFAULT_WA_MESSAGE } from '../lib/contact';
-import MapPin from './icons/MapPin.astro';
+import WhatsApp from './icons/WhatsApp.astro';
 
 interface Props {
   block?: boolean;
@@ -15,7 +15,7 @@ const { block = false } = Astro.props;
   target="_blank"
   rel="noopener"
 >
-  <MapPin size={20} />
+  <WhatsApp size={22} />
   <span>Konumu WhatsApp'tan gönder</span>
 </a>
 
@@ -27,11 +27,11 @@ const { block = false } = Astro.props;
     gap: 10px;
     min-height: 56px;
     padding: 0 20px;
-    border: 2px solid var(--ink);
+    border: 2px solid var(--wa-green);
     border-radius: 8px;
-    background: transparent;
+    background: var(--wa-green);
     color: var(--ink);
-    font: 600 0.9375rem/1.2 var(--font-body);
+    font: 700 0.9375rem/1.2 var(--font-body);
     text-decoration: none;
     white-space: nowrap;
     transition:
@@ -47,14 +47,14 @@ const { block = false } = Astro.props;
 
   @media (hover: hover) {
     .wa-button:hover {
-      background: var(--ink);
-      color: #fff;
+      background: var(--wa-green-press);
+      border-color: var(--wa-green-press);
     }
   }
 
   .wa-button:active {
-    background: var(--ink);
-    color: #fff;
+    background: var(--wa-green-press);
+    border-color: var(--wa-green-press);
   }
 
   @media (prefers-reduced-motion: reduce) {

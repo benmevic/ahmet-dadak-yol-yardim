@@ -10,3 +10,10 @@
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'Barlow', system-ui, sans-serif;
 }
+
+:root {
+  /* Brand colours of the platforms we link to. */
+  --wa-green: #25d366;
+  --wa-green-press: #1ebe5b;
+  --insta-gradient: linear-gradient(115deg, #6d2fa4 0%, #b02f7c 52%, #d53a50 100%);
+}

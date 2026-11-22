@@ -1,0 +1,72 @@
+---
+import { business } from '../data/business';
+import Instagram from './icons/Instagram.astro';
+
+interface Props {
+  block?: boolean;
+}
+
+const { block = false } = Astro.props;
+---
+<a
+  class:list={['insta-button', { 'insta-button--block': block }]}
+  href={business.instagramUrl}
+  target="_blank"
+  rel="noopener"
+>
+  <Instagram size={22} />
+  <span class="insta-text">
+    <span>Instagram'da takip edin</span>
+    <b>@{business.instagramHandle}</b>
+  </span>
+</a>
+
+<style>
+  .insta-button {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    min-height: 56px;
+    padding: 0 20px;
+    border-radius: 8px;
+    background: var(--insta-gradient);
+    color: #fff;
+    text-decoration: none;
+    transition: filter 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  .insta-button--block {
+    display: flex;
+    width: 100%;
+  }
+
+  .insta-text {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: baseline;
+    gap: 2px 8px;
+    font: 600 0.9375rem/1.2 var(--font-body);
+  }
+
+  .insta-text b {
+    font-weight: 700;
+  }
+
+  @media (hover: hover) {
+    .insta-button:hover {
+      filter: brightness(0.9);
+    }
+  }
+
+  .insta-button:active {
+    filter: brightness(0.82);
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .insta-button {
+      transition: none;
+    }
+  }
+</style>

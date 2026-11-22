@@ -4,6 +4,7 @@ import { telHref, whatsappHref, DEFAULT_WA_MESSAGE } from '../lib/contact';
 import Phone from './icons/Phone.astro';
 import WhatsApp from './icons/WhatsApp.astro';
 import MapPin from './icons/MapPin.astro';
+import Instagram from './icons/Instagram.astro';
 
 const year = new Date().getFullYear();
 
@@ -36,12 +37,13 @@ const links = [
             target="_blank"
             rel="noopener"
           >
-            <WhatsApp size={18} />
+            <span class="brand-chip brand-chip--wa"><WhatsApp size={16} /></span>
             <span>WhatsApp'tan yazın</span>
           </a>
         </li>
         <li>
           <a href={business.instagramUrl} target="_blank" rel="noopener">
+            <span class="brand-chip brand-chip--insta"><Instagram size={16} /></span>
             <span>Instagram: @{business.instagramHandle}</span>
           </a>
         </li>
@@ -147,6 +149,25 @@ const links = [
     font: 700 1.5rem/1 var(--font-display);
     letter-spacing: 0.03em;
     text-decoration: none;
+  }
+
+  .brand-chip {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 28px;
+    height: 28px;
+    border-radius: 8px;
+  }
+
+  .brand-chip--wa {
+    background: var(--wa-green);
+    color: var(--ink);
+  }
+
+  .brand-chip--insta {
+    background: var(--insta-gradient);
+    color: #fff;
   }
 
   .footer-address {

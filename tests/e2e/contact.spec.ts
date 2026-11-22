@@ -12,9 +12,9 @@ test('/iletisim/ carries every way to reach the business', async ({ page }) => {
   await expect(page.locator('main')).toContainText('Mevlana Mah. 1713 Sk. No:3, Bornova / İzmir');
 });
 
-test('Instagram label is separated from the handle', async ({ page }) => {
+test('Instagram button shows the handle', async ({ page }) => {
   await page.goto('/iletisim/');
-  await expect(page.locator('.contact-insta').first()).toHaveText(/Instagram: @dadakyolyardim/);
+  await expect(page.locator('a.insta-button').first()).toContainText('@dadakyolyardim');
 });
 
 test('İzmir map serves all 30 districts and marks the ones with pages', async ({ page }) => {
