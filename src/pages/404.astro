@@ -1,0 +1,112 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import PlateCall from '../components/PlateCall.astro';
+import WhatsAppButton from '../components/WhatsAppButton.astro';
+---
+<BaseLayout
+  title="Sayfa bulunamadı | Ahmet Dadak Yol Yardım"
+  description="Aradığınız sayfa bulunamadı. Çekici için 0540 123 0335'i arayın."
+  path="/404/"
+>
+  <section class="lost wrap">
+    <h1>Bu sayfa yok, ama yardım bir arama uzağınızda.</h1>
+    <div class="actions">
+      <PlateCall data-primary-cta />
+      <WhatsAppButton />
+    </div>
+    <p class="home"><a href="/">Ana sayfaya dön</a></p>
+  </section>
+</BaseLayout>
+
+<style>
+  .lost {
+    padding-block: 40px 64px;
+  }
+
+  h1 {
+    margin: 0;
+    max-width: 16ch;
+    font: 700 2.5rem/0.98 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 26px;
+  }
+
+  .actions :global(.plate) {
+    display: flex;
+  }
+
+  .actions :global(.plate-face) {
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .actions :global(.plate-digits) {
+    font-size: clamp(1.75rem, 9.4vw, 2.125rem);
+  }
+
+  .actions :global(.wa-button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .home {
+    margin: 22px 0 0;
+  }
+
+  .home a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .lost {
+      padding-block: 72px 96px;
+    }
+
+    h1 {
+      max-width: 18ch;
+      font-size: 4.5rem;
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 32px;
+    }
+
+    .actions :global(.plate) {
+      display: inline-flex;
+    }
+
+    .actions :global(.plate-face) {
+      align-items: flex-start;
+      padding-inline: 18px;
+    }
+
+    .actions :global(.plate-digits) {
+      font-size: 2.5rem;
+    }
+
+    .actions :global(.wa-button) {
+      display: inline-flex;
+      width: auto;
+    }
+  }
+</style>

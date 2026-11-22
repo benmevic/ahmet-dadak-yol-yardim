@@ -1,0 +1,145 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import IzmirMap from '../components/IzmirMap.astro';
+import { liveIlceler } from '../lib/ilce';
+import { business } from '../data/business';
+import { localBusinessJsonLd, breadcrumbJsonLd } from '../lib/seo';
+
+const live = liveIlceler();
+const jsonLd = [
+  localBusinessJsonLd(business, live.map((i) => i.name), Astro.site),
+  breadcrumbJsonLd(
+    [
+      { name: 'Ana sayfa', path: '/' },
+      { name: 'İletişim', path: '/iletisim/' },
+    ],
+    Astro.site,
+  ),
+].filter((entry): entry is object => entry !== null);
+---
+<BaseLayout
+  title="İletişim | Ahmet Dadak Yol Yardım"
+  description="Ahmet Dadak Yol Yardım iletişim: 0540 123 0335, WhatsApp, Instagram ve Kemalpaşa ile Bornova adresleri. Çekici gece gündüz yolda."
+  path="/iletisim/"
+  jsonLd={jsonLd}
+>
+  <header class="page-head wrap">
+    <h1>İletişim</h1>
+    <p class="lead">
+      Yolda kaldıysanız önce arayın. Konumunuzu WhatsApp'tan göndermeniz de yeter; çekici size gelsin.
+    </p>
+  </header>
+
+  <ContactBlock />
+
+  <section class="area wrap" aria-labelledby="area-title">
+    <div class="area-text">
+      <h2 id="area-title" class="section-title">Hizmet bölgemiz</h2>
+      <p>
+        Kırmızı ilçelerin sayfaları hazır. Başka bir ilçedeyseniz konumunuzu gönderin, size ulaşıp ulaşamayacağımızı hemen söyleyelim.
+      </p>
+      <ul class="area-links">
+        {
+          live.map((i) => (
+            <li>
+              <a href={`/izmir/${i.slug}-cekici/`}>{i.name} çekici</a>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+    <div class="area-map">
+      <IzmirMap highlight={live.map((i) => i.slug)} />
+    </div>
+  </section>
+</BaseLayout>
+
+<style>
+  .page-head {
+    padding-top: 24px;
+    padding-bottom: 28px;
+  }
+
+  h1 {
+    margin: 0;
+    font: 700 2.5rem/0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin: 14px 0 0;
+    max-width: 52ch;
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .area {
+    display: grid;
+    gap: 24px;
+    padding-block: 34px 48px;
+  }
+
+  .area-map {
+    max-width: 640px;
+    justify-self: end;
+    width: 100%;
+  }
+
+  .area-text p {
+    margin: 12px 0 0;
+    max-width: 52ch;
+    line-height: 1.5;
+  }
+
+  .area-links {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px 20px;
+    margin: 12px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .area-links a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .page-head {
+      padding-top: 36px;
+      padding-bottom: 36px;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    .lead {
+      font-size: 1.1875rem;
+    }
+
+    .area {
+      grid-template-columns: 0.8fr 1.2fr;
+      align-items: center;
+      gap: 56px;
+      padding-block: 56px 72px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+</style>

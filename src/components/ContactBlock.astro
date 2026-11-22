@@ -8,11 +8,11 @@ import WhatsAppButton from './WhatsAppButton.astro';
     <div class="contact-actions">
       <h2 id="contact-title" class="section-title">Bize ulaşın</h2>
       <div class="contact-buttons">
-        <PlateCall size="md" />
+        <PlateCall size="md" data-primary-cta />
         <WhatsAppButton block />
       </div>
       <p class="contact-insta">
-        Instagram:
+        Instagram:{' '}
         <a href={business.instagramUrl} target="_blank" rel="noopener">@{business.instagramHandle}</a>
       </p>
     </div>
