@@ -8,7 +8,9 @@
 body {
   margin: 0;
   background:
-    radial-gradient(120% 60% at 50% -10%, rgb(227 27 35 / 0.32), transparent 60%) top / 100% 900px no-repeat,
+    radial-gradient(110% 900px at 50% -120px, rgb(220 35 41 / 0.34), transparent 70%),
+    radial-gradient(70% 1100px at 0% 42%, rgb(92 13 18 / 0.55), transparent 70%),
+    radial-gradient(70% 1100px at 100% 72%, rgb(92 13 18 / 0.5), transparent 70%),
     var(--ground);
   color-scheme: dark;
   color: var(--ink);
@@ -72,7 +74,7 @@ a {
   border-radius: 24px;
   background: var(--red-panel);
   color: #fff;
-  box-shadow: 0 24px 48px -30px rgb(126 11 16 / 0.8);
+  box-shadow: 0 30px 90px -30px rgb(220 35 41 / 0.55);
   margin-bottom: 24px;
 }
 
@@ -118,4 +120,36 @@ summary {
    without ::details-content simply open instantly). */
 :root {
   interpolate-size: allow-keywords;
+}
+
+/* Cards and panels rise into place as they scroll in (CSS only; browsers
+   without scroll timelines show them at rest). Uses the independent
+   translate/scale properties so hover transforms keep working. */
+@media (prefers-reduced-motion: no-preference) {
+  @supports (animation-timeline: view()) {
+    .steps > li,
+    .service-list > li,
+    .faq,
+    .drunk,
+    .contact-inner,
+    .district-main > section,
+    .service-main > * {
+      animation: rise-in linear both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 45%;
+    }
+  }
+}
+
+@keyframes rise-in {
+  from {
+    opacity: 0.25;
+    translate: 0 28px;
+    scale: 0.98;
+  }
+  to {
+    opacity: 1;
+    translate: 0 0;
+    scale: 1;
+  }
 }

@@ -110,6 +110,18 @@ const shown = jobs.slice(0, limit);
 
   .job :global(picture) {
     display: block;
+    overflow: hidden;
+    border-radius: 16px;
+  }
+
+  .job :global(img) {
+    transition: scale var(--duration-very-slow) var(--ease-smooth-out);
+  }
+
+  @media (hover: hover) {
+    .job:hover :global(img) {
+      scale: 1.03;
+    }
   }
 
   .job :global(img) {

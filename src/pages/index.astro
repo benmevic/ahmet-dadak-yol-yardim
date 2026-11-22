@@ -205,6 +205,61 @@ const jsonLd = [
     }
   }
 
+  @media (prefers-reduced-motion: no-preference) {
+    h1,
+    .hero-lede,
+    .hero-services {
+      animation: text-rise var(--duration-very-slow) var(--ease-smooth-out) both;
+    }
+
+    .hero-lede {
+      animation-delay: 80ms;
+    }
+
+    .hero-services {
+      animation-delay: 160ms;
+    }
+
+    /* The hero call plate breathes a soft red ring to draw the eye. */
+    .hero-actions :global(.plate) {
+      animation: call-ring 2.8s var(--ease-smooth-out) 1s infinite;
+    }
+
+    /* The reflective tape on the "alkollü" panel drifts like a moving truck. */
+    .drunk::before {
+      animation: tape-drift 3s linear infinite;
+    }
+  }
+
+  @keyframes text-rise {
+    from {
+      opacity: 0;
+      translate: 0 12px;
+      filter: blur(3px);
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
+      filter: none;
+    }
+  }
+
+  @keyframes call-ring {
+    0% {
+      box-shadow: 0 0 0 0 rgb(246 201 104 / 0.7), 0 14px 28px -14px rgb(0 0 0 / 0.6);
+    }
+    70%,
+    100% {
+      box-shadow: 0 0 0 16px rgb(246 201 104 / 0), 0 14px 28px -14px rgb(0 0 0 / 0.6);
+    }
+  }
+
+  @keyframes tape-drift {
+    to {
+      background-position: 39.6px 0;
+    }
+  }
+
   @keyframes hero-settle {
     from {
       transform: scale(1.05);
@@ -294,7 +349,7 @@ const jsonLd = [
     border-radius: 24px;
     background: var(--night-panel);
     color: #fff;
-    box-shadow: 0 24px 48px -30px rgb(22 23 27 / 0.9);
+    box-shadow: 0 30px 100px -34px rgb(220 35 41 / 0.55);
   }
 
   .drunk::before {
@@ -380,7 +435,7 @@ const jsonLd = [
     overflow: hidden;
     background: var(--red-panel);
     color: #fff;
-    box-shadow: 0 28px 56px -32px rgb(126 11 16 / 0.85);
+    box-shadow: 0 30px 100px -30px rgb(220 35 41 / 0.6);
   }
 
   .hero-copy {
