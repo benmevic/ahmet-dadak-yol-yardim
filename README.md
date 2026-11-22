@@ -233,9 +233,9 @@ Denenen şeyler arasında şunlar var: 375×667 telefon ekranında arama ve What
 
 ## Git durumu
 
-- `main`: ilk kayıtlar (proje bilgileri, tasarım belgesi, plan).
-- `site/ilk-surum`: sitenin tamamı. **Henüz `main`'e birleştirilmedi.**
+- `main`: sitenin tamamı. Çalışmaya buradan devam edin.
+- `site/ilk-surum`: ilk sürümün geliştirildiği dal. `main`'e birleştirildi, silinebilir.
 
-Teslim almadan önce `site/ilk-surum` dalını `main`'e birleştirin ya da bu dalla devam edin. Depo şu an yalnızca yerelde; uzak bir depo (GitHub vb.) bağlı değil.
+Depo şu an yalnızca yerelde; uzak bir depo (GitHub vb.) bağlı değil.
 
 `eski-site/` klasörü (eski Bootstrap site, yalnızca referans) `.gitignore` içinde, depoya girmiyor.
