@@ -1,0 +1,282 @@
+---
+import type { GetStaticPaths } from 'astro';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlateCall from '../../components/PlateCall.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import Faq from '../../components/Faq.astro';
+import JobStrip from '../../components/JobStrip.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import type { Ilce } from '../../data/ilceler';
+import { liveIlceler, ilcePath } from '../../lib/ilce';
+import { business } from '../../data/business';
+import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+
+export const getStaticPaths = (() =>
+  liveIlceler().map((ilce) => ({
+    params: { slug: `${ilce.slug}-cekici` },
+    props: { ilce },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  ilce: Ilce;
+}
+
+const { ilce } = Astro.props;
+const path = ilcePath(ilce);
+const liveNeighbours = liveIlceler().filter(
+  (i) => i.slug !== ilce.slug && ilce.neighbours.includes(i.name),
+);
+
+const jsonLd = [
+  localBusinessJsonLd(business, [ilce.name], Astro.site),
+  faqJsonLd(ilce.faq),
+  breadcrumbJsonLd(
+    [
+      { name: 'Ana sayfa', path: '/' },
+      { name: 'İzmir', path: '/izmir/' },
+      { name: `${ilce.name} Çekici`, path },
+    ],
+    Astro.site,
+  ),
+].filter((entry): entry is object => entry !== null);
+---
+<BaseLayout
+  title={`${ilce.name} Çekici 7/24 | Ahmet Dadak Yol Yardım`}
+  description={`${ilce.name} çekici ve yol yardım, gece gündüz. 0540 123 0335'i arayın ya da konumunuzu WhatsApp'tan gönderin; aracınızı istediğiniz yere bırakalım.`}
+  path={path}
+  jsonLd={jsonLd}
+>
+  <article class="district">
+    <header class="district-head wrap">
+      <nav class="crumbs" aria-label="Sayfa yolu">
+        <a href="/">Ana sayfa</a>
+        <span aria-hidden="true">/</span>
+        <a href="/izmir/">İzmir</a>
+      </nav>
+      <h1>{ilce.name} Çekici · 7/24 Yol Yardım</h1>
+      <p class="lead">{ilce.intro}</p>
+      <div class="actions">
+        <PlateCall />
+        <WhatsAppButton />
+      </div>
+    </header>
+
+    <div class="district-main wrap">
+      <section aria-labelledby="roads-title">
+        <h2 id="roads-title" class="section-title">Sık yardım verdiğimiz yollar</h2>
+        <ul class="marks">
+          {ilce.roads.map((r) => <li>{r}</li>)}
+        </ul>
+      </section>
+      <section aria-labelledby="landmarks-title">
+        <h2 id="landmarks-title" class="section-title">Çevrede tanıdık yerler</h2>
+        <ul class="marks">
+          {ilce.landmarks.map((l) => <li>{l}</li>)}
+        </ul>
+      </section>
+      {
+        liveNeighbours.length > 0 && (
+          <section class="neighbours" aria-labelledby="nb-title">
+            <h2 id="nb-title" class="section-title">Komşu ilçeler</h2>
+            <ul class="nb-list">
+              {liveNeighbours.map((n) => (
+                <li>
+                  <a href={ilcePath(n)}>{n.name} çekici</a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        )
+      }
+    </div>
+
+    <section class="faq-section wrap" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
+      <div class="faq-wrap">
+        <Faq items={ilce.faq} />
+      </div>
+    </section>
+  </article>
+
+  <JobStrip limit={3} heading="Son taşıdıklarımız" />
+  <ContactBlock />
+</BaseLayout>
+
+<style>
+  .district-head {
+    padding-top: 18px;
+    padding-bottom: 26px;
+  }
+
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 10px 0 0;
+    font: 700 2.5rem/0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin: 16px 0 0;
+    max-width: 60ch;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.5;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .actions :global(.plate) {
+    display: flex;
+  }
+
+  .actions :global(.plate-face) {
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .actions :global(.plate-digits) {
+    font-size: clamp(1.75rem, 9.4vw, 2.125rem);
+  }
+
+  .actions :global(.wa-button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .district-main {
+    display: grid;
+    gap: 28px;
+    padding-block: 28px 34px;
+    border-top: 1px solid var(--line);
+  }
+
+  .marks,
+  .nb-list {
+    margin: 14px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .marks li {
+    max-width: 60ch;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
+
+  .marks li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 10px;
+    height: 3px;
+    background: var(--red);
+  }
+
+  .nb-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .faq-section {
+    padding-block: 28px 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-wrap {
+    margin-top: 16px;
+    max-width: 760px;
+  }
+
+  @media (min-width: 768px) {
+    .district-head {
+      padding-top: 28px;
+      padding-bottom: 36px;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    .lead {
+      font-size: 1.1875rem;
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .actions :global(.plate) {
+      display: inline-flex;
+    }
+
+    .actions :global(.plate-face) {
+      align-items: flex-start;
+      padding-inline: 18px;
+    }
+
+    .actions :global(.plate-digits) {
+      font-size: 2.5rem;
+    }
+
+    .actions :global(.wa-button) {
+      display: inline-flex;
+      width: auto;
+    }
+
+    .district-main {
+      grid-template-columns: 1.2fr 1fr 0.8fr;
+      gap: 48px;
+      padding-block: 40px 48px;
+    }
+
+    .faq-section {
+      padding-block: 40px 56px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+</style>

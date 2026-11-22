@@ -1,0 +1,153 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlateCall from '../../components/PlateCall.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import { liveIlceler, ilcePath } from '../../lib/ilce';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const districts = liveIlceler();
+
+const jsonLd = [
+  breadcrumbJsonLd(
+    [
+      { name: 'Ana sayfa', path: '/' },
+      { name: 'İzmir', path: '/izmir/' },
+    ],
+    Astro.site,
+  ),
+].filter((entry): entry is object => entry !== null);
+---
+<BaseLayout
+  title="İzmir İlçeleri Çekici ve Yol Yardım 7/24 | Ahmet Dadak"
+  description="İzmir'de ilçeniz için çekici ve yol yardım sayfaları. Gece gündüz arayın ya da konumunuzu WhatsApp'tan gönderin."
+  path="/izmir/"
+  jsonLd={jsonLd}
+>
+  <section class="index wrap">
+    <h1>İzmir ilçeleri</h1>
+    <p class="lead">İzmir'in her ilçesine geliyoruz. İlçenize özel sayfalar:</p>
+    <div class="actions">
+      <PlateCall />
+      <WhatsAppButton />
+    </div>
+    <ul class="list">
+      {
+        districts.map((d) => (
+          <li>
+            <a href={ilcePath(d)}>{d.name} çekici</a>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <ContactBlock />
+</BaseLayout>
+
+<style>
+  .index {
+    padding-block: 26px 44px;
+  }
+
+  h1 {
+    margin: 0;
+    font: 700 2.5rem/0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin: 14px 0 0;
+    max-width: 44ch;
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .actions :global(.plate) {
+    display: flex;
+  }
+
+  .actions :global(.plate-face) {
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .actions :global(.plate-digits) {
+    font-size: clamp(1.75rem, 9.4vw, 2.125rem);
+  }
+
+  .actions :global(.wa-button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .list {
+    display: grid;
+    gap: 6px 48px;
+    margin: 32px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font: 700 1.5rem/1.1 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  @media (min-width: 768px) {
+    .index {
+      padding-block: 40px 64px;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .actions :global(.plate) {
+      display: inline-flex;
+    }
+
+    .actions :global(.plate-face) {
+      align-items: flex-start;
+      padding-inline: 18px;
+    }
+
+    .actions :global(.plate-digits) {
+      font-size: 2.5rem;
+    }
+
+    .actions :global(.wa-button) {
+      display: inline-flex;
+      width: auto;
+    }
+
+    .list {
+      grid-template-columns: 1fr 1fr 1fr;
+      margin-top: 40px;
+    }
+  }
+</style>

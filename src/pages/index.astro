@@ -14,6 +14,7 @@ import parkBornova from '../assets/jobs/park-bornova.jpg';
 import { business } from '../data/business';
 import { services as serviceList } from '../data/services';
 import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
+import { liveIlceler, ilcePath } from '../lib/ilce';
 
 const services = [
   { label: 'Arıza' },
@@ -25,7 +26,7 @@ const services = [
 ];
 
 const jsonLd = [
-  localBusinessJsonLd(business, ['İzmir'], Astro.site),
+  localBusinessJsonLd(business, liveIlceler().map((i) => i.name), Astro.site),
   faqJsonLd(homeFaq),
 ].filter((entry): entry is object => entry !== null);
 ---
@@ -95,6 +96,15 @@ const jsonLd = [
     <div class="wrap districts-inner">
       <h2 id="districts-title" class="section-title">İzmir'in her ilçesi</h2>
       <p>İzmir'in tüm ilçelerine 7/24 geliyoruz.</p>
+      <ul class="districts-list">
+        {
+          liveIlceler().map((d) => (
+            <li>
+              <a href={ilcePath(d)}>{d.name} çekici</a>
+            </li>
+          ))
+        }
+      </ul>
       <a class="districts-link" href="/izmir/">Tüm ilçeler</a>
     </div>
   </section>
@@ -164,6 +174,29 @@ const jsonLd = [
     color: var(--muted);
     font-size: 1.0625rem;
     line-height: 1.45;
+  }
+
+  .districts-list {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0 24px;
+    margin: 10px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .districts-list a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    color: var(--ink);
+    font: 700 1.25rem/1.15 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
   }
 
   .districts-link {
