@@ -9,3 +9,10 @@ eski-site/
 .claude/settings.local.json
 .impeccable/hook.cache.json
 dist-site/
+
+# Third-party skills installed locally (not redistributed with the site)
+.claude/skills/design-taste-frontend/
+.claude/skills/pick-ui-library/
+.claude/skills/transitions-dev/
+.claude/skills/web-design-guidelines/
+.taste-skill/

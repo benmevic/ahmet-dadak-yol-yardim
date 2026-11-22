@@ -14,6 +14,12 @@
   --night: #16171b;
   --red-panel: linear-gradient(135deg, #d71920 0%, #b3131a 48%, #7e0b10 100%);
   --night-panel: linear-gradient(120deg, #16171b 0%, #3b0d11 52%, #b3131a 100%);
+  /* Motion tokens from the transitions.dev scale. */
+  --duration-quick: 150ms;
+  --duration-fast: 250ms;
+  --duration-very-slow: 500ms;
+  --ease-smooth-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --card-shadow-lift: 0 1px 0 rgb(22 23 27 / 0.04), 0 24px 44px -24px rgb(22 23 27 / 0.5);
   --card-shadow: 0 1px 0 rgb(22 23 27 / 0.04), 0 18px 40px -26px rgb(22 23 27 / 0.45);
   --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
   --font-body: 'Barlow', system-ui, sans-serif;

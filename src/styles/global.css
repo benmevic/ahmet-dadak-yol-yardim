@@ -105,3 +105,16 @@ body .head-panel nav.crumbs a[href] {
     max-width: 1600px;
   }
 }
+
+/* No double-tap zoom delay on anything tappable. */
+a,
+button,
+summary {
+  touch-action: manipulation;
+}
+
+/* Let <details> animate its height to and from auto (progressive: browsers
+   without ::details-content simply open instantly). */
+:root {
+  interpolate-size: allow-keywords;
+}

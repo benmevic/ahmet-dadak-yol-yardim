@@ -34,7 +34,9 @@ const { block = false } = Astro.props;
     box-shadow: 0 10px 22px -14px rgb(176 47 124 / 0.9);
     color: #fff;
     text-decoration: none;
-    transition: filter 160ms cubic-bezier(0.16, 1, 0.3, 1);
+    transition:
+      filter var(--duration-quick) var(--ease-smooth-out),
+      transform var(--duration-quick) var(--ease-smooth-out);
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -58,11 +60,13 @@ const { block = false } = Astro.props;
   @media (hover: hover) {
     .insta-button:hover {
       filter: brightness(0.9);
+      transform: translateY(-1px);
     }
   }
 
   .insta-button:active {
     filter: brightness(0.82);
+    transform: translateY(1px);
   }
 
   @media (prefers-reduced-motion: reduce) {

@@ -159,10 +159,65 @@ const jsonLd = [
   }
 
   .service-list li {
+    position: relative;
     padding: 16px 18px 18px;
     border-radius: 20px;
     background: var(--panel);
     box-shadow: var(--card-shadow);
+    transition:
+      transform var(--duration-fast) var(--ease-smooth-out),
+      box-shadow var(--duration-fast) var(--ease-smooth-out);
+  }
+
+  /* The title link covers the whole card. */
+  .service-list a::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+  }
+
+  .service-list li:has(a:focus-visible) {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .service-list a:focus-visible {
+    outline: none;
+  }
+
+  @media (hover: hover) {
+    .service-list li:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--card-shadow-lift);
+    }
+  }
+
+  .service-list li:active {
+    transform: translateY(0);
+  }
+
+  /* The hero photo settles into its frame once on load; the text and the
+     call button never wait for it. */
+  @media (prefers-reduced-motion: no-preference) {
+    .hero-photo :global(img) {
+      animation: hero-settle 900ms var(--ease-smooth-out) both;
+    }
+  }
+
+  @keyframes hero-settle {
+    from {
+      transform: scale(1.05);
+    }
+    to {
+      transform: none;
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .service-list li {
+      transition: none;
+    }
   }
 
   .service-list a {

@@ -61,6 +61,24 @@ const { items } = Astro.props;
     transform: rotate(225deg);
   }
 
+  details::details-content {
+    block-size: 0;
+    overflow: clip;
+    transition:
+      block-size var(--duration-fast) var(--ease-smooth-out),
+      content-visibility var(--duration-fast) allow-discrete;
+  }
+
+  details[open]::details-content {
+    block-size: auto;
+  }
+
+  @media (hover: hover) {
+    summary:hover {
+      color: var(--red);
+    }
+  }
+
   p {
     margin: 0;
     padding: 0 0 18px;
@@ -71,7 +89,8 @@ const { items } = Astro.props;
   }
 
   @media (prefers-reduced-motion: reduce) {
-    summary::after {
+    summary::after,
+    details::details-content {
       transition: none;
     }
   }

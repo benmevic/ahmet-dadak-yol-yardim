@@ -36,8 +36,9 @@ const { block = false } = Astro.props;
     text-decoration: none;
     white-space: nowrap;
     transition:
-      background-color 160ms cubic-bezier(0.16, 1, 0.3, 1),
-      color 160ms cubic-bezier(0.16, 1, 0.3, 1);
+      background-color var(--duration-quick) var(--ease-smooth-out),
+      color var(--duration-quick) var(--ease-smooth-out),
+      transform var(--duration-quick) var(--ease-smooth-out);
     -webkit-tap-highlight-color: transparent;
   }
 
@@ -50,12 +51,14 @@ const { block = false } = Astro.props;
     .wa-button:hover {
       background: var(--wa-green-press);
       border-color: var(--wa-green-press);
+      transform: translateY(-1px);
     }
   }
 
   .wa-button:active {
     background: var(--wa-green-press);
     border-color: var(--wa-green-press);
+    transform: translateY(1px);
   }
 
   @media (prefers-reduced-motion: reduce) {

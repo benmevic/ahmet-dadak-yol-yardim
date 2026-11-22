@@ -18,7 +18,7 @@ const links = [
 <footer class="site-footer">
   <div class="footer-inner">
     <div class="footer-lead">
-      <p class="footer-name">{business.name}</p>
+      <p class="footer-name" translate="no">{business.name}</p>
       <p class="footer-note">İzmir'in her ilçesinde {business.hours} çekici ve yol yardım.</p>
     </div>
 
@@ -82,14 +82,14 @@ const links = [
 
 <style>
   .site-footer {
-    background: linear-gradient(180deg, var(--ground) 0, #2a2b31 150px, var(--night) 260px);
+    background: linear-gradient(180deg, var(--ground) 0, var(--night) 96px);
     color: #fff;
   }
 
   .footer-inner {
     display: grid;
     gap: 28px;
-    padding: 150px 16px 28px;
+    padding: 120px 16px 28px;
   }
 
   p {
@@ -203,7 +203,7 @@ const links = [
   @media (min-width: 768px) {
     .footer-inner {
       grid-template-columns: 1.3fr 1fr 1fr;
-      padding: 170px 32px 36px;
+      padding: 140px 32px 36px;
     }
 
     .footer-lead {
