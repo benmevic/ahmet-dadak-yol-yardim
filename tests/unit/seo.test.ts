@@ -30,6 +30,18 @@ describe('localBusinessJsonLd', () => {
     expect(ld.url).toBe('https://ornek.com.tr/');
   });
 
+  it('has a stable @id, logo and image only when siteUrl is given', () => {
+    const site = new URL('https://ornek.com.tr');
+    const ld = localBusinessJsonLd(business, ['Bornova'], site, 'https://ornek.com.tr/_astro/logo.png') as Ld;
+    expect(ld['@id']).toBe('https://ornek.com.tr/#isletme');
+    expect(ld.logo).toBe('https://ornek.com.tr/_astro/logo.png');
+    expect(ld.image).toBe('https://ornek.com.tr/_astro/logo.png');
+    const bare = localBusinessJsonLd(business, ['Bornova'], undefined, 'https://x/y.png') as Ld;
+    expect(bare).not.toHaveProperty('@id');
+    expect(bare).not.toHaveProperty('logo');
+    expect(bare).not.toHaveProperty('image');
+  });
+
   it('covers all 7 days in openingHoursSpecification', () => {
     const ld = localBusinessJsonLd(business, ['Bornova'], undefined) as Ld;
     expect(ld.openingHoursSpecification[0].dayOfWeek).toHaveLength(7);
@@ -66,6 +78,16 @@ describe('serviceJsonLd', () => {
     expect(ld.provider.name).toBe(business.name);
     expect(ld.provider.telephone).toBe('+905401230335');
     expect(ld.areaServed).toBe('İzmir');
+  });
+
+  it('references the business by @id when siteUrl is given', () => {
+    const ld = serviceJsonLd('Yol yardım', 'Çekici hizmeti', business, new URL('https://ornek.com.tr')) as Ld;
+    expect(ld.provider).toEqual({ '@id': 'https://ornek.com.tr/#isletme' });
+  });
+
+  it('accepts a custom areaServed', () => {
+    const ld = serviceJsonLd('Bornova çekici', 'd', business, undefined, { '@type': 'City', name: 'Bornova' }) as Ld;
+    expect(ld.areaServed).toEqual({ '@type': 'City', name: 'Bornova' });
   });
 });
 

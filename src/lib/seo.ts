@@ -10,18 +10,25 @@ const ALL_DAYS = [
   'https://schema.org/Sunday',
 ];
 
+export function businessId(siteUrl: URL): string {
+  return new URL('/#isletme', siteUrl).toString();
+}
+
 export function localBusinessJsonLd(
   b: Business,
   areaServed: string[],
   siteUrl: URL | undefined,
+  logoUrl?: string,
 ): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'AutomotiveBusiness',
+    ...(siteUrl ? { '@id': businessId(siteUrl) } : {}),
     name: b.name,
     telephone: b.phoneE164,
     sameAs: [b.instagramUrl],
     ...(siteUrl ? { url: siteUrl.toString() } : {}),
+    ...(siteUrl && logoUrl ? { logo: logoUrl, image: logoUrl } : {}),
     openingHoursSpecification: [
       {
         '@type': 'OpeningHoursSpecification',
@@ -41,18 +48,26 @@ export function localBusinessJsonLd(
   };
 }
 
-export function serviceJsonLd(name: string, description: string, b: Business): object {
+export function serviceJsonLd(
+  name: string,
+  description: string,
+  b: Business,
+  siteUrl?: URL,
+  areaServed: string | object = 'İzmir',
+): object {
   return {
     '@context': 'https://schema.org',
     '@type': 'Service',
     name,
     description,
-    provider: {
-      '@type': 'AutomotiveBusiness',
-      name: b.name,
-      telephone: b.phoneE164,
-    },
-    areaServed: 'İzmir',
+    provider: siteUrl
+      ? { '@id': businessId(siteUrl) }
+      : {
+          '@type': 'AutomotiveBusiness',
+          name: b.name,
+          telephone: b.phoneE164,
+        },
+    areaServed,
   };
 }
 

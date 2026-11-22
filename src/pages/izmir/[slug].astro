@@ -9,7 +9,7 @@ import ContactBlock from '../../components/ContactBlock.astro';
 import type { Ilce } from '../../data/ilceler';
 import { liveIlceler, ilcePath } from '../../lib/ilce';
 import { business } from '../../data/business';
-import { localBusinessJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+import { localBusinessJsonLd, serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
 
 export const getStaticPaths = (() =>
   liveIlceler().map((ilce) => ({
@@ -27,9 +27,23 @@ const liveNeighbours = liveIlceler().filter(
   (i) => i.slug !== ilce.slug && ilce.neighbours.includes(i.name),
 );
 
+const addressFaq = {
+  q: `${business.name} adresiniz nerede?`,
+  a: `${business.addresses.map((a) => a.postalLine).join('; ')}. Çekicimiz bu adreslerden çıkıp İzmir'in her ilçesine gider.`,
+};
+const faqItems = [...ilce.faq, addressFaq];
+
 const jsonLd = [
-  localBusinessJsonLd(business, [ilce.name], Astro.site),
-  faqJsonLd(ilce.faq),
+  Astro.site
+    ? serviceJsonLd(
+        `${ilce.name} çekici ve yol yardım`,
+        ilce.intro,
+        business,
+        Astro.site,
+        { '@type': 'City', name: ilce.name },
+      )
+    : localBusinessJsonLd(business, [ilce.name], Astro.site),
+  faqJsonLd(faqItems),
   breadcrumbJsonLd(
     [
       { name: 'Ana sayfa', path: '/' },
@@ -56,7 +70,7 @@ const jsonLd = [
       <h1>{ilce.name} Çekici · 7/24 Yol Yardım</h1>
       <p class="lead">{ilce.intro}</p>
       <div class="actions">
-        <PlateCall />
+        <PlateCall data-primary-cta />
         <WhatsAppButton />
       </div>
     </header>
@@ -93,7 +107,7 @@ const jsonLd = [
     <section class="faq-section wrap" aria-labelledby="faq-title">
       <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
       <div class="faq-wrap">
-        <Faq items={ilce.faq} />
+        <Faq items={faqItems} />
       </div>
     </section>
   </article>
