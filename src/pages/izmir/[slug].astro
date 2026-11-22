@@ -1,5 +1,7 @@
 ---
 import type { GetStaticPaths } from 'astro';
+import { getImage } from 'astro:assets';
+import { jobs } from '../../data/jobs';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlateCall from '../../components/PlateCall.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
@@ -25,6 +27,8 @@ interface Props {
 
 const { ilce } = Astro.props;
 const path = ilcePath(ilce);
+const headJob = jobs.find((j) => j.id === 'maserati') ?? jobs[0];
+const headPhoto = await getImage({ src: headJob.image, width: 1600, format: 'webp' });
 const liveNeighbours = liveIlceler().filter(
   (i) => i.slug !== ilce.slug && ilce.neighbours.includes(i.name),
 );
@@ -63,7 +67,7 @@ const jsonLd = [
   jsonLd={jsonLd}
 >
   <article class="district">
-    <header class="district-head wrap head-panel">
+    <header class="district-head wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
       <nav class="crumbs" aria-label="Sayfa yolu">
         <a href="/">Ana sayfa</a>
         <span aria-hidden="true">/</span>

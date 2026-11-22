@@ -1,6 +1,7 @@
 ---
 import { getImage } from 'astro:assets';
 import logo from '../assets/logo.jpg';
+import parkBornova from '../assets/jobs/park-bornova.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
 import ContactBlock from '../components/ContactBlock.astro';
 import IzmirMap from '../components/IzmirMap.astro';
@@ -9,6 +10,7 @@ import { business } from '../data/business';
 import { localBusinessJsonLd, breadcrumbJsonLd } from '../lib/seo';
 
 const live = liveIlceler();
+const headPhoto = await getImage({ src: parkBornova, width: 1600, format: 'webp' });
 const logoImage = await getImage({ src: logo, width: 512, height: 512, format: 'png' });
 const logoUrl = Astro.site ? new URL(logoImage.src, Astro.site).toString() : undefined;
 
@@ -29,7 +31,7 @@ const jsonLd = [
   path="/iletisim/"
   jsonLd={jsonLd}
 >
-  <header class="page-head wrap head-panel">
+  <header class="page-head wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
     <h1>İletişim</h1>
     <p class="lead">
       Yolda kaldıysanız önce arayın. Konumunuzu WhatsApp'tan göndermeniz de yeter; çekici size gelsin.

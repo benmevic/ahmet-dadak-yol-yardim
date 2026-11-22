@@ -1,6 +1,6 @@
 ---
 import type { GetStaticPaths } from 'astro';
-import { Picture } from 'astro:assets';
+import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import PlateCall from '../../components/PlateCall.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
@@ -26,6 +26,7 @@ interface Props {
 const { service } = Astro.props;
 const job = jobs.find((j) => j.id === service.jobId)!;
 const path = `/hizmetler/${service.slug}/`;
+const headPhoto = await getImage({ src: job.image, width: 1600, format: 'webp' });
 
 const jsonLd = [
   serviceJsonLd(service.name, service.metaDescription, business, Astro.site),
@@ -48,7 +49,7 @@ const jsonLd = [
   ogImage={job.image}
 >
   <article class="service">
-    <header class="service-head wrap head-panel">
+    <header class="service-head wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
       <nav class="crumbs" aria-label="Sayfa yolu">
         <a href="/">Ana sayfa</a>
         <span aria-hidden="true">/</span>

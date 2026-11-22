@@ -78,23 +78,20 @@ test('desktop hero composition', async ({ page }) => {
 
   const h1 = await page.locator('h1').boundingBox();
   const plate = await page.getByRole('link', { name: PLATE_NAME }).first().boundingBox();
+  const hero = await page.locator('.hero').boundingBox();
   const photo = await page.locator('.hero-photo img').boundingBox();
-  const band = page.locator('.reflective-band').first();
 
   expect(h1).not.toBeNull();
   expect(plate).not.toBeNull();
   expect(photo).not.toBeNull();
+  // The copy sits on the left, dark side of the photo.
   expect(h1!.x + h1!.width).toBeLessThanOrEqual(half);
   expect(plate!.x + plate!.width).toBeLessThanOrEqual(half);
-  // The photo column is slightly wider than the copy column, so check its centre.
-  expect(photo!.x).toBeGreaterThanOrEqual(h1!.x + h1!.width);
-  expect(photo!.x + photo!.width / 2).toBeGreaterThan(half);
-  // The photo is a rounded card inset from the right edge by the page gutter.
-  expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(1440 - 48);
-
-  await expect(band).toBeVisible();
-  const bandBox = await band.boundingBox();
-  expect(bandBox!.y + bandBox!.height).toBeLessThanOrEqual(900);
+  // The photo fills the whole hero, edge to edge inside its rounded frame.
+  expect(photo!.x).toBeLessThanOrEqual(hero!.x + 1);
+  expect(photo!.x + photo!.width).toBeGreaterThanOrEqual(hero!.x + hero!.width - 1);
+  // The whole hero, with its call plate, fits the first screen.
+  expect(hero!.y + hero!.height).toBeLessThanOrEqual(900);
 });
 
 for (const path of [

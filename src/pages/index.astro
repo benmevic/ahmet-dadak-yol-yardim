@@ -5,7 +5,6 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import PlateCall from '../components/PlateCall.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import ServiceLine from '../components/ServiceLine.astro';
-import ReflectiveBand from '../components/ReflectiveBand.astro';
 import JobStrip from '../components/JobStrip.astro';
 import HowItWorks from '../components/HowItWorks.astro';
 import Faq from '../components/Faq.astro';
@@ -81,7 +80,6 @@ const jsonLd = [
       <figcaption>
         <b>Park Bornova önü.</b><span class="caption-rest"> Peugeot 206 çekiciye alındı.</span>
       </figcaption>
-      <ReflectiveBand />
     </figure>
   </section>
 
@@ -341,14 +339,6 @@ const jsonLd = [
     box-shadow: 0 30px 100px -34px rgb(220 35 41 / 0.55);
   }
 
-  .drunk::before {
-    content: '';
-    position: absolute;
-    inset: 0 0 auto;
-    height: 10px;
-    background: repeating-linear-gradient(-45deg, var(--red-deep) 0 14px, var(--amber) 14px 28px);
-  }
-
   .drunk-inner {
     display: grid;
     gap: 20px;
@@ -415,40 +405,49 @@ const jsonLd = [
   }
 
   .hero {
+    position: relative;
+    isolation: isolate;
     display: grid;
-    grid-template-areas:
-      'photo'
-      'copy';
     margin: 4px 12px 0;
     border-radius: 24px;
     overflow: hidden;
-    background: var(--red-panel);
+    background: rgb(18 13 15);
     color: #fff;
-    box-shadow: 0 30px 100px -30px rgb(140 29 35 / 0.65);
+    box-shadow: 0 30px 90px -40px rgb(0 0 0 / 0.9);
   }
 
   .hero-copy {
-    grid-area: copy;
+    position: relative;
+    z-index: 1;
     display: flex;
     flex-direction: column;
-    padding: 18px 16px 24px;
+    padding: calc(clamp(220px, 64vw, 420px) - 40px) 16px 30px;
   }
 
+  /* Phones: the photo sits across the top of the hero and fades into it. */
   .hero-photo {
-    grid-area: photo;
-    position: relative;
-    height: clamp(200px, 44vw, 420px);
-    margin: 10px 10px 0;
+    position: absolute;
+    inset: 0 0 auto;
+    height: clamp(220px, 64vw, 420px);
+    z-index: 0;
+    margin: 0;
     overflow: hidden;
-    border-radius: 16px;
-    background: #3a3328;
   }
 
-  .hero-photo :global(.reflective-band) {
+  /* Darkens the photo where the copy sits: the top stays bright on phones,
+     the left side goes dark on wide screens. */
+  .hero-photo::after {
+    content: '';
     position: absolute;
-    inset: auto 0 0;
+    inset: 0;
     z-index: 1;
-    height: 10px;
+    background: linear-gradient(
+      180deg,
+      rgb(18 13 15 / 0) 0%,
+      rgb(18 13 15 / 0) 50%,
+      rgb(18 13 15 / 0.75) 82%,
+      rgb(18 13 15) 100%
+    );
   }
 
   .hero-services :global(.service-line) {
@@ -477,9 +476,9 @@ const jsonLd = [
 
   figcaption {
     position: absolute;
-    left: 10px;
-    bottom: 20px;
-    z-index: 1;
+    top: 12px;
+    right: 12px;
+    z-index: 2;
     padding: 6px 11px 5px;
     background: var(--paper);
     border-radius: 8px;
@@ -579,9 +578,36 @@ const jsonLd = [
       border-radius: 32px;
     }
 
+    .hero-copy {
+      max-width: 62%;
+      padding: 48px 32px 52px;
+    }
+
     .hero-photo {
-      margin: 14px 14px 0;
-      border-radius: 22px;
+      inset: 0;
+      height: auto;
+    }
+
+    .hero-photo::after {
+      background:
+        linear-gradient(
+          90deg,
+          rgb(18 13 15 / 0.95) 0%,
+          rgb(18 13 15 / 0.82) 36%,
+          rgb(18 13 15 / 0.2) 68%,
+          rgb(18 13 15 / 0) 100%
+        ),
+        linear-gradient(0deg, rgb(18 13 15 / 0.55) 0%, rgb(18 13 15 / 0) 40%);
+    }
+
+    .hero-photo :global(img) {
+      object-position: 72% 58%;
+    }
+
+    figcaption {
+      top: auto;
+      bottom: 26px;
+      right: 18px;
     }
 
     .hero-lede {
@@ -634,22 +660,12 @@ const jsonLd = [
 
   @media (min-width: 1024px) {
     .hero {
-      grid-template-columns: 1fr 1.08fr;
       grid-template-rows: minmax(max(430px, min(620px, calc(100svh - 190px))), auto);
-      grid-template-areas: 'copy photo';
-    }
-
-    .hero-photo {
-      height: auto;
-      margin: 16px 16px 16px 0;
-    }
-
-    .hero-photo :global(img) {
-      object-position: center 58%;
     }
 
     .hero-copy {
-      padding: clamp(40px, 5vh, 64px) 40px 34px 32px;
+      max-width: 50%;
+      padding: clamp(44px, 6vh, 72px) 40px 40px 44px;
     }
 
     h1 {
