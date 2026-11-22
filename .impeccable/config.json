@@ -1,0 +1,17 @@
+{
+  "detector": {
+    "ignoreRules": [],
+    "ignoreFiles": [],
+    "ignoreValues": [
+      {
+        "rule": "cramped-padding",
+        "value": "*",
+        "files": [
+          ".superpowers/brainstorm/1322-1795352858/content/b-yonu-v3.html"
+        ],
+        "createdAt": "2026-11-22T13:14:51.694Z",
+        "reason": "Claude: flagged .desk/.ph are mock device frames (browser window, phone bezel); the site inside fills them edge to edge by design"
+      }
+    ]
+  }
+}
