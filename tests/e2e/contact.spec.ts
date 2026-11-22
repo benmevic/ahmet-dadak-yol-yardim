@@ -17,13 +17,14 @@ test('Instagram label is separated from the handle', async ({ page }) => {
   await expect(page.locator('.contact-insta').first()).toHaveText(/Instagram: @dadakyolyardim/);
 });
 
-test('İzmir map has 30 districts and highlights the live ones', async ({ page }) => {
+test('İzmir map serves all 30 districts and marks the ones with pages', async ({ page }) => {
   await page.goto('/iletisim/');
   const map = page.locator('svg[data-izmir-map]');
   await expect(map.locator('path[data-ilce]')).toHaveCount(30);
+  await expect(map.locator('path[data-ilce][data-served]')).toHaveCount(30);
   await expect(map.locator('path[data-ilce][data-live]')).toHaveCount(2);
   await expect(map.locator('path[data-ilce="bornova"] > title')).toHaveCount(1);
-  await expect(page.getByText('© OpenStreetMap katkıda bulunanlar')).toBeVisible();
+  await expect(page.getByRole('link', { name: '© OpenStreetMap katkıda bulunanlar' })).toHaveAttribute('href', 'https://www.openstreetmap.org/copyright');
 });
 
 test('contact page makes no third-party requests', async ({ page }) => {

@@ -12,7 +12,6 @@ const viewBox = raw.match(/viewBox="([^"]+)"/)?.[1] ?? '0 0 1000 1000';
 const districts = [...raw.matchAll(/<path data-ilce="([^"]+)" data-name="([^"]+)" data-cx="([^"]+)" data-cy="([^"]+)" d="([^"]*)"/g)].map(
   (m) => ({ slug: m[1]!, name: m[2]!, cx: m[3]!, cy: m[4]!, d: m[5]! }),
 );
-const inactive = districts.filter((d) => !live.has(d.slug));
 const active = districts.filter((d) => live.has(d.slug));
 ---
 <figure class="izmir-map">
@@ -20,21 +19,18 @@ const active = districts.filter((d) => live.has(d.slug));
     data-izmir-map
     viewBox={viewBox}
     role="img"
-    aria-label={`İzmir ilçe haritası. Hizmet verdiğimiz ilçeler: ${active.map((d) => d.name).join(', ')}.`}
+    aria-label={`İzmir ilçe haritası. İzmir'in tüm ilçelerine hizmet veriyoruz. Kendi sayfası olan ilçeler: ${active.map((d) => d.name).join(', ')}.`}
   >
     {
-      inactive.map((d) => (
-        <path class="d" data-ilce={d.slug} d={d.d}>
-          <title>{d.name}</title>
-        </path>
-      ))
-    }
-    {
-      active.map((d) => (
-        <path class="d d--live" data-ilce={d.slug} data-live d={d.d}>
-          <title>{d.name}</title>
-        </path>
-      ))
+      [...districts].sort((a, b) => Number(live.has(a.slug)) - Number(live.has(b.slug))).map((d) => {
+        const isLive = live.has(d.slug);
+        const path = (
+          <path class:list={['d', { 'd--live': isLive }]} data-ilce={d.slug} data-served data-live={isLive ? '' : undefined} d={d.d}>
+            <title>{d.name}</title>
+          </path>
+        );
+        return isLive ? <a href={`/izmir/${d.slug}-cekici/`} aria-label={`${d.name} çekici`}>{path}</a> : path;
+      })
     }
     {
       active.map((d, i) => (
@@ -44,7 +40,7 @@ const active = districts.filter((d) => live.has(d.slug));
       ))
     }
   </svg>
-  <figcaption>© OpenStreetMap katkıda bulunanlar</figcaption>
+  <figcaption><a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap katkıda bulunanlar</a></figcaption>
 </figure>
 
 <style>
@@ -58,15 +54,24 @@ const active = districts.filter((d) => live.has(d.slug));
   }
 
   .d {
-    fill: var(--line);
+    fill: var(--red);
+    fill-opacity: 0.2;
     stroke: var(--panel);
     stroke-width: 1.5;
     stroke-linejoin: round;
   }
 
   .d--live {
-    fill: var(--red);
     fill-opacity: 0.85;
+  }
+
+  a:focus-visible {
+    outline: none;
+  }
+
+  a:focus-visible .d {
+    stroke: var(--blue);
+    stroke-width: 4;
   }
 
   .label {
@@ -79,6 +84,10 @@ const active = districts.filter((d) => live.has(d.slug));
     stroke-opacity: 0.55;
     paint-order: stroke;
     pointer-events: none;
+  }
+
+  figcaption a {
+    color: inherit;
   }
 
   figcaption {

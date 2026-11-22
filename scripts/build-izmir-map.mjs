@@ -1,12 +1,16 @@
 // Builds src/assets/izmir-ilceler.svg from district boundary data.
 //
-// Source:      geoBoundaries gbOpen, Turkey ADM2 (districts), simplified GeoJSON
+// Source:      geoBoundaries gbOpen, Turkey ADM2 (districts), simplified GeoJSON, pinned commit 9469f09
 //              https://github.com/wmgeolab/geoBoundaries/raw/9469f09/releaseData/gbOpen/TUR/ADM2/geoBoundaries-TUR-ADM2_simplified.geojson
-//              Catalogue entry: https://www.geoboundaries.org/api/current/gbOpen/TUR/ADM2/
-// Upstream:    OpenStreetMap, via osm-boundaries.com (boundary year 2021)
-// Licence:     Open Data Commons Open Database License (ODbL) 1.0
-//              https://www.openstreetmap.org/copyright
-// Attribution: "© OpenStreetMap katkıda bulunanlar" (shown under the map on /iletisim/)
+// Metadata:    https://www.geoboundaries.org/api/current/gbOpen/TUR/ADM2/ (checked 2026-11-22), which states:
+//                boundarySource:    "OpenStreetMap, OSM Boundaries"
+//                boundarySourceURL: "osm-boundaries.com"
+//                boundaryLicense:   "Open Data Commons Open Database License 1.0"
+//                licenseSource:     "www.openstreetmap.org/copyright"
+//                boundaryYearRepresented: "2021"
+// Licence:     ODbL 1.0 (data derived from OpenStreetMap)
+// Attribution: ODbL requires crediting OpenStreetMap contributors. The page shows
+//              "© OpenStreetMap katkıda bulunanlar" linking to https://www.openstreetmap.org/copyright
 //
 // The GeoJSON is treated as data only and is never committed. Download it into an
 // empty folder outside src/ and pass its path:
