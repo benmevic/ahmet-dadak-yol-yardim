@@ -5,9 +5,14 @@ import PlateCall from '../components/PlateCall.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
 import ServiceLine from '../components/ServiceLine.astro';
 import ReflectiveBand from '../components/ReflectiveBand.astro';
+import JobStrip from '../components/JobStrip.astro';
+import HowItWorks from '../components/HowItWorks.astro';
+import Faq from '../components/Faq.astro';
+import ContactBlock from '../components/ContactBlock.astro';
+import { homeFaq } from '../data/home-faq';
 import parkBornova from '../assets/jobs/park-bornova.jpg';
 import { business } from '../data/business';
-import { localBusinessJsonLd } from '../lib/seo';
+import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
 
 const services = [
   { label: 'Arıza' },
@@ -18,7 +23,43 @@ const services = [
   { label: 'Alkollüyseniz arayın' },
 ];
 
-const jsonLd = [localBusinessJsonLd(business, ['İzmir'], Astro.site)];
+const serviceList = [
+  {
+    label: 'Arıza kurtarma',
+    href: '/hizmetler/ariza-kurtarma/',
+    text: 'Aracınız yolda kaldıysa çekiciyle istediğiniz yere bırakırız.',
+  },
+  {
+    label: 'Kaza oto kurtarma',
+    href: '/hizmetler/kaza-oto-kurtarma/',
+    text: 'Kazadan sonra aracınızı yoldan alır, istediğiniz yere taşırız.',
+  },
+  {
+    label: 'Akü takviyesi',
+    href: '/hizmetler/aku-takviyesi/',
+    text: 'Akünüz bittiyse bulunduğunuz yerde takviye yaparız.',
+  },
+  {
+    label: 'Lastik desteği',
+    href: '/hizmetler/lastik-destegi/',
+    text: 'Lastiğiniz patladıysa yolda yanınızda oluruz.',
+  },
+  {
+    label: 'Yakıt desteği',
+    href: '/hizmetler/yakit-destegi/',
+    text: 'Yakıtınız bittiyse yola devam etmeniz için destek veririz.',
+  },
+  {
+    label: 'Alkollü sürücü araç taşıma',
+    href: '/hizmetler/alkollu-surucu-arac-tasima/',
+    text: 'İçki içtiyseniz direksiyona geçmeyin; aracınızı eve biz götürürüz.',
+  },
+];
+
+const jsonLd = [
+  localBusinessJsonLd(business, ['İzmir'], Astro.site),
+  faqJsonLd(homeFaq),
+].filter((entry): entry is object => entry !== null);
 ---
 <BaseLayout
   title="İzmir Çekici ve Yol Yardım 7/24 | Ahmet Dadak Yol Yardım"
@@ -61,9 +102,184 @@ const jsonLd = [localBusinessJsonLd(business, ['İzmir'], Astro.site)];
     </figure>
     <ReflectiveBand />
   </section>
+
+  <JobStrip />
+
+  <HowItWorks />
+
+  <section id="hizmetler" class="services" aria-labelledby="services-title">
+    <div class="wrap">
+      <h2 id="services-title" class="section-title">Hizmetlerimiz</h2>
+      <ul class="service-list">
+        {
+          serviceList.map((s) => (
+            <li>
+              <a href={s.href}>{s.label}</a>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+
+  <section id="ilceler" class="districts" aria-labelledby="districts-title">
+    <div class="wrap districts-inner">
+      <h2 id="districts-title" class="section-title">İzmir'in her ilçesi</h2>
+      <p>İzmir'in tüm ilçelerine 7/24 geliyoruz.</p>
+      <a class="districts-link" href="/izmir/">Tüm ilçeler</a>
+    </div>
+  </section>
+
+  <section class="drunk" aria-labelledby="drunk-title">
+    <div class="wrap drunk-inner">
+      <div class="drunk-copy">
+        <h2 id="drunk-title">Alkollü araç kullanmayın, arayın</h2>
+        <p>Aracınızı biz alalım, istediğiniz yere bırakalım.</p>
+      </div>
+      <PlateCall size="md" />
+    </div>
+  </section>
+
+  <section id="sss" class="faq-section" aria-labelledby="faq-title">
+    <div class="wrap">
+      <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
+      <div class="faq-wrap">
+        <Faq items={homeFaq} />
+      </div>
+    </div>
+  </section>
+
+  <ContactBlock />
 </BaseLayout>
 
 <style>
+  .services {
+    background: var(--panel);
+    padding: 34px 0 38px;
+    scroll-margin-top: 72px;
+  }
+
+  .service-list {
+    display: grid;
+    gap: 18px 48px;
+    margin: 20px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .service-list a {
+    color: var(--ink);
+    font: 700 1.25rem/1.15 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .service-list p {
+    margin: 4px 0 0;
+    max-width: 44ch;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  .districts {
+    padding: 34px 0 38px;
+    scroll-margin-top: 72px;
+  }
+
+  .districts-inner p {
+    margin: 12px 0 0;
+    color: var(--muted);
+    font-size: 1.0625rem;
+    line-height: 1.45;
+  }
+
+  .districts-link {
+    display: inline-flex;
+    align-items: center;
+    min-height: 44px;
+    margin-top: 6px;
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .drunk {
+    background: var(--ink);
+    color: #fff;
+    padding: 34px 0 36px;
+  }
+
+  .drunk-inner {
+    display: grid;
+    gap: 20px;
+    justify-items: start;
+  }
+
+  .drunk h2 {
+    margin: 0;
+    font: 700 2rem/0.98 var(--font-display);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+  }
+
+  .drunk-copy p {
+    margin: 10px 0 0;
+    max-width: 36ch;
+    color: #d8dadf;
+    line-height: 1.45;
+  }
+
+  .faq-section {
+    padding: 34px 0 38px;
+    scroll-margin-top: 72px;
+  }
+
+  .faq-wrap {
+    margin-top: 18px;
+    max-width: 760px;
+  }
+
+  @media (min-width: 768px) {
+    .services,
+    .districts,
+    .faq-section {
+      padding-block: 52px 56px;
+    }
+
+    .service-list {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 28px;
+      gap: 26px 56px;
+    }
+
+    .drunk {
+      padding-block: 48px;
+    }
+
+    .drunk-inner {
+      grid-template-columns: 1fr auto;
+      align-items: center;
+      gap: 40px;
+    }
+
+    .drunk h2 {
+      font-size: 3rem;
+    }
+
+    .faq-wrap {
+      margin-top: 24px;
+    }
+  }
+
   .hero {
     display: grid;
     grid-template-areas:

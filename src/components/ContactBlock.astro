@@ -1,0 +1,105 @@
+---
+import { business } from '../data/business';
+import PlateCall from './PlateCall.astro';
+import WhatsAppButton from './WhatsAppButton.astro';
+---
+<section id="iletisim" class="contact" aria-labelledby="contact-title">
+  <div class="wrap contact-inner">
+    <div class="contact-actions">
+      <h2 id="contact-title" class="section-title">Bize ulaşın</h2>
+      <div class="contact-buttons">
+        <PlateCall size="md" />
+        <WhatsAppButton block />
+      </div>
+      <p class="contact-insta">
+        Instagram:
+        <a href={business.instagramUrl} target="_blank" rel="noopener">@{business.instagramHandle}</a>
+      </p>
+    </div>
+    <ul class="contact-addresses">
+      {
+        business.addresses.map((a) => (
+          <li>
+            <b>{a.district}</b>
+            <address>{a.postalLine}</address>
+          </li>
+        ))
+      }
+    </ul>
+  </div>
+</section>
+
+<style>
+  .contact {
+    background: var(--panel);
+    padding: 34px 0 40px;
+    scroll-margin-top: 72px;
+  }
+
+  .contact-inner {
+    display: grid;
+    gap: 28px;
+  }
+
+  .contact-buttons {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 16px;
+    max-width: 380px;
+  }
+
+  .contact-buttons :global(.plate) {
+    display: flex;
+  }
+
+  .contact-insta {
+    margin: 16px 0 0;
+    color: var(--muted);
+  }
+
+  .contact-insta a {
+    color: var(--ink);
+    font-weight: 600;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+  }
+
+  .contact-addresses {
+    display: grid;
+    gap: 14px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    align-content: start;
+  }
+
+  .contact-addresses b {
+    display: block;
+    font: 700 1.125rem/1.2 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+  }
+
+  address {
+    margin-top: 2px;
+    color: var(--muted);
+    font-style: normal;
+    line-height: 1.4;
+  }
+
+  @media (min-width: 768px) {
+    .contact {
+      padding: 52px 0 56px;
+    }
+
+    .contact-inner {
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+    }
+
+    .contact-addresses {
+      padding-top: 6px;
+    }
+  }
+</style>
