@@ -18,7 +18,7 @@ const shown = jobs.slice(0, limit);
       Tümü Instagram'da: @{business.instagramHandle}
     </a>
   </div>
-  <ul class="jobs-row wrap">
+  <ul class="jobs-row wrap" tabindex="0" aria-label="Son taşıdıklarımız, yana kaydırın">
     {
       shown.map((job) => (
         <li class="job">
