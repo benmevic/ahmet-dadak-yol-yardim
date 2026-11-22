@@ -7,3 +7,4 @@ playwright-report/
 .impeccable/review/
 eski-site/
 .claude/settings.local.json
+.impeccable/hook.cache.json
