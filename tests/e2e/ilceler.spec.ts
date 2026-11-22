@@ -44,3 +44,9 @@ test('home areaServed equals the live set and home links to live districts', asy
   await expect(page.locator('section#ilceler a[href="/izmir/kemalpasa-cekici/"]')).toHaveCount(1);
   await expect(page.locator('section#ilceler a[href="/izmir/"]')).toHaveCount(1);
 });
+
+test('road section heading makes no frequency claim', async ({ page }) => {
+  await page.goto('/izmir/bornova-cekici/');
+  await expect(page.getByRole('heading', { name: 'Bölgedeki ana yollar' })).toBeVisible();
+  expect(await page.locator('body').innerText()).not.toContain('Sık yardım verdiğimiz');
+});
