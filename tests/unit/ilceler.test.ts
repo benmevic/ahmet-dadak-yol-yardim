@@ -47,4 +47,43 @@ describe('ilceler', () => {
       }
     }
   });
+
+  it('names exactly equal the spec list', () => {
+    const spec = ['Aliağa', 'Balçova', 'Bayındır', 'Bayraklı', 'Bergama', 'Beydağ', 'Bornova', 'Buca', 'Çeşme', 'Çiğli', 'Dikili', 'Foça', 'Gaziemir', 'Güzelbahçe', 'Karabağlar', 'Karaburun', 'Karşıyaka', 'Kemalpaşa', 'Kınık', 'Kiraz', 'Konak', 'Menderes', 'Menemen', 'Narlıdere', 'Ödemiş', 'Seferihisar', 'Selçuk', 'Tire', 'Torbalı', 'Urla'];
+    expect(ilceler.map((i) => i.name)).toEqual(spec);
+  });
+
+  describe('drafts are complete', () => {
+    it.each(ilceler.map((i) => [i.name, i] as const))('%s meets the content minimums', (_n, i) => {
+      expect(i.intro.length).toBeGreaterThanOrEqual(250);
+      expect(i.roads.length).toBeGreaterThanOrEqual(2);
+      expect(i.landmarks.length).toBeGreaterThanOrEqual(2);
+      expect(i.neighbours.length).toBeGreaterThanOrEqual(2);
+      expect(i.faq.length).toBeGreaterThanOrEqual(2);
+      const names = new Set(ilceler.map((x) => x.name));
+      for (const n of i.neighbours) {
+        expect(names.has(n)).toBe(true);
+        expect(n).not.toBe(i.name);
+      }
+    });
+
+    it('no two intros are name-swaps of each other (all 30, Jaccard < 0.5)', () => {
+      for (let a = 0; a < ilceler.length; a++) {
+        for (let b = a + 1; b < ilceler.length; b++) {
+          const sim = jaccard(
+            wordsWithoutName(ilceler[a].intro, ilceler[a].name),
+            wordsWithoutName(ilceler[b].intro, ilceler[b].name),
+          );
+          expect(sim, `${ilceler[a].name} / ${ilceler[b].name}`).toBeLessThan(0.5);
+        }
+      }
+    });
+
+    it('every district has a district-specific FAQ question', () => {
+      const all = ilceler.flatMap((i) => i.faq.map((f) => f.q));
+      for (const i of ilceler) {
+        expect(i.faq.some((f) => all.filter((q) => q === f.q).length === 1)).toBe(true);
+      }
+    });
+  });
 });
