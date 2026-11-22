@@ -1,0 +1,325 @@
+---
+import type { GetStaticPaths } from 'astro';
+import { Picture } from 'astro:assets';
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlateCall from '../../components/PlateCall.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import Faq from '../../components/Faq.astro';
+import JobStrip from '../../components/JobStrip.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import { services, type Service } from '../../data/services';
+import { jobs } from '../../data/jobs';
+import { business } from '../../data/business';
+import { serviceJsonLd, faqJsonLd, breadcrumbJsonLd } from '../../lib/seo';
+
+export const getStaticPaths = (() =>
+  services.map((service) => ({
+    params: { slug: service.slug },
+    props: { service },
+  }))) satisfies GetStaticPaths;
+
+interface Props {
+  service: Service;
+}
+
+const { service } = Astro.props;
+const job = jobs.find((j) => j.id === service.jobId)!;
+const path = `/hizmetler/${service.slug}/`;
+
+const jsonLd = [
+  serviceJsonLd(service.name, service.metaDescription, business),
+  faqJsonLd(service.faq),
+  breadcrumbJsonLd(
+    [
+      { name: 'Ana sayfa', path: '/' },
+      { name: 'Hizmetler', path: '/hizmetler/' },
+      { name: service.name, path },
+    ],
+    Astro.site,
+  ),
+].filter((entry): entry is object => entry !== null);
+---
+<BaseLayout
+  title={service.metaTitle}
+  description={service.metaDescription}
+  path={path}
+  jsonLd={jsonLd}
+  ogImage={job.image}
+>
+  <article class="service">
+    <header class="service-head wrap">
+      <nav class="crumbs" aria-label="Sayfa yolu">
+        <a href="/">Ana sayfa</a>
+        <span aria-hidden="true">/</span>
+        <a href="/hizmetler/">Hizmetler</a>
+      </nav>
+      <h1>{service.name}</h1>
+      <p class="lead">{service.lead}</p>
+      <div class="actions">
+        <PlateCall />
+        <WhatsAppButton />
+      </div>
+    </header>
+
+    <div class="service-main wrap">
+      <div class="service-text">
+        <div class="prose">
+          {service.body.map((p) => <p>{p}</p>)}
+        </div>
+        <section class="when" aria-labelledby="when-title">
+          <h2 id="when-title" class="section-title">Ne zaman arayın</h2>
+          <ul>
+            {service.whenToCall.map((item) => <li>{item}</li>)}
+          </ul>
+        </section>
+      </div>
+      <figure class="service-photo">
+        <Picture
+          src={job.image}
+          formats={['avif', 'webp']}
+          fallbackFormat="jpg"
+          widths={[480, 768, 1080]}
+          sizes="(min-width: 1024px) 44vw, 100vw"
+          loading="lazy"
+          alt={job.alt}
+        />
+        <figcaption><b>{job.vehicle}.</b> {job.place}.</figcaption>
+      </figure>
+    </div>
+
+    <section class="faq-section wrap" aria-labelledby="faq-title">
+      <h2 id="faq-title" class="section-title">Sık sorulanlar</h2>
+      <div class="faq-wrap">
+        <Faq items={service.faq} />
+      </div>
+    </section>
+  </article>
+
+  <JobStrip limit={3} heading="Son taşıdıklarımız" />
+  <ContactBlock />
+</BaseLayout>
+
+<style>
+  .service-head {
+    padding-top: 18px;
+    padding-bottom: 26px;
+  }
+
+  .crumbs {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 4px 8px;
+    color: var(--muted);
+    font-size: 0.875rem;
+  }
+
+  .crumbs a {
+    display: inline-flex;
+    align-items: center;
+    min-height: 32px;
+    color: var(--muted);
+  }
+
+  h1 {
+    margin: 10px 0 0;
+    font: 700 2.5rem/0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    text-wrap: balance;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin: 16px 0 0;
+    max-width: 44ch;
+    color: var(--ink);
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 22px;
+  }
+
+  .actions :global(.plate) {
+    display: flex;
+  }
+
+  .actions :global(.plate-face) {
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .actions :global(.plate-digits) {
+    font-size: clamp(1.75rem, 9.4vw, 2.125rem);
+  }
+
+  .actions :global(.wa-button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .service-main {
+    display: grid;
+    gap: 22px;
+    padding-bottom: 34px;
+  }
+
+  .prose p {
+    margin: 0 0 14px;
+    max-width: 66ch;
+    color: var(--muted);
+    font-size: 1.0625rem;
+    line-height: 1.55;
+  }
+
+  .prose p:first-child {
+    color: var(--ink);
+  }
+
+  .service-photo {
+    position: relative;
+    margin: 0;
+    overflow: hidden;
+    border-radius: 6px;
+    background: var(--line);
+  }
+
+  .service-photo :global(img) {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4 / 3;
+    object-fit: cover;
+  }
+
+  .service-photo figcaption {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    padding: 8px 14px 7px;
+    background: var(--panel);
+    border-top-right-radius: 6px;
+    color: var(--ink);
+    font: 500 0.8125rem/1.3 var(--font-body);
+  }
+
+  .service-photo figcaption b {
+    font-weight: 600;
+  }
+
+  .when {
+    margin-top: 12px;
+    padding-top: 26px;
+    border-top: 1px solid var(--line);
+  }
+
+  .when ul {
+    margin: 16px 0 0;
+    padding: 0;
+    list-style: none;
+    display: grid;
+    gap: 10px;
+  }
+
+  .when li {
+    max-width: 60ch;
+    padding-left: 22px;
+    position: relative;
+    color: var(--ink);
+    font-size: 1.0625rem;
+    line-height: 1.4;
+  }
+
+  .when li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0.55em;
+    width: 10px;
+    height: 3px;
+    background: var(--red);
+  }
+
+  .faq-section {
+    padding-block: 28px 40px;
+    border-top: 1px solid var(--line);
+  }
+
+  .faq-wrap {
+    margin-top: 16px;
+    max-width: 760px;
+  }
+
+  @media (min-width: 768px) {
+    .service-head {
+      padding-top: 28px;
+      padding-bottom: 36px;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    .lead {
+      font-size: 1.3125rem;
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+      margin-top: 28px;
+    }
+
+    .actions :global(.plate) {
+      display: inline-flex;
+    }
+
+    .actions :global(.plate-face) {
+      align-items: flex-start;
+      padding-inline: 18px;
+    }
+
+    .actions :global(.plate-digits) {
+      font-size: 2.5rem;
+    }
+
+    .actions :global(.wa-button) {
+      display: inline-flex;
+      width: auto;
+    }
+
+    .service-main {
+      grid-template-columns: 1.1fr 1fr;
+      gap: 48px;
+      align-items: start;
+      padding-bottom: 48px;
+    }
+
+    .when {
+      margin-top: 20px;
+      padding-top: 32px;
+    }
+
+    .service-photo {
+      position: sticky;
+      top: 88px;
+    }
+
+    .faq-section {
+      padding-block: 40px 56px;
+    }
+  }
+
+  @media (min-width: 1024px) {
+    h1 {
+      font-size: 5rem;
+    }
+  }
+</style>

@@ -12,6 +12,7 @@ import ContactBlock from '../components/ContactBlock.astro';
 import { homeFaq } from '../data/home-faq';
 import parkBornova from '../assets/jobs/park-bornova.jpg';
 import { business } from '../data/business';
+import { services as serviceList } from '../data/services';
 import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
 
 const services = [
@@ -21,39 +22,6 @@ const services = [
   { label: 'Lastik' },
   { label: 'Yakıt' },
   { label: 'Alkollüyseniz arayın' },
-];
-
-const serviceList = [
-  {
-    label: 'Arıza kurtarma',
-    href: '/hizmetler/ariza-kurtarma/',
-    text: 'Aracınız yolda kaldıysa çekiciyle istediğiniz yere bırakırız.',
-  },
-  {
-    label: 'Kaza oto kurtarma',
-    href: '/hizmetler/kaza-oto-kurtarma/',
-    text: 'Kazadan sonra aracınızı yoldan alır, istediğiniz yere taşırız.',
-  },
-  {
-    label: 'Akü takviyesi',
-    href: '/hizmetler/aku-takviyesi/',
-    text: 'Akünüz bittiyse bulunduğunuz yerde takviye yaparız.',
-  },
-  {
-    label: 'Lastik desteği',
-    href: '/hizmetler/lastik-destegi/',
-    text: 'Lastiğiniz patladıysa yolda yanınızda oluruz.',
-  },
-  {
-    label: 'Yakıt desteği',
-    href: '/hizmetler/yakit-destegi/',
-    text: 'Yakıtınız bittiyse yola devam etmeniz için destek veririz.',
-  },
-  {
-    label: 'Alkollü sürücü araç taşıma',
-    href: '/hizmetler/alkollu-surucu-arac-tasima/',
-    text: 'İçki içtiyseniz direksiyona geçmeyin; aracınızı eve biz götürürüz.',
-  },
 ];
 
 const jsonLd = [
@@ -114,8 +82,8 @@ const jsonLd = [
         {
           serviceList.map((s) => (
             <li>
-              <a href={s.href}>{s.label}</a>
-              <p>{s.text}</p>
+              <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
+              <p>{s.lead}</p>
             </li>
           ))
         }

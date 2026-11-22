@@ -1,0 +1,158 @@
+---
+import BaseLayout from '../../layouts/BaseLayout.astro';
+import PlateCall from '../../components/PlateCall.astro';
+import WhatsAppButton from '../../components/WhatsAppButton.astro';
+import ContactBlock from '../../components/ContactBlock.astro';
+import { services } from '../../data/services';
+import { breadcrumbJsonLd } from '../../lib/seo';
+
+const jsonLd = [
+  breadcrumbJsonLd(
+    [
+      { name: 'Ana sayfa', path: '/' },
+      { name: 'Hizmetler', path: '/hizmetler/' },
+    ],
+    Astro.site,
+  ),
+].filter((entry): entry is object => entry !== null);
+---
+<BaseLayout
+  title="İzmir Çekici ve Yol Yardım Hizmetleri | Ahmet Dadak"
+  description="Arıza kurtarma, kaza oto kurtarma, akü takviyesi, lastik ve yakıt desteği, alkollü sürücü araç taşıma. İzmir'in her ilçesinde 7/24."
+  path="/hizmetler/"
+  jsonLd={jsonLd}
+>
+  <section class="index wrap">
+    <h1>Hizmetlerimiz</h1>
+    <p class="lead">İzmir'in her ilçesinde, gece gündüz. Yolda ne olduysa arayın.</p>
+    <div class="actions">
+      <PlateCall />
+      <WhatsAppButton />
+    </div>
+    <ul class="list">
+      {
+        services.map((s) => (
+          <li>
+            <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
+            <p>{s.lead}</p>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+  <ContactBlock />
+</BaseLayout>
+
+<style>
+  .index {
+    padding-block: 26px 44px;
+  }
+
+  h1 {
+    margin: 0;
+    font: 700 2.5rem/0.95 var(--font-display);
+    letter-spacing: -0.01em;
+    text-transform: uppercase;
+    color: var(--ink);
+  }
+
+  .lead {
+    margin: 14px 0 0;
+    max-width: 44ch;
+    font-size: 1.125rem;
+    line-height: 1.45;
+  }
+
+  .actions {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    margin-top: 20px;
+  }
+
+  .actions :global(.plate) {
+    display: flex;
+  }
+
+  .actions :global(.plate-face) {
+    align-items: center;
+    padding-inline: 12px;
+  }
+
+  .actions :global(.plate-digits) {
+    font-size: clamp(1.75rem, 9.4vw, 2.125rem);
+  }
+
+  .actions :global(.wa-button) {
+    display: flex;
+    width: 100%;
+  }
+
+  .list {
+    display: grid;
+    gap: 22px 48px;
+    margin: 36px 0 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .list a {
+    display: inline-block;
+    color: var(--ink);
+    font: 700 1.5rem/1.1 var(--font-display);
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    text-decoration: underline;
+    text-decoration-color: var(--red);
+    text-decoration-thickness: 2px;
+    text-underline-offset: 4px;
+  }
+
+  .list p {
+    margin: 6px 0 0;
+    max-width: 46ch;
+    color: var(--muted);
+    line-height: 1.45;
+  }
+
+  @media (min-width: 768px) {
+    .index {
+      padding-block: 40px 64px;
+    }
+
+    h1 {
+      font-size: 4rem;
+    }
+
+    .actions {
+      flex-direction: row;
+      flex-wrap: wrap;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .actions :global(.plate) {
+      display: inline-flex;
+    }
+
+    .actions :global(.plate-face) {
+      align-items: flex-start;
+      padding-inline: 18px;
+    }
+
+    .actions :global(.plate-digits) {
+      font-size: 2.5rem;
+    }
+
+    .actions :global(.wa-button) {
+      display: inline-flex;
+      width: auto;
+    }
+
+    .list {
+      grid-template-columns: 1fr 1fr;
+      margin-top: 48px;
+      gap: 32px 56px;
+    }
+  }
+</style>
