@@ -224,11 +224,6 @@ const jsonLd = [
     .hero-actions :global(.plate) {
       animation: call-ring 2.8s var(--ease-smooth-out) 1s infinite;
     }
-
-    /* The reflective tape on the "alkollü" panel drifts like a moving truck. */
-    .drunk::before {
-      animation: tape-drift 3s linear infinite;
-    }
   }
 
   @keyframes text-rise {
@@ -251,12 +246,6 @@ const jsonLd = [
     70%,
     100% {
       box-shadow: 0 0 0 16px rgb(246 201 104 / 0), 0 14px 28px -14px rgb(0 0 0 / 0.6);
-    }
-  }
-
-  @keyframes tape-drift {
-    to {
-      background-position: 39.6px 0;
     }
   }
 
@@ -435,7 +424,7 @@ const jsonLd = [
     overflow: hidden;
     background: var(--red-panel);
     color: #fff;
-    box-shadow: 0 30px 100px -30px rgb(220 35 41 / 0.6);
+    box-shadow: 0 30px 100px -30px rgb(140 29 35 / 0.65);
   }
 
   .hero-copy {
