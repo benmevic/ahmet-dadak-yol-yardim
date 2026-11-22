@@ -153,7 +153,7 @@ export const ilceler: Ilce[] = [
     slug: 'bornova',
     status: 'live',
     intro:
-      "Bornova, İzmir'in doğusunda, Yamanlar Dağı'nın eteğinde uzanır. Ege Üniversitesi kampüsü, Forum Bornova ve şehirlerarası otobüs terminali bu ilçededir; çevre yolu ile İstanbul otoyolu da buradan geçer. Mevlana Mahallesi'ndeki adresimizden çıkıp ilçenin her mahallesine gideriz. Aracınız Ankara Caddesi'nde, çevre yolunda ya da Belkahve Tüneli'ne giden hatta kaldıysa konumunuzu gönderin, çekicimiz yola çıksın.",
+      "Bornova, İzmir'in doğusunda, Yamanlar Dağı'nın eteğinde uzanır. Ege Üniversitesi kampüsü, Forum Bornova ve şehirlerarası otobüs terminali bu ilçededir; çevre yolu ile İstanbul otoyolu da buradan geçer. İlçenin her mahallesine gideriz. Aracınız Ankara Caddesi'nde, çevre yolunda ya da Belkahve Tüneli'ne giden hatta kaldıysa konumunuzu gönderin, çekicimiz yola çıksın.",
     roads: [
       'İzmir Çevre Yolu (O-30)',
       'İstanbul otoyolu (O-5) ve Belkahve Tüneli',
@@ -176,10 +176,6 @@ export const ilceler: Ilce[] = [
       {
         q: 'Bornova içinde aracımı nereye bırakabilirsiniz?',
         a: "İstediğiniz yere: evinize, bir servise ya da başka bir adrese. Bornova içinde de İzmir'in diğer ilçelerinde de aracı kasaya alıp söylediğiniz adrese bırakırız.",
-      },
-      {
-        q: 'Bornova ofisiniz nerede?',
-        a: 'Mevlana Mah. 1713 Sk. No:3, Bornova / İzmir. Kemalpaşa adresimiz Çambel Mah. 2005 Sk. No:4.',
       },
     ],
   },
@@ -404,7 +400,7 @@ export const ilceler: Ilce[] = [
     slug: 'kemalpasa',
     status: 'live',
     intro:
-      "Kemalpaşa, İzmir'in en geniş ilçelerinden biridir; Nif Dağı ile Manisa tarafındaki Spil dağları arasındaki ovada yer alır. Çambel Mahallesi'ndeki adresimiz ilçenin içinde. Ulucak ve Armutlu mahalleleri, organize sanayi bölgesi, otoyol bağlantısı ve Turgutlu'ya giden il yolu üzerinde arıza ya da kaza olursa arayın. Kasalı çekicimiz sizi bulunduğunuz yerden alır.",
+      "Kemalpaşa, Nif Dağı ile Manisa tarafındaki Spil dağları arasındaki ovada yer alır. Ulucak ve Armutlu mahalleleri, organize sanayi bölgesi, otoyol bağlantısı ve Turgutlu'ya giden il yolu üzerinde arıza ya da kaza olursa arayın. Kasalı çekicimiz sizi bulunduğunuz yerden alır.",
     roads: [
       'İstanbul otoyolu (O-5) Kemalpaşa bağlantısı',
       'Necdet Bukey Caddesi (İstiklal ve Ulucak yönü)',
@@ -426,10 +422,6 @@ export const ilceler: Ilce[] = [
       {
         q: 'Sanayi bölgesindeki bir aracı alır mısınız?',
         a: 'Evet. Kemalpaşa içinde de çevresinde de arızalı ya da kazalı aracı kasaya alıp istediğiniz yere bırakırız.',
-      },
-      {
-        q: 'Kemalpaşa adresiniz nerede?',
-        a: 'Çambel Mah. 2005 Sk. No:4, Kemalpaşa / İzmir. Bornova adresimiz Mevlana Mah. 1713 Sk. No:3.',
       },
     ],
   },

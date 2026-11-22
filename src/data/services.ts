@@ -30,6 +30,7 @@ export const services: Service[] = [
       'Yolda bir arıza çıktı, devam etmek güvenli değil.',
       'Araç vites almıyor ya da fren ve direksiyonda sorun var.',
       'Aracınızı servise ya da evinize götürmek istiyorsunuz.',
+      'Aracınız dar bir sokakta ya da park yerinde sıkıştı.',
     ],
     faq: [
       {
@@ -63,7 +64,6 @@ export const services: Service[] = [
       'Kaza oldu, araç yürümüyor.',
       'Araç yolda ya da yol kenarında kaldı.',
       'Hasarlı aracı servise ya da eve götürmek istiyorsunuz.',
-      'Aracınız dar bir sokakta ya da park yerinde sıkıştı.',
     ],
     faq: [
       {
@@ -102,7 +102,7 @@ export const services: Service[] = [
     faq: [
       {
         q: 'Aracı çekmeniz gerekir mi?',
-        a: 'Çoğu zaman gerekmez; bulunduğunuz yerde takviye yaparız. Takviye yetmezse aracı çekiciyle istediğiniz yere bırakırız.',
+        a: 'Gerekmez; bulunduğunuz yerde takviye yaparız. Takviye yetmezse aracı çekiciyle istediğiniz yere bırakırız.',
       },
       {
         q: 'Gece de takviyeye geliyor musunuz?',
