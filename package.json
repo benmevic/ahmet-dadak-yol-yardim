@@ -1,0 +1,23 @@
+{
+  "name": "ahmet-dadak-yol-yardim",
+  "type": "module",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "test": "vitest run",
+    "test:e2e": "playwright test"
+  },
+  "dependencies": {
+    "@astrojs/sitemap": "~3.7",
+    "@fontsource/barlow": "~5.3",
+    "@fontsource/barlow-condensed": "~5.3",
+    "astro": "~7.4"
+  },
+  "devDependencies": {
+    "@playwright/test": "~1.65",
+    "vitest": "~5.1"
+  }
+}

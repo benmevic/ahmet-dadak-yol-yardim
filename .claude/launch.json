@@ -4,8 +4,25 @@
     {
       "name": "eski-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "8081", "--bind", "127.0.0.1", "--directory", "eski-site/DadakNakliyat"],
+      "runtimeArgs": [
+        "-m",
+        "http.server",
+        "8081",
+        "--bind",
+        "127.0.0.1",
+        "--directory",
+        "eski-site/DadakNakliyat"
+      ],
       "port": 8081
+    },
+    {
+      "name": "site",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run",
+        "dev"
+      ],
+      "port": 4321
     }
   ]
 }

@@ -1,0 +1,12 @@
+:root {
+  --ground: #f3f4f2;
+  --panel: #ffffff;
+  --ink: #141518;
+  --muted: #4a4d55;
+  --line: #d9dbd8;
+  --red: #c8161d;
+  --blue: #0f4fa8;
+  --amber: #f2b705;
+  --font-display: 'Barlow Condensed', 'Arial Narrow', sans-serif;
+  --font-body: 'Barlow', system-ui, sans-serif;
+}
