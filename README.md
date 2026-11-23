@@ -212,7 +212,13 @@ Bunlar müşteriyle konuşulup kesinleşti. Değiştirmeden önce müşteriye so
 - **Taşınan araçlar:** otomobil, hafif ticari, dolmuş/minibüs ve motosiklet.
 - **Arama ve WhatsApp her sayfada tek dokunuşla erişilebilir olmalı.** Telefonda ilk ekranda görünürler; sayfa kayınca alttaki çubuk çıkar.
 - **Kontrol edilmemiş ilçe yayına alınmaz.** Birbirinin kopyası, yalnızca ilçe adı değişen sayfalar yapılmaz; Google bunları cezalandırır.
-- **Tasarım:** onaylanan tasarım belgesi `docs/superpowers/specs/` klasöründe. Kart ızgarası, renk geçişli yazı ya da stok fotoğraf gibi "hazır şablon" görünümünden kaçınıldı. Müşteri "yapay zekâ yapmış gibi durmasın" dedi.
+- **Tasarım:** müşterinin seçtiği siyah-kırmızı tasarım. Renkler logodan: şarap tonlu siyah zemin, kırmızı, altın (taçtan), gümüş. Kurallar:
+  - Üst kısımlar gerçek çekici fotoğraflarıyla yapılır, düz kırmızı panel kullanılmaz (müşteri "cırtlak" buldu).
+  - Reflektörlü şerit kullanılmaz (müşteri istemedi).
+  - Renkler aynı aileden ve geçişler yumuşak olmalı; sert bölüm çizgisi yok.
+  - Hareket ölçülü: başlık açılışta yukarı kayar, kartlar kaydırınca yerine oturur, arama plakasının etrafında altın bir halka yayılır. Hareketi kapatan kullanıcıda hiçbiri oynamaz.
+  - Stok fotoğraf ya da uydurma içerik yok; müşteri "yapay zekâ yapmış gibi durmasın" dedi.
+  - İlk (açık renkli) tasarımın belgesi `docs/superpowers/specs/` klasöründe; renk ve üst kısım kararları sonradan değişti.
 - **Türkçe büyük harf:** sayfanın dili `lang="tr"` olarak ayarlı, bu yüzden CSS'teki `text-transform: uppercase` "i" harfini doğru "İ" yapar. Bu ayarı kaldırmayın.
 
 ## Testler
@@ -234,7 +240,6 @@ Denenen şeyler arasında şunlar var: 375×667 telefon ekranında arama ve What
 ## Git durumu
 
 - `main`: sitenin tamamı. Çalışmaya buradan devam edin.
-- `site/ilk-surum`: ilk sürümün geliştirildiği dal. `main`'e birleştirildi, silinebilir.
 
 Depo şu an yalnızca yerelde; uzak bir depo (GitHub vb.) bağlı değil.
 

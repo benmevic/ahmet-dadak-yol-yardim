@@ -41,7 +41,7 @@ Contact is by phone call or WhatsApp (including sharing a live location). Visito
 ## Brand Commitments
 
 - Name: Ahmet Dadak Yol Yardım. Logo: `kaynak/gorseller/logo-ahmet-dadak-yol-yardim.jpg` (black ground, red and silver "AD" monogram, gold crown, white flatbed truck).
-- The user chose the light, trust-building direction ("B") for the site and asked that it must not look generic or AI-made.
+- Visual direction (client decision, 2026-11-23): black-red from the logo, on a wine-tinted black ground with gold accents; photo-led heads (the landscape side-profile truck photo on the home hero, truck right, text left); no bright red panels, no reflective stripes, smooth colour flow, lively but measured motion. It must not look generic or AI-made. The earlier light direction ("B") was dropped.
 
 ## Evidence on Hand
 
