@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { Picture, getImage } from 'astro:assets';
 import logo from '../assets/logo.jpg';
 import BaseLayout from '../layouts/BaseLayout.astro';
@@ -96,7 +97,7 @@ const jsonLd = [
         {
           serviceList.map((s, i) => (
             <li>
-              <a href={`/hizmetler/${s.slug}/`}>
+              <a href={withBase(`/hizmetler/${s.slug}/`)}>
                 <span class="svc-no" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
                 <span class="svc-name">{s.name}</span>
                 <span class="svc-lead">{s.lead}</span>
@@ -130,12 +131,12 @@ const jsonLd = [
         {
           liveIlceler().map((d) => (
             <li>
-              <a href={ilcePath(d)}>{d.name} çekici</a>
+              <a href={withBase(ilcePath(d))}>{d.name} çekici</a>
             </li>
           ))
         }
       </ul>
-      <a class="districts-link" href="/izmir/">Tüm ilçeler</a>
+      <a class="districts-link" href={withBase('/izmir/')}>Tüm ilçeler</a>
     </div>
   </section>
 

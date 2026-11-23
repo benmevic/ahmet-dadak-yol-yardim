@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import raw from '../assets/izmir-ilceler.svg?raw';
 import { ilcePath } from '../lib/ilce';
 
@@ -30,7 +31,7 @@ const active = districts.filter((d) => live.has(d.slug));
             <title>{d.name}</title>
           </path>
         );
-        return isLive ? <a href={ilcePath(d)} aria-label={`${d.name} çekici`} tabindex="-1" aria-hidden="true">{path}</a> : path;
+        return isLive ? <a href={withBase(ilcePath(d))} aria-label={`${d.name} çekici`} tabindex="-1" aria-hidden="true">{path}</a> : path;
       })
     }
     {

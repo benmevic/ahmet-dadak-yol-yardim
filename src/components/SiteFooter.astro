@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { business } from '../data/business';
 import { telHref, whatsappHref, DEFAULT_WA_MESSAGE } from '../lib/contact';
 import Phone from './icons/Phone.astro';
@@ -70,7 +71,7 @@ const links = [
         {
           links.map((l) => (
             <li>
-              <a href={l.href}>{l.label}</a>
+              <a href={withBase(l.href)}>{l.label}</a>
             </li>
           ))
         }

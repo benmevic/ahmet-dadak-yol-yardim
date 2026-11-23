@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
 import { jobs } from '../../data/jobs';
@@ -40,7 +41,7 @@ const jsonLd = [
       {
         services.map((s) => (
           <li>
-            <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
+            <a href={withBase(`/hizmetler/${s.slug}/`)}>{s.name}</a>
             <p>{s.lead}</p>
           </li>
         ))

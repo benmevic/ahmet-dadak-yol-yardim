@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import type { GetStaticPaths } from 'astro';
 import { getImage } from 'astro:assets';
 import { jobs } from '../../data/jobs';
@@ -69,9 +70,9 @@ const jsonLd = [
   <article class="district">
     <header class="district-head wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
       <nav class="crumbs" aria-label="Sayfa yolu">
-        <a href="/">Ana sayfa</a>
+        <a href={withBase('/')}>Ana sayfa</a>
         <span aria-hidden="true">/</span>
-        <a href="/izmir/">İzmir</a>
+        <a href={withBase('/izmir/')}>İzmir</a>
       </nav>
       <h1>{ilce.name} Çekici · 7/24 Yol Yardım</h1>
       <p class="lead">{ilce.intro}</p>
@@ -101,7 +102,7 @@ const jsonLd = [
             <ul class="nb-list">
               {liveNeighbours.map((n) => (
                 <li>
-                  <a href={ilcePath(n)}>{n.name} çekici</a>
+                  <a href={withBase(ilcePath(n))}>{n.name} çekici</a>
                 </li>
               ))}
             </ul>
@@ -116,7 +117,7 @@ const jsonLd = [
         {
           services.map((s) => (
             <li>
-              <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
+              <a href={withBase(`/hizmetler/${s.slug}/`)}>{s.name}</a>
             </li>
           ))
         }

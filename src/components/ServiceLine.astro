@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 interface Props {
   items: { label: string; href?: string }[];
 }
@@ -8,7 +9,7 @@ const { items } = Astro.props;
 <ul class="service-line" aria-label="Hizmetler">
   {
     items.map((item) => (
-      <li>{item.href ? <a href={item.href}>{item.label}</a> : item.label}</li>
+      <li>{item.href ? <a href={withBase(item.href)}>{item.label}</a> : item.label}</li>
     ))
   }
 </ul>

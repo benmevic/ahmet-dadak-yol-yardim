@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../../lib/url';
 import type { GetStaticPaths } from 'astro';
 import { Picture, getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
@@ -51,9 +52,9 @@ const jsonLd = [
   <article class="service">
     <header class="service-head wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
       <nav class="crumbs" aria-label="Sayfa yolu">
-        <a href="/">Ana sayfa</a>
+        <a href={withBase('/')}>Ana sayfa</a>
         <span aria-hidden="true">/</span>
-        <a href="/hizmetler/">Hizmetler</a>
+        <a href={withBase('/hizmetler/')}>Hizmetler</a>
       </nav>
       <h1>{service.name} · İzmir 7/24</h1>
       <p class="lead">{service.lead}</p>
@@ -103,12 +104,12 @@ const jsonLd = [
         {
           liveIlceler().map((d) => (
             <li>
-              <a href={ilcePath(d)}>{d.name} çekici</a>
+              <a href={withBase(ilcePath(d))}>{d.name} çekici</a>
             </li>
           ))
         }
         <li>
-          <a href="/izmir/">Tüm İzmir ilçeleri</a>
+          <a href={withBase('/izmir/')}>Tüm İzmir ilçeleri</a>
         </li>
       </ul>
     </section>

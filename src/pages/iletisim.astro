@@ -1,4 +1,5 @@
 ---
+import { withBase } from '../lib/url';
 import { getImage } from 'astro:assets';
 import logo from '../assets/logo.jpg';
 import parkBornova from '../assets/jobs/park-bornova.jpg';
@@ -50,7 +51,7 @@ const jsonLd = [
         {
           live.map((i) => (
             <li>
-              <a href={ilcePath(i)}>{i.name} çekici</a>
+              <a href={withBase(ilcePath(i))}>{i.name} çekici</a>
             </li>
           ))
         }

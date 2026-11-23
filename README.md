@@ -37,6 +37,21 @@ Tarayıcı testlerini çalıştıracaksanız, Playwright'ın tarayıcısını bi
 npx playwright install chromium
 ```
 
+Node sürümü `.nvmrc` dosyasında (24); `nvm use` ile aynı sürüme geçebilirsiniz. Kurulum için `npm install` yerine `npm ci` kullanırsanız `package-lock.json`'daki sürümler birebir kurulur.
+
+### Docker ile (Node kurmadan)
+
+```bash
+docker build -t ahmet-dadak .
+docker run --rm -p 8080:8080 ahmet-dadak
+```
+
+Site http://localhost:8080 adresinde açılır. Bu, sitenin derlenmiş halidir; nginx sunar. Gerçek alan adıyla derlemek için `docker build --build-arg SITE_URL=https://alanadi.com.tr -t ahmet-dadak .`
+
+### Test sitesi (GitHub Pages)
+
+`main` dalına her gönderimde `.github/workflows/pages.yml` testleri çalıştırır, siteyi derler ve `https://<kullanıcı>.github.io/<depo>/` adresine yükler. Bu sürüm `SITE_URL` olmadan derlenir, yani Google'a kapalıdır; yalnızca müşterinin denemesi içindir. Site alt klasörde çalıştığı için bağlantılar `src/lib/url.ts` içindeki `withBase()` ile yazılır; yeni bir site içi bağlantı eklerken onu kullanın.
+
 ## Teknoloji
 
 - **[Astro](https://astro.build) 7**, statik çıktı. Sunucu, veritabanı ya da yönetim paneli yok; panel istenmedi. Derleme sonunda `dist/` klasöründe düz HTML, CSS ve görseller çıkar, herhangi bir statik barındırmada çalışır.

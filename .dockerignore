@@ -1,0 +1,14 @@
+node_modules
+dist
+dist-site
+.astro
+.git
+.claude
+.superpowers
+.impeccable
+.taste-skill
+eski-site
+ekran-goruntuleri
+test-results
+playwright-report
+kaynak
