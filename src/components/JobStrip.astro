@@ -5,56 +5,92 @@ import { business } from '../data/business';
 import Instagram from './icons/Instagram.astro';
 
 interface Props {
-  limit?: number;
   heading?: string;
 }
 
-const { limit = 5, heading = 'Son taşıdıklarımız' } = Astro.props;
-const shown = jobs.slice(0, limit);
+const { heading = 'Son taşıdıklarımız' } = Astro.props;
+// Each copy of the list is one full lap of the loop.
+const laps = [false, true];
 ---
-<section class="jobs" aria-labelledby="jobs-title">
+<section class="jobs" aria-labelledby="jobs-title" data-jobs>
   <div class="jobs-head wrap">
     <h2 id="jobs-title" class="section-title">{heading}</h2>
-    <a class="jobs-insta" href={business.instagramUrl} target="_blank" rel="noopener">
-      <span class="jobs-insta-icon"><Instagram size={18} /></span>
-      <span>Tümü Instagram'da: <b>@{business.instagramHandle}</b></span>
-    </a>
+    <div class="jobs-tools">
+      <a class="jobs-insta" href={business.instagramUrl} target="_blank" rel="noopener">
+        <span class="jobs-insta-icon"><Instagram size={18} /></span>
+        <span>Tümü Instagram'da: <b>@{business.instagramHandle}</b></span>
+      </a>
+      <button class="jobs-pause" type="button" aria-pressed="false" data-jobs-pause>
+        <span class="jobs-pause-icon" aria-hidden="true"></span>
+        <span class="jobs-pause-label">Durdur</span>
+      </button>
+    </div>
   </div>
-  <ul class="jobs-row wrap" tabindex="0" aria-label="Son taşıdıklarımız, yana kaydırın">
-    {
-      shown.map((job) => (
-        <li class="job">
-          <Picture
-            src={job.image}
-            formats={['avif', 'webp']}
-            fallbackFormat="jpg"
-            widths={[320, 480, 640]}
-            sizes="(min-width: 1024px) 20vw, (min-width: 768px) 30vw, 46vw"
-            loading="lazy"
-            alt={job.alt}
-          />
-          <p>
-            <b>{job.vehicle}</b>
-            <span>{job.place}</span>
-          </p>
-        </li>
-      ))
-    }
-  </ul>
+  <div class="jobs-viewport" tabindex="0" role="region" aria-label="Son taşıdıklarımız, yana kaydırın">
+    <div class="jobs-loop">
+      {
+        laps.map((clone) => (
+          <ul
+            class="jobs-row"
+            {...(clone
+              ? { 'aria-hidden': 'true', 'data-clone': '' }
+              : {})}
+          >
+            {jobs.map((job) => (
+              <li class="job">
+                <Picture
+                  src={job.image}
+                  formats={['avif', 'webp']}
+                  fallbackFormat="jpg"
+                  widths={[320, 480, 640]}
+                  sizes="(min-width: 768px) 320px, 70vw"
+                  loading="lazy"
+                  alt={clone ? '' : job.alt}
+                />
+                <p>
+                  <b>{job.vehicle}</b>
+                  <span>{job.place}</span>
+                </p>
+              </li>
+            ))}
+          </ul>
+        ))
+      }
+    </div>
+  </div>
 </section>
+<script is:inline>
+  (() => {
+    document.querySelectorAll('[data-jobs]').forEach((s) => {
+      const b = s.querySelector('[data-jobs-pause]');
+      if (!b) return;
+      b.addEventListener('click', () => {
+        const p = s.classList.toggle('is-paused');
+        b.setAttribute('aria-pressed', String(p));
+        b.querySelector('.jobs-pause-label').textContent = p ? 'Oynat' : 'Durdur';
+      });
+    });
+  })();
+</script>
 
 <style>
   .jobs {
-    background: transparent;
-    padding: 26px 0 30px;
+    padding: 30px 0 34px;
   }
 
   .jobs-head {
     display: flex;
     flex-wrap: wrap;
-    align-items: baseline;
+    align-items: flex-end;
     justify-content: space-between;
-    gap: 6px 20px;
+    gap: 10px 20px;
+  }
+
+  .jobs-tools {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px 16px;
   }
 
   .jobs-insta {
@@ -86,42 +122,68 @@ const shown = jobs.slice(0, limit);
     text-underline-offset: 4px;
   }
 
-  .jobs-row {
-    display: flex;
-    gap: 10px;
-    margin-top: 14px;
-    margin-bottom: 0;
-    padding-block: 0;
-    list-style: none;
-    overflow-x: auto;
-    scroll-snap-type: x proximity;
-    scroll-padding-inline: 16px;
-    scrollbar-width: none;
+  .jobs-pause {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    min-height: 44px;
+    padding: 0 14px;
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    background: var(--panel);
+    color: var(--ink);
+    font: 600 0.875rem/1 var(--font-body);
+    cursor: pointer;
   }
 
-  .jobs-row::-webkit-scrollbar {
-    display: none;
+  .jobs-pause-icon {
+    width: 10px;
+    height: 12px;
+    border-inline: 3px solid currentColor;
+    box-sizing: border-box;
+  }
+
+  .jobs.is-paused .jobs-pause-icon {
+    border: none;
+    border-left: 10px solid currentColor;
+    border-block: 6px solid transparent;
+  }
+
+  .jobs-viewport {
+    margin-top: 18px;
+    overflow: hidden;
+    /* Photos fade in and out at the screen edges. */
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 6%, #000 94%, transparent);
+  }
+
+  .jobs-loop {
+    display: flex;
+    width: max-content;
+  }
+
+  .jobs-row {
+    display: flex;
+    gap: 14px;
+    margin: 0;
+    padding: 4px 14px 8px 0;
+    list-style: none;
+  }
+
+  .jobs-viewport:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: -3px;
   }
 
   .job {
-    flex: 0 0 clamp(150px, 46vw, 220px);
-    scroll-snap-align: start;
+    flex: 0 0 clamp(220px, 68vw, 320px);
   }
 
   .job :global(picture) {
     display: block;
     overflow: hidden;
-    border-radius: 16px;
-  }
-
-  .job :global(img) {
-    transition: scale var(--duration-very-slow) var(--ease-smooth-out);
-  }
-
-  @media (hover: hover) {
-    .job:hover :global(img) {
-      scale: 1.03;
-    }
+    border-radius: 18px;
+    box-shadow: var(--card-shadow);
   }
 
   .job :global(img) {
@@ -130,13 +192,12 @@ const shown = jobs.slice(0, limit);
     height: auto;
     aspect-ratio: 4 / 3;
     object-fit: cover;
-    border-radius: 16px;
     background: var(--line);
-    box-shadow: var(--card-shadow);
+    transition: scale var(--duration-very-slow) var(--ease-smooth-out);
   }
 
   .job p {
-    margin: 8px 0 0;
+    margin: 10px 0 0;
     color: var(--muted);
     font-size: 0.8125rem;
     line-height: 1.35;
@@ -145,52 +206,70 @@ const shown = jobs.slice(0, limit);
   .job b {
     display: block;
     color: var(--ink);
-    font-size: 0.875rem;
+    font-size: 0.9375rem;
     font-weight: 600;
+  }
+
+  @media (hover: hover) {
+    .job:hover :global(img) {
+      scale: 1.04;
+    }
+  }
+
+  /* The loop: two identical lists slide left by one list's width, forever.
+     It rests while the pointer or keyboard is on it, and on "Durdur". */
+  @media (prefers-reduced-motion: no-preference) {
+    .jobs-loop {
+      animation: jobs-loop 60s linear infinite;
+    }
+
+    .jobs-viewport:hover .jobs-loop,
+    .jobs-viewport:focus-within .jobs-loop,
+    .jobs.is-paused .jobs-loop {
+      animation-play-state: paused;
+    }
+  }
+
+  @keyframes jobs-loop {
+    to {
+      transform: translateX(-50%);
+    }
+  }
+
+  /* Without motion: one list, scrolled by hand. */
+  @media (prefers-reduced-motion: reduce) {
+    .jobs-viewport {
+      overflow-x: auto;
+      scroll-snap-type: x proximity;
+      -webkit-mask-image: none;
+      mask-image: none;
+    }
+
+    .jobs-row[data-clone],
+    .jobs-pause {
+      display: none;
+    }
+
+    .jobs-row {
+      padding-left: 16px;
+    }
+
+    .job {
+      scroll-snap-align: start;
+    }
+
+    .job :global(img) {
+      transition: none;
+    }
   }
 
   @media (min-width: 768px) {
     .jobs {
-      padding: 34px 0 40px;
+      padding: 44px 0 48px;
     }
 
-    .jobs-row {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-      gap: 14px;
-      margin-top: 18px;
-      overflow: visible;
-    }
-
-    .job {
-      flex: none;
-    }
-  }
-
-  @media (min-width: 1024px) {
-    .jobs-row {
-      grid-template-columns: repeat(5, 1fr);
-    }
-  }
-
-  @media (prefers-reduced-motion: no-preference) {
-    @supports (animation-timeline: view()) {
-      .job {
-        animation: job-rise linear both;
-        animation-timeline: view();
-        animation-range: entry 0% entry 55%;
-      }
-    }
-  }
-
-  @keyframes job-rise {
-    from {
-      opacity: 0.55;
-      transform: translateY(14px);
-    }
-    to {
-      opacity: 1;
-      transform: none;
+    .jobs-viewport {
+      margin-top: 24px;
     }
   }
 </style>

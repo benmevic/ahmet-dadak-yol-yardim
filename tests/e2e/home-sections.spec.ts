@@ -65,10 +65,11 @@ test('strip Instagram link points to the business profile', async ({ page }) => 
   );
 });
 
-test('phone job strip is keyboard focusable and named', async ({ page }) => {
+test('job strip is keyboard focusable, named, and scrolls by hand without motion', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'reduce' });
   await page.setViewportSize({ width: 375, height: 812 });
   await page.goto('/');
-  const strip = page.locator('section.jobs ul.jobs-row');
+  const strip = page.locator('section.jobs .jobs-viewport');
   await expect(strip).toHaveAttribute('tabindex', '0');
   await expect(strip).toHaveAttribute('aria-label', /yana kaydırın/);
   const scrolls = await strip.evaluate((el) => el.scrollWidth > el.clientWidth);
@@ -76,4 +77,33 @@ test('phone job strip is keyboard focusable and named', async ({ page }) => {
   await strip.focus();
   const outline = await strip.evaluate((el) => getComputedStyle(el).outlineStyle);
   expect(outline).not.toBe('none');
+  // Without motion there is no loop: the copy and the pause button are gone.
+  await expect(page.locator('section.jobs [data-clone]')).toBeHidden();
+  await expect(page.locator('section.jobs [data-jobs-pause]')).toBeHidden();
+});
+
+test('job strip loops with a hidden copy and can be paused', async ({ page }) => {
+  await page.emulateMedia({ reducedMotion: 'no-preference' });
+  await page.goto('/');
+  const rows = page.locator('section.jobs ul.jobs-row');
+  await expect(rows).toHaveCount(2);
+  await expect(rows.nth(1)).toHaveAttribute('aria-hidden', 'true');
+  await expect(rows.nth(1).locator('img').first()).toHaveAttribute('alt', '');
+  const loop = page.locator('section.jobs .jobs-loop');
+  await expect(loop).toHaveCSS('animation-name', 'jobs-loop');
+  const pause = page.locator('section.jobs [data-jobs-pause]');
+  await expect(pause).toHaveAttribute('aria-pressed', 'false');
+  await pause.click();
+  await expect(pause).toHaveAttribute('aria-pressed', 'true');
+  await expect(pause).toContainText('Oynat');
+  await page.mouse.move(0, 0);
+  await expect(loop).toHaveCSS('animation-play-state', 'paused');
+});
+
+test('how it works stops carry an icon and a number', async ({ page }) => {
+  await page.goto('/');
+  const stops = page.locator('section#nasil ol > li');
+  await expect(stops).toHaveCount(3);
+  await expect(stops.locator('.stop-pin svg')).toHaveCount(3);
+  await expect(stops.nth(2)).toContainText('03');
 });

@@ -130,8 +130,7 @@ summary {
    translate/scale properties so hover transforms keep working. */
 @media (prefers-reduced-motion: no-preference) {
   @supports (animation-timeline: view()) {
-    .steps > li,
-    .service-list > li,
+    .svc-rows > li,
     .faq,
     .drunk,
     .contact-inner,

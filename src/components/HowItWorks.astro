@@ -1,69 +1,111 @@
 ---
+import Phone from './icons/Phone.astro';
+import MapPin from './icons/MapPin.astro';
+import Truck from './icons/Truck.astro';
+
 const steps = [
-  { title: 'Arayın', text: 'Bizi arayın, aracınızın durumunu söyleyin.' },
-  { title: 'Konumunuzu gönderin', text: "WhatsApp'tan konumunuzu paylaşın, sizi bulalım." },
+  { title: 'Arayın', text: 'Bizi arayın, aracınızın durumunu söyleyin.', icon: Phone },
+  { title: 'Konumunuzu gönderin', text: "WhatsApp'tan konumunuzu paylaşın, sizi bulalım.", icon: MapPin },
   {
     title: 'Aracınızı istediğiniz yere bırakalım',
     text: 'Aracınızı çekiciyle söylediğiniz adrese götürürüz.',
+    icon: Truck,
   },
 ];
 ---
 <section id="nasil" class="how" aria-labelledby="how-title">
   <div class="wrap">
     <h2 id="how-title" class="section-title">Nasıl çalışıyoruz</h2>
-    <ol class="steps">
-      {
-        steps.map((s) => (
-          <li>
-            <h3>{s.title}</h3>
-            <p>{s.text}</p>
-          </li>
-        ))
-      }
-    </ol>
+    <div class="route">
+      <div class="road" aria-hidden="true"></div>
+      <ol class="stops">
+        {
+          steps.map((s, i) => (
+            <li style={`--i: ${i}`}>
+              <span class="stop-pin">
+                <s.icon size={26} />
+              </span>
+              <span class="stop-no">{String(i + 1).padStart(2, '0')}</span>
+              <h3>{s.title}</h3>
+              <p>{s.text}</p>
+            </li>
+          ))
+        }
+      </ol>
+    </div>
   </div>
 </section>
 
 <style>
   .how {
-    padding: 34px 0 38px;
+    padding: 36px 0 44px;
     scroll-margin-top: 72px;
   }
 
-  .steps {
+  .route {
+    position: relative;
+    margin-top: 28px;
+  }
+
+  /* An asphalt road with a white centre line joins the three stops.
+     Phones: it runs down the left; wide screens: across, through the pins. */
+  .road {
+    position: absolute;
+    top: 8px;
+    bottom: 8px;
+    left: 27px;
+    width: 14px;
+    border-radius: 7px;
+    background:
+      repeating-linear-gradient(180deg, rgb(255 255 255 / 0.85) 0 14px, transparent 14px 28px) center / 2px 100% no-repeat,
+      linear-gradient(180deg, #2b2023, #1c1416);
+    box-shadow: inset 0 0 0 1px var(--line);
+    transform-origin: top;
+  }
+
+  .stops {
+    position: relative;
     display: grid;
-    gap: 22px;
-    margin: 20px 0 0;
+    gap: 30px;
+    margin: 0;
     padding: 0;
     list-style: none;
-    counter-reset: step;
   }
 
-  .steps li {
+  .stops li {
     position: relative;
-    padding: 18px 18px 20px 72px;
-    border-radius: 20px;
-    background: var(--panel);
-    box-shadow: var(--card-shadow);
-    counter-increment: step;
+    padding-left: 84px;
+    min-height: 68px;
   }
 
-  .steps li::before {
-    content: counter(step);
+  .stop-pin {
     position: absolute;
-    left: 20px;
-    top: 14px;
-    font: 700 2.75rem/1 var(--font-display);
-    background: linear-gradient(180deg, var(--red), var(--red-deep));
-    -webkit-background-clip: text;
-    background-clip: text;
-    color: transparent;
-    font-variant-numeric: tabular-nums;
+    left: 0;
+    top: 0;
+    display: grid;
+    place-items: center;
+    width: 68px;
+    height: 68px;
+    border-radius: 50%;
+    background: radial-gradient(circle at 35% 30%, #e0353b, #8c1d23 70%);
+    color: #fff;
+    box-shadow:
+      0 0 0 4px var(--ground),
+      0 0 0 6px var(--gold),
+      0 14px 30px -12px rgb(220 35 41 / 0.7);
+  }
+
+  .stop-no {
+    display: block;
+    color: var(--gold-light);
+    font: 700 0.9375rem/1 var(--font-display);
+    letter-spacing: 0.12em;
   }
 
   h3 {
-    margin: 0;
-    font: 700 1.375rem/1.05 var(--font-display);
+    margin: 6px 0 0;
+    color: var(--ink);
+    font: 700 1.5rem/1.05 var(--font-display);
     text-transform: uppercase;
     letter-spacing: 0.01em;
     text-wrap: balance;
@@ -79,28 +121,96 @@ const steps = [
 
   @media (min-width: 768px) {
     .how {
-      padding: 52px 0 56px;
+      padding: 56px 0 64px;
     }
 
-    .steps {
+    .route {
+      margin-top: 40px;
+    }
+
+    .road {
+      top: 27px;
+      bottom: auto;
+      left: 8%;
+      right: 8%;
+      width: auto;
+      height: 14px;
+      background:
+        repeating-linear-gradient(90deg, rgb(255 255 255 / 0.85) 0 18px, transparent 18px 36px) center / 100% 2px no-repeat,
+        linear-gradient(90deg, #2b2023, #1c1416);
+      transform-origin: left;
+    }
+
+    .stops {
       grid-template-columns: repeat(3, 1fr);
       gap: 32px;
-      margin-top: 28px;
     }
 
-    .steps li {
-      padding: 24px 26px 28px;
+    .stops li {
+      padding: 92px 0 0;
+      text-align: center;
     }
 
-    .steps li::before {
-      position: static;
-      display: block;
-      margin-bottom: 10px;
-      font-size: 3.5rem;
+    .stop-pin {
+      left: 50%;
+      translate: -50% 0;
+    }
+
+    p {
+      margin-inline: auto;
     }
 
     h3 {
-      font-size: 1.625rem;
+      font-size: 1.75rem;
+    }
+  }
+
+  /* As the section scrolls in, the road draws itself and the stops pop up
+     one after another. Browsers without scroll timelines show it at rest. */
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      .road {
+        animation: road-draw linear both;
+        animation-timeline: view();
+        animation-range: entry 10% cover 40%;
+      }
+
+      .stops li {
+        animation: stop-pop linear both;
+        animation-timeline: view();
+        animation-range: entry calc(10% + var(--i) * 12%) cover calc(30% + var(--i) * 8%);
+      }
+    }
+  }
+
+  @keyframes road-draw {
+    from {
+      scale: 1 0;
+    }
+    to {
+      scale: 1 1;
+    }
+  }
+
+  @media (min-width: 768px) {
+    @keyframes road-draw {
+      from {
+        scale: 0 1;
+      }
+      to {
+        scale: 1 1;
+      }
+    }
+  }
+
+  @keyframes stop-pop {
+    from {
+      opacity: 0;
+      translate: 0 24px;
+    }
+    to {
+      opacity: 1;
+      translate: 0 0;
     }
   }
 </style>

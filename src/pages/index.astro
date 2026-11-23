@@ -17,6 +17,7 @@ import { business } from '../data/business';
 import { services as serviceList } from '../data/services';
 import { faqJsonLd, localBusinessJsonLd } from '../lib/seo';
 import { liveIlceler, ilcePath } from '../lib/ilce';
+import { ilceler } from '../data/ilceler';
 
 const faqItems = [homeFaq[0], priceFaq, ...homeFaq.slice(1)];
 
@@ -91,12 +92,16 @@ const jsonLd = [
   <section id="hizmetler" class="services" aria-labelledby="services-title">
     <div class="wrap">
       <h2 id="services-title" class="section-title">Hizmetlerimiz</h2>
-      <ul class="service-list">
+      <ul class="svc-rows">
         {
-          serviceList.map((s) => (
+          serviceList.map((s, i) => (
             <li>
-              <a href={`/hizmetler/${s.slug}/`}>{s.name}</a>
-              <p>{s.lead}</p>
+              <a href={`/hizmetler/${s.slug}/`}>
+                <span class="svc-no" aria-hidden="true">{String(i + 1).padStart(2, '0')}</span>
+                <span class="svc-name">{s.name}</span>
+                <span class="svc-lead">{s.lead}</span>
+                <span class="svc-arrow" aria-hidden="true">→</span>
+              </a>
             </li>
           ))
         }
@@ -105,6 +110,19 @@ const jsonLd = [
   </section>
 
   <section id="ilceler" class="districts" aria-labelledby="districts-title">
+    <div class="names" aria-hidden="true">
+      <div class="names-loop">
+        {
+          [0, 1].map(() => (
+            <span class="names-set">
+              {ilceler.map((d) => (
+                <span class:list={['name', { 'name--live': d.status === 'live' }]}>{d.name}</span>
+              ))}
+            </span>
+          ))
+        }
+      </div>
+    </div>
     <div class="wrap districts-inner">
       <h2 id="districts-title" class="section-title">İzmir'in her ilçesi</h2>
       <p>İzmir'in tüm ilçelerine 7/24 geliyoruz.</p>
@@ -147,53 +165,6 @@ const jsonLd = [
   .services {
     padding: 34px 0 38px;
     scroll-margin-top: 72px;
-  }
-
-  .service-list {
-    display: grid;
-    gap: 12px;
-    margin: 20px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .service-list li {
-    position: relative;
-    padding: 16px 18px 18px 22px;
-    border-radius: 20px;
-    background: linear-gradient(90deg, var(--red) 0 5px, var(--panel) 5px);
-    box-shadow: var(--card-shadow);
-    transition:
-      transform var(--duration-fast) var(--ease-smooth-out),
-      box-shadow var(--duration-fast) var(--ease-smooth-out);
-  }
-
-  /* The title link covers the whole card. */
-  .service-list a::after {
-    content: '';
-    position: absolute;
-    inset: 0;
-    border-radius: inherit;
-  }
-
-  .service-list li:has(a:focus-visible) {
-    outline: 3px solid var(--blue);
-    outline-offset: 2px;
-  }
-
-  .service-list a:focus-visible {
-    outline: none;
-  }
-
-  @media (hover: hover) {
-    .service-list li:hover {
-      transform: translateY(-2px);
-      box-shadow: var(--card-shadow-lift);
-    }
-  }
-
-  .service-list li:active {
-    transform: translateY(0);
   }
 
   /* The hero photo settles into its frame once on load; the text and the
@@ -257,28 +228,171 @@ const jsonLd = [
     }
   }
 
+  .svc-rows {
+    margin: 24px 0 0;
+    padding: 0;
+    list-style: none;
+    border-top: 1px solid var(--line);
+  }
+
+  .svc-rows li {
+    border-bottom: 1px solid var(--line);
+  }
+
+  .svc-rows a {
+    position: relative;
+    isolation: isolate;
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) 28px;
+    grid-template-areas:
+      'no name arrow'
+      '. lead .';
+    align-items: baseline;
+    gap: 6px 12px;
+    padding: 20px 6px 22px;
+    overflow: hidden;
+    border-radius: 14px;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  /* Hover: the row fills with wine-red from the left. */
+  .svc-rows a::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    z-index: -1;
+    background: linear-gradient(90deg, rgb(140 29 35 / 0.95), rgb(92 13 18 / 0.35));
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 420ms var(--ease-smooth-out);
+  }
+
+  .svc-no {
+    grid-area: no;
+    color: var(--gold-light);
+    font: 700 1rem/1 var(--font-display);
+    letter-spacing: 0.1em;
+  }
+
+  .svc-name {
+    grid-area: name;
+    font: 700 clamp(1.75rem, 7vw, 3rem)/0.95 var(--font-display);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+  }
+
+  .svc-lead {
+    grid-area: lead;
+    max-width: 46ch;
+    color: var(--muted);
+    line-height: 1.45;
+    transition: color var(--duration-fast) var(--ease-smooth-out);
+  }
+
+  .svc-arrow {
+    grid-area: arrow;
+    justify-self: end;
+    color: var(--red);
+    font: 700 1.75rem/1 var(--font-display);
+    transition:
+      translate var(--duration-fast) var(--ease-smooth-out),
+      color var(--duration-fast) var(--ease-smooth-out);
+  }
+
+  .svc-rows a:focus-visible {
+    outline: 3px solid var(--blue);
+    outline-offset: 2px;
+  }
+
+  .svc-rows a:focus-visible::before {
+    transform: scaleX(1);
+  }
+
+  @media (hover: hover) {
+    .svc-rows a:hover::before {
+      transform: scaleX(1);
+    }
+
+    .svc-rows a:hover .svc-arrow {
+      translate: 8px 0;
+      color: var(--gold-light);
+    }
+
+    .svc-rows a:hover .svc-lead {
+      color: #f3e4e5;
+    }
+  }
+
+  @media (min-width: 900px) {
+    .svc-rows a {
+      grid-template-columns: 64px minmax(0, 1.1fr) minmax(0, 1fr) 44px;
+      grid-template-areas: 'no name lead arrow';
+      align-items: center;
+      gap: 24px;
+      padding: 26px 18px;
+    }
+  }
+
   @media (prefers-reduced-motion: reduce) {
-    .service-list li {
+    .svc-rows a::before,
+    .svc-arrow,
+    .svc-lead {
       transition: none;
     }
   }
 
-  .service-list a {
-    color: var(--ink);
-    font: 700 1.25rem/1.15 var(--font-display);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-color: var(--red);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
+  /* Every İzmir district name drifting past in outline letters; the ones
+     with their own page are filled gold. Decorative: the links follow. */
+  .names {
+    margin-bottom: 18px;
+    overflow: hidden;
+    -webkit-mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
   }
 
-  .service-list p {
-    margin: 4px 0 0;
-    max-width: 44ch;
-    color: var(--muted);
-    line-height: 1.45;
+  .names-loop {
+    display: flex;
+    width: max-content;
+  }
+
+  .names-set {
+    display: flex;
+  }
+
+  .name {
+    padding: 0 0.3em;
+    color: transparent;
+    font: 700 clamp(2.75rem, 9vw, 5.5rem)/1.05 var(--font-display);
+    letter-spacing: 0.01em;
+    text-transform: uppercase;
+    white-space: nowrap;
+    -webkit-text-stroke: 1.5px rgb(246 201 104 / 0.45);
+  }
+
+  .name::after {
+    content: '•';
+    content: '•' / '';
+    margin-left: 0.6em;
+    color: var(--red);
+    -webkit-text-stroke: 0;
+  }
+
+  .name--live {
+    color: var(--gold-light);
+    -webkit-text-stroke: 0;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .names-loop {
+      animation: names-loop 90s linear infinite;
+    }
+  }
+
+  @keyframes names-loop {
+    to {
+      transform: translateX(-50%);
+    }
   }
 
   .districts {
@@ -376,12 +490,6 @@ const jsonLd = [
     .districts,
     .faq-section {
       padding-block: 52px 56px;
-    }
-
-    .service-list {
-      grid-template-columns: 1fr 1fr;
-      margin-top: 28px;
-      gap: 26px 56px;
     }
 
     .drunk {
