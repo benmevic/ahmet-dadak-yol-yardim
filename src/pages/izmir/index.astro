@@ -1,5 +1,7 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { jobs } from '../../data/jobs';
 import PlateCall from '../../components/PlateCall.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
@@ -7,6 +9,9 @@ import { liveIlceler, ilcePath } from '../../lib/ilce';
 import { breadcrumbJsonLd } from '../../lib/seo';
 
 const districts = liveIlceler();
+
+const headJob = jobs.find((j) => j.id === 'dolmus-cadde') ?? jobs[0];
+const headPhoto = await getImage({ src: headJob.image, width: 1600, format: 'webp' });
 
 const jsonLd = [
   breadcrumbJsonLd(
@@ -24,14 +29,16 @@ const jsonLd = [
   path="/izmir/"
   jsonLd={jsonLd}
 >
-  <section class="index wrap">
+  <header class="wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
     <h1>İzmir ilçelerinde çekici</h1>
     <p class="lead">İzmir'in her ilçesine geliyoruz. İlçenize özel sayfalar:</p>
     <div class="actions">
       <PlateCall data-primary-cta />
       <WhatsAppButton />
     </div>
-    <ul class="list">
+  </header>
+  <section class="wrap list-wrap">
+    <ul class="card-list">
       {
         districts.map((d) => (
           <li>
@@ -45,8 +52,8 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
-  .index {
-    padding-block: 26px 44px;
+  .list-wrap {
+    padding-bottom: 44px;
   }
 
   h1 {
@@ -89,33 +96,7 @@ const jsonLd = [
     width: 100%;
   }
 
-  .list {
-    display: grid;
-    gap: 6px 48px;
-    margin: 32px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .list a {
-    display: inline-flex;
-    align-items: center;
-    min-height: 44px;
-    color: var(--ink);
-    font: 700 1.5rem/1.1 var(--font-display);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-color: var(--red);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
   @media (min-width: 768px) {
-    .index {
-      padding-block: 40px 64px;
-    }
-
     h1 {
       font-size: 4rem;
     }
@@ -143,11 +124,6 @@ const jsonLd = [
     .actions :global(.wa-button) {
       display: inline-flex;
       width: auto;
-    }
-
-    .list {
-      grid-template-columns: 1fr 1fr 1fr;
-      margin-top: 40px;
     }
   }
 </style>

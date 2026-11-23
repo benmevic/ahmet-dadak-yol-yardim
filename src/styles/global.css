@@ -99,7 +99,7 @@ body .head-panel nav.crumbs a[href] {
 
 @media (min-width: 768px) {
   .head-panel {
-    margin: 8px 32px 0;
+    margin: 8px 32px 32px;
     padding: 30px 36px 38px;
     border-radius: 30px;
   }
@@ -154,5 +154,76 @@ summary {
     opacity: 1;
     translate: 0 0;
     scale: 1;
+  }
+}
+
+/* A list of linked cards (services, districts). */
+.card-list {
+  display: grid;
+  gap: 12px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.card-list > li {
+  position: relative;
+  padding: 18px 18px 20px 24px;
+  border-radius: 20px;
+  background: linear-gradient(90deg, var(--red) 0 5px, var(--panel) 5px);
+  box-shadow: var(--card-shadow);
+  transition:
+    transform var(--duration-fast) var(--ease-smooth-out),
+    box-shadow var(--duration-fast) var(--ease-smooth-out);
+}
+
+.card-list a {
+  color: var(--ink);
+  font: 700 1.375rem/1.1 var(--font-display);
+  letter-spacing: 0.02em;
+  text-transform: uppercase;
+  text-decoration: none;
+}
+
+.card-list a::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+}
+
+.card-list a:focus-visible {
+  outline: none;
+}
+
+.card-list > li:has(a:focus-visible) {
+  outline: 3px solid var(--blue);
+  outline-offset: 2px;
+}
+
+.card-list p {
+  margin: 6px 0 0;
+  max-width: 46ch;
+  color: var(--muted);
+  line-height: 1.45;
+}
+
+@media (hover: hover) {
+  .card-list > li:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--card-shadow-lift);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .card-list > li {
+    transition: none;
+  }
+}
+
+@media (min-width: 768px) {
+  .card-list {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 }

@@ -1,7 +1,11 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../layouts/BaseLayout.astro';
+import sedanSokak from '../assets/jobs/sedan-sokak.jpg';
 import PlateCall from '../components/PlateCall.astro';
 import WhatsAppButton from '../components/WhatsAppButton.astro';
+
+const headPhoto = await getImage({ src: sedanSokak, width: 1600, format: 'webp' });
 ---
 <BaseLayout
   title="Sayfa bulunamadı | Ahmet Dadak Yol Yardım"
@@ -9,7 +13,7 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
   path="/404/"
   noindex
 >
-  <section class="lost wrap">
+  <section class="lost wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
     <h1>Bu sayfa yok, ama yardım bir arama uzağınızda.</h1>
     <div class="actions">
       <PlateCall data-primary-cta />
@@ -21,7 +25,7 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
 
 <style>
   .lost {
-    padding-block: 40px 64px;
+    margin-bottom: 48px;
   }
 
   h1 {
@@ -75,10 +79,6 @@ import WhatsAppButton from '../components/WhatsAppButton.astro';
   }
 
   @media (min-width: 768px) {
-    .lost {
-      padding-block: 72px 96px;
-    }
-
     h1 {
       max-width: 18ch;
       font-size: 4.5rem;

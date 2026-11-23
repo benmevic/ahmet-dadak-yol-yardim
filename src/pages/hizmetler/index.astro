@@ -1,10 +1,15 @@
 ---
+import { getImage } from 'astro:assets';
 import BaseLayout from '../../layouts/BaseLayout.astro';
+import { jobs } from '../../data/jobs';
 import PlateCall from '../../components/PlateCall.astro';
 import WhatsAppButton from '../../components/WhatsAppButton.astro';
 import ContactBlock from '../../components/ContactBlock.astro';
 import { services } from '../../data/services';
 import { breadcrumbJsonLd } from '../../lib/seo';
+
+const headJob = jobs.find((j) => j.id === 'partner') ?? jobs[0];
+const headPhoto = await getImage({ src: headJob.image, width: 1600, format: 'webp' });
 
 const jsonLd = [
   breadcrumbJsonLd(
@@ -22,14 +27,16 @@ const jsonLd = [
   path="/hizmetler/"
   jsonLd={jsonLd}
 >
-  <section class="index wrap">
+  <header class="wrap head-panel" style={`--head-photo: url(${headPhoto.src})`}>
     <h1>Çekici ve yol yardım hizmetlerimiz</h1>
     <p class="lead">İzmir'in her ilçesinde, gece gündüz. Yolda ne olduysa arayın.</p>
     <div class="actions">
       <PlateCall data-primary-cta />
       <WhatsAppButton />
     </div>
-    <ul class="list">
+  </header>
+  <section class="wrap list-wrap">
+    <ul class="card-list">
       {
         services.map((s) => (
           <li>
@@ -44,8 +51,8 @@ const jsonLd = [
 </BaseLayout>
 
 <style>
-  .index {
-    padding-block: 26px 44px;
+  .list-wrap {
+    padding-bottom: 44px;
   }
 
   h1 {
@@ -88,38 +95,7 @@ const jsonLd = [
     width: 100%;
   }
 
-  .list {
-    display: grid;
-    gap: 22px 48px;
-    margin: 36px 0 0;
-    padding: 0;
-    list-style: none;
-  }
-
-  .list a {
-    display: inline-block;
-    color: var(--ink);
-    font: 700 1.5rem/1.1 var(--font-display);
-    letter-spacing: 0.02em;
-    text-transform: uppercase;
-    text-decoration: underline;
-    text-decoration-color: var(--red);
-    text-decoration-thickness: 2px;
-    text-underline-offset: 4px;
-  }
-
-  .list p {
-    margin: 6px 0 0;
-    max-width: 46ch;
-    color: var(--muted);
-    line-height: 1.45;
-  }
-
   @media (min-width: 768px) {
-    .index {
-      padding-block: 40px 64px;
-    }
-
     h1 {
       font-size: 4rem;
     }
@@ -147,12 +123,6 @@ const jsonLd = [
     .actions :global(.wa-button) {
       display: inline-flex;
       width: auto;
-    }
-
-    .list {
-      grid-template-columns: 1fr 1fr;
-      margin-top: 48px;
-      gap: 32px 56px;
     }
   }
 </style>
